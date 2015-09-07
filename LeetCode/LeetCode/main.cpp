@@ -542,6 +542,50 @@ public:
         }
         return sum.back().back();
     }
+    
+    // 67 Add Binary
+    string addBinary(string a, string b) {
+        int ix = a.size() - 1;
+        int jx = b.size() - 1;
+        string output = "";
+        int carry = 0;
+        while(ix >= 0 || jx >= 0) {
+            int result = (ix >= 0?a[ix--] - '0':0) + (jx >= 0?b[jx--] - '0':0) + carry;
+            output += (result % 2 + '0');
+            carry = result / 2;
+        }
+        if (carry) output += carry + '0';
+        ::reverse(output.begin(), output.end());
+        return output;
+    }
+    
+    // 74 Search a 2D Matrix
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        if (matrix.size() == 0) return false;
+        int rstart = 0;
+        int cstart = 0;
+        int rend = matrix.size() - 1;
+        int cend = matrix[0].size() - 1;
+        
+        while (rstart <= rend && cstart <= cend) {
+            
+            if (target < matrix[rstart][cstart]) {
+                return false;
+            }
+            
+            if (target == matrix[rstart][cstart]) {
+                return true;
+            }
+
+            if (target > matrix[rstart][cend]) {
+                rstart++;
+            }
+            else  {
+                cstart++;
+            }
+        }
+        return false;
+    }
 };
 
 int main(int argc, const char * argv[]) {
@@ -557,5 +601,10 @@ int main(int argc, const char * argv[]) {
     copy(nums.begin(), nums.end(), ostream_iterator<int>(ss, " "));
     cout << " nums:" << ss.str() << std::endl;
     cout << " mult:" << sol.multiply("1", "1") << endl;
+    
+    vector<vector<int>> matrix = {{1,3,5,7},{10,11,16,20},{23,30,34,50}};
+    
+    cout << "Matrix Search:" << sol.searchMatrix(matrix, 3) << endl;
+    
     return 0;
 }
