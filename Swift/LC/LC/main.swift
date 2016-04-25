@@ -54,17 +54,7 @@ class Solution {
     // 2. Add Two Numbers represented as Linked Lists
     func addTwoNumbers(l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         var result:ListNode? = ListNode(0);
-        var dummyHead = result;
-        
-        func listLen(l1:ListNode?) -> Int {
-            var count = 0;
-            var itr = l1
-            while (itr != nil) {
-                count++;
-                itr = itr?.next
-            }
-            return count;
-        }
+        let dummyHead = result;
         
         var itr1 = l1
         var itr2 = l2
