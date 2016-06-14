@@ -28,8 +28,48 @@ extension String {
 
 class Solution {
 
+    // MARK: - 349
+    func intersection(nums1: [Int], _ nums2: [Int]) -> [Int]
+    {
+        let set1 = Set(nums1)
+        let set2 = Set(nums2)
+        return set2.filter() { return set1.contains($0)}
+    }
     
-    // 3. Longest Substring Without Repeating Characters
+    // MARK: - 345
+    func isVowel(c : Character) -> Bool {
+        
+        if  ["A", "E", "I", "O", "U"].contains(c) ||
+            ["a", "e", "i", "o", "u"].contains(c)
+        {
+            return true
+        }
+        return false
+    }
+    
+    
+    func reverseVowels(s : String) -> String {
+        var left = 0
+        var right = s.characters.count - 1;
+        var result = Array(s.characters)
+        
+        while (left < right) {
+            if !isVowel(result[left]) {
+                left++
+                continue
+            }
+            if !isVowel(result[right]) {
+                right--
+                continue
+            }
+            swap(&result[left], &result[right])
+            left++; right--;
+        }
+        return String(result);
+    }
+
+    
+    // MARK: - 3. Longest Substring Without Repeating Characters
     func lengthOfLongestSubstring(s: String) -> Int {
         
         var maxLen:Int = 0
@@ -51,7 +91,7 @@ class Solution {
     }
     
     
-    // 2. Add Two Numbers represented as Linked Lists
+    // MARK: - 2. Add Two Numbers represented as Linked Lists
     func addTwoNumbers(l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         var result:ListNode? = ListNode(0);
         let dummyHead = result;
@@ -75,7 +115,7 @@ class Solution {
         return dummyHead?.next
     }
     
-    // 1. Two Sum
+    // MARK: - 1. Two Sum
     func twoSum(nums: [Int], _ target: Int) -> [Int] {
         
         var myDict:[Int:Int] = Dictionary()
