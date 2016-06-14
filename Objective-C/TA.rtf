@@ -1,0 +1,83 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1348\cocoasubrtf170
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww18200\viewh10100\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 # Write a function m (in your favorite language, question is written in Python)\
+# which merges 2 hashmaps.\
+\
+# Example\
+# Given two input hashmaps, a anb b:\
+countries1 = \{'Italy': 1,\
+              'Peru':  \{'Lima': 2\},\
+              'Brazil': \{'Amazone': \{'Manaus': 3\}, 'Rio': 9\}\}\
+\
+countries2 = \{'Peru': 6,\
+              'Brazil': \{'Amazone': \{'Coari': 9\}, 'Sao Paulo': 10\},\
+              'Holland': 2\}\
+\
+# Write a function m which merges the 2 country maps and return a result hashmap:\
+result = m(countries1, countries2)\
+\
+# For example, merging countries1 and countries2 will return:\
+result = \{'Italy': 1,\
+          'Peru': \{'Lima': 2\},\
+          'Holland': 2,\
+          'Brazil': \{'Amazone': \{'Manaus': 3, 'Coari': 9\}, 'Rio': 9, 'Sao Paulo': 10\}\}\
+\
+# There are 2 specific merge rules:\
+# 1: if keys collide, pick either value\
+# 2: if keys collide, and both values are hashmaps, then merge again\
+\
+\
+- (NSDictionary*) mergeCountry1: (NSDictionary*) c1\
+      country2:(NSDictionary*) c2 \{\
+          NSMutableDictionary* result = [NSMutableDictionary dictionary];\
+          \
+          NSArray* allKeys1 = [c1 allKeys];\
+          NSArray* allKeys2 = [c2 allKeys];\
+          NSArray* allKeys = [NSMutableArray arrayWithArray:allKeys1];\
+          [allKeys appendArray:allKeys2]\
+          \
+          for (int ix = 0; ix < allKeys.count; ix++) \{\
+             id key = allKeys[ix];\
+             id val1 = [c1 objectForKey: allKeys[ix];\
+             id val2 = c2[allKeys[ix]];\
+             if ([val1 isKindOFClass:[NSNumber class] && [val2 isKindOfClass:[NSNumber class]]) \{\
+                 result[key] = val1;    \
+             \} \
+             else if ([val1 isKindOFClass:[NSDictionary class] && [val2 isKindOFClass:[NSDictionary class])\
+                 NSDictionary* merged = [self mergeCountry1:val1 country2:val2];\
+                 result[key] = merged;    \
+             \} \
+             else \{\
+                //  \
+                result[key] = val1;      \
+             \}\
+          \}\
+          return result;\
+   \}\
+          \
+          \}\
+          \
+          \
+public HashMap<Character, Object> merge(HashMap<Character, Object> a, HashMap<Character, Object> b) \{\
+    HashMap<Character, Object> result = new HashMap<Character, Object>(a);\
+    for (Map.Entry<Character, Object> entry : b.entrySet()) \{\
+        Character bKey = entry.getKey();\
+        Object bValue = entry.getValue();\
+\
+        if (a.containsKey(bKey) && entry.getValue() instanceof HashMap && a.get(bKey) instanceof HashMap) \{\
+            result.put(entry.getKey(), merge((HashMap)a.get(bKey), (HashMap)bValue));\
+        \} else \{\
+            result.put(entry.getKey(), bValue);\
+        \}\
+    \}\
+\
+    return result;\
+\}\
+\
+\
+\
+}
