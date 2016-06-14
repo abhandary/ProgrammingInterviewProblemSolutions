@@ -1,0 +1,26 @@
+
+
+
+public class Main {
+	
+	boolean isVowel(CharSequence c) 
+	{
+		String vowelStr = "aeiouAEIOU";
+		return vowelStr.indexOf(c)
+	}
+	
+	public String reverseVowels(String s) {
+        String result = "";
+        int left = 0;
+        int right = s.length() - 1;
+        while (left < right) {
+        	
+        }
+        return result;
+    }
+	
+	public static void main(String[] args){
+		
+	    System.out.println("Test is a test");
+	}
+}

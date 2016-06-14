@@ -1,0 +1,13 @@
+
+public class Main {
+	
+	
+	public String reverseVowels(String s) {
+        
+    }
+	
+	public static void main(String[] args){
+		
+	    System.out.println("Test is a test");
+	}
+}
