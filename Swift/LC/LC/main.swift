@@ -28,7 +28,7 @@ extension String {
 
 class Solution {
 
-    // MARK: - 349
+    // MARK: - 349. Intersection of Two Arrays
     func intersection(nums1: [Int], _ nums2: [Int]) -> [Int]
     {
         let set1 = Set(nums1)
@@ -36,7 +36,7 @@ class Solution {
         return set2.filter() { return set1.contains($0)}
     }
     
-    // MARK: - 345
+    // MARK: - 345. Reverse Vowels of a String
     func isVowel(c : Character) -> Bool {
         
         if  ["A", "E", "I", "O", "U"].contains(c) ||
