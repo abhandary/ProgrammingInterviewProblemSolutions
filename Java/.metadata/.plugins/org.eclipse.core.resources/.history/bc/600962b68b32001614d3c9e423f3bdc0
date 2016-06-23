@@ -3,7 +3,6 @@
 
 public class Main {
 	
-	// 345. Reverse vowels in a string
 	boolean isVowel(char c) 
 	{
 		String vowelStr = "aeiouAEIOU";
@@ -30,7 +29,6 @@ public class Main {
         return new String(result);
     }
 	
-	// 344. Reverse a String
 	public String reverseString(String s) {
 		char[] result = s.toCharArray();
 		int left = 0;
@@ -39,15 +37,12 @@ public class Main {
 			char temp = result[left];
 			result[left] = result[right];
 			result[right] = temp;
-			left++; right--;
 		}
 		return new String(result);
 	}
 	
-	public static void main(String[] args)
-	{
-		Main m = new Main();
+	public static void main(String[] args){
+		
 	    System.out.println("Test is a test");
-	    System.out.println(m.reverseString("afadfasdfaeefqt4"));
 	}
 }

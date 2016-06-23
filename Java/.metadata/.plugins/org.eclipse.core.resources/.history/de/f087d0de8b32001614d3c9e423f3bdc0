@@ -3,7 +3,6 @@
 
 public class Main {
 	
-	// 345. Reverse vowels in a string
 	boolean isVowel(char c) 
 	{
 		String vowelStr = "aeiouAEIOU";
@@ -30,7 +29,6 @@ public class Main {
         return new String(result);
     }
 	
-	// 344. Reverse a String
 	public String reverseString(String s) {
 		char[] result = s.toCharArray();
 		int left = 0;
