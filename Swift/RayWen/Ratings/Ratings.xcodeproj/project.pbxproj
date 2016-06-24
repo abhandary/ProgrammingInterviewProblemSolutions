@@ -15,6 +15,8 @@
 		FA52A5F51D1C8E3800FAD771 /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA52A5F41D1C8E3800FAD771 /* PlayersViewController.swift */; };
 		FA52A5F71D1C8E4A00FAD771 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA52A5F61D1C8E4A00FAD771 /* Player.swift */; };
 		FA52A5F91D1C8F2E00FAD771 /* SamplePlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA52A5F81D1C8F2E00FAD771 /* SamplePlayerData.swift */; };
+		FA52A5FD1D1CEE3700FAD771 /* PlayerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA52A5FC1D1CEE3700FAD771 /* PlayerViewCell.swift */; };
+		FA52A6071D1D022100FAD771 /* PlayerDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA52A6061D1D022100FAD771 /* PlayerDetailsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,8 @@
 		FA52A5F41D1C8E3800FAD771 /* PlayersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
 		FA52A5F61D1C8E4A00FAD771 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		FA52A5F81D1C8F2E00FAD771 /* SamplePlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplePlayerData.swift; sourceTree = "<group>"; };
+		FA52A5FC1D1CEE3700FAD771 /* PlayerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewCell.swift; sourceTree = "<group>"; };
+		FA52A6061D1D022100FAD771 /* PlayerDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				FA52A5F41D1C8E3800FAD771 /* PlayersViewController.swift */,
+				FA52A6061D1D022100FAD771 /* PlayerDetailsTableViewController.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -146,6 +151,7 @@
 		FA52A5F31D1C8E0B00FAD771 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FA52A5FC1D1CEE3700FAD771 /* PlayerViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -253,6 +259,8 @@
 			files = (
 				FA52A5F71D1C8E4A00FAD771 /* Player.swift in Sources */,
 				FA52A5C61D1C7BB000FAD771 /* AppDelegate.swift in Sources */,
+				FA52A5FD1D1CEE3700FAD771 /* PlayerViewCell.swift in Sources */,
+				FA52A6071D1D022100FAD771 /* PlayerDetailsTableViewController.swift in Sources */,
 				FA52A5F51D1C8E3800FAD771 /* PlayersViewController.swift in Sources */,
 				FA52A5F91D1C8F2E00FAD771 /* SamplePlayerData.swift in Sources */,
 			);
@@ -442,6 +450,7 @@
 				FA52A5E11D1C7BB000FAD771 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FA52A5E21D1C7BB000FAD771 /* Build configuration list for PBXNativeTarget "RatingsTests" */ = {
 			isa = XCConfigurationList;
@@ -450,6 +459,7 @@
 				FA52A5E41D1C7BB000FAD771 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

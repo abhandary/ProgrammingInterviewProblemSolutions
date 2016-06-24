@@ -39,14 +39,37 @@ class PlayersViewController: UITableViewController {
 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("PlayerCell", forIndexPath: indexPath)
         
-        let player = self.players[indexPath.row]
-        cell.textLabel?.text       = player.name
-        cell.detailTextLabel?.text = player.game
+        let cell = tableView.dequeueReusableCellWithIdentifier("PlayerCell", forIndexPath: indexPath) as! PlayerViewCell
+        cell.player = self.players[indexPath.row] as Player
         return cell
     }
 
+    func imageForRatings(rating: Int) -> UIImage? {
+        let image = "\(rating)Stars"
+        return UIImage(named: image)
+    }
+    
+    @IBAction func cancelToPlayersViewController(segue: UIStoryboardSegue) {
+
+    }
+    
+    @IBAction func savePlayerDetail(segue: UIStoryboardSegue) {
+        if let playerDetaillsVC = segue.sourceViewController as? PlayerDetailsTableViewController {
+            
+            // add the new player to the players array
+            if let player = playerDetaillsVC.player {
+                players.append(player)
+                
+                // update the table view
+                let indexPath = NSIndexPath(forRow: players.count - 1, inSection: 0)
+                tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            }
+        }
+    }
+    
+
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
