@@ -14,10 +14,15 @@ class PlayerDetailsTableViewController: UITableViewController {
     @IBOutlet weak var detailLabel: UILabel!
     
     var player : Player?
+    var game : String = "Chess" {
+        didSet {
+            detailLabel.text = game
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        game = "Chess"
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -39,9 +44,19 @@ class PlayerDetailsTableViewController: UITableViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SavePlayerDetail" {
-            player = Player(name: nameTextField.text!, game: "Chess", rating: 1)
+            player = Player(name: nameTextField.text!, game: game, rating: 1)
+        }
+        if segue.identifier == "PickGame" {
+            if let gamesPickerVC = segue.destinationViewController as? GamePickerTableViewController {
+                gamesPickerVC.selectedGame = game
+            }
         }
     }
     
-    
+    @IBAction func unwindWithSelectedGame(segue: UIStoryboardSegue) {
+        
+        if let gamePickerVC = segue.sourceViewController as? GamePickerTableViewController {
+            game = gamePickerVC.selectedGame!
+        }
+    }
 }

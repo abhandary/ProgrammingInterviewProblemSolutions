@@ -17,6 +17,7 @@
 		FA52A5F91D1C8F2E00FAD771 /* SamplePlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA52A5F81D1C8F2E00FAD771 /* SamplePlayerData.swift */; };
 		FA52A5FD1D1CEE3700FAD771 /* PlayerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA52A5FC1D1CEE3700FAD771 /* PlayerViewCell.swift */; };
 		FA52A6071D1D022100FAD771 /* PlayerDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA52A6061D1D022100FAD771 /* PlayerDetailsTableViewController.swift */; };
+		FADAB7581D1F0456003E3361 /* GamePickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADAB7571D1F0456003E3361 /* GamePickerTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		FA52A5F81D1C8F2E00FAD771 /* SamplePlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplePlayerData.swift; sourceTree = "<group>"; };
 		FA52A5FC1D1CEE3700FAD771 /* PlayerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewCell.swift; sourceTree = "<group>"; };
 		FA52A6061D1D022100FAD771 /* PlayerDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailsTableViewController.swift; sourceTree = "<group>"; };
+		FADAB7571D1F0456003E3361 /* GamePickerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePickerTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 			children = (
 				FA52A5F41D1C8E3800FAD771 /* PlayersViewController.swift */,
 				FA52A6061D1D022100FAD771 /* PlayerDetailsTableViewController.swift */,
+				FADAB7571D1F0456003E3361 /* GamePickerTableViewController.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				FA52A6071D1D022100FAD771 /* PlayerDetailsTableViewController.swift in Sources */,
 				FA52A5F51D1C8E3800FAD771 /* PlayersViewController.swift in Sources */,
 				FA52A5F91D1C8F2E00FAD771 /* SamplePlayerData.swift in Sources */,
+				FADAB7581D1F0456003E3361 /* GamePickerTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
