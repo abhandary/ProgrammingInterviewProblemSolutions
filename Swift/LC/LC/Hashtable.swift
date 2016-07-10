@@ -117,12 +117,24 @@ class HashTableSolution {
     }
     
     // MARK: - 290. Word Pattern
-    /*
     func wordPattern(pattern: String, _ str: String) -> Bool {
-    
+        
+        let words = str.characters.split(" ").map(String.init)
+        var rtable = Dictionary<Character, String>()
+        let pchar = Array(pattern.characters)
+        var pattern_ix = 0
+        
+        for word in words {
+            if rtable[pchar[pattern_ix]] != word {
+                return false
+            }
+            rtable[pchar[pattern_ix]] = word
+            pattern_ix+=1
+        }
+        return true
     }
 
-    
+    /*
     // MARK: 217. Contains Duplicates. Given an array of integers, find if the array contains any duplicates. Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
     func containsDuplicate(nums: [Int]) -> Bool {
         var mySet = Set<Int>()

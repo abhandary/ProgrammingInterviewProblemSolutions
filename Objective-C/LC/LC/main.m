@@ -78,7 +78,7 @@
 
 @end
 
-
+#if 0
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         // insert code here...
@@ -88,3 +88,6 @@ int main(int argc, const char * argv[]) {
     }
     return 0;
 }
+#endif
+
+

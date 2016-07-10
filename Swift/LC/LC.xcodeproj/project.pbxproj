@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E2064BAD1CCDB76B00CFB1A9 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2064BAC1CCDB76B00CFB1A9 /* main.swift */; };
+		FA41AD8A1D319F5000534511 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA41AD891D319F5000534511 /* Array.swift */; };
+		FA41AD901D31F86C00534511 /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA41AD8F1D31F86C00534511 /* BinarySearch.swift */; };
 		FA52A5B71D1B79F800FAD771 /* Hashtable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA52A5B61D1B79F800FAD771 /* Hashtable.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +28,8 @@
 /* Begin PBXFileReference section */
 		E2064BA91CCDB76B00CFB1A9 /* LC */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LC; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2064BAC1CCDB76B00CFB1A9 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		FA41AD891D319F5000534511 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		FA41AD8F1D31F86C00534511 /* BinarySearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinarySearch.swift; sourceTree = "<group>"; };
 		FA52A5B61D1B79F800FAD771 /* Hashtable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hashtable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,6 +65,8 @@
 			children = (
 				E2064BAC1CCDB76B00CFB1A9 /* main.swift */,
 				FA52A5B61D1B79F800FAD771 /* Hashtable.swift */,
+				FA41AD891D319F5000534511 /* Array.swift */,
+				FA41AD8F1D31F86C00534511 /* BinarySearch.swift */,
 			);
 			path = LC;
 			sourceTree = "<group>";
@@ -122,6 +128,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA41AD901D31F86C00534511 /* BinarySearch.swift in Sources */,
+				FA41AD8A1D319F5000534511 /* Array.swift in Sources */,
 				FA52A5B71D1B79F800FAD771 /* Hashtable.swift in Sources */,
 				E2064BAD1CCDB76B00CFB1A9 /* main.swift in Sources */,
 			);
