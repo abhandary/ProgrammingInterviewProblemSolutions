@@ -39,6 +39,18 @@ class TreeNode {
 
 class Solution {
 
+    
+    // MARK: - 395. Longest Substring with At Least K Repeating Characters
+    // 1. in the first pass I record counts of every character in a hashmap
+    // 2. in the second pass I locate the first character that appear less than k times in the string. this character is definitely not included in the result, and that separates the string into two parts.
+    // 3. keep doing this recursively and the maximum of the left/right part is the answer.
+    func longestSubstring(s: String, _ k: Int) -> Int {
+        var map = [Character: Int]
+        for c in s.characters {
+            
+        }
+    }
+    
     //MARK: - 350. Intersection of Two Arrays
     // 1. What if the given array is already sorted, optimize
     // 2. What if num1's size is small compared to num2's size, Which algo is better
