@@ -124,29 +124,6 @@ class EPI {
         return true;
     }
     
-    // MARK: - 6. Arrays
-    
-    // MARK: - 6.1 Increment an arbitrary-precision integer
-    func plusOne(x : [Int]) -> [Int] {
-        guard x.count > 0 else {
-            return x
-        }
-        var result = x
-        var ix = result.count - 1
-        result[ix] += 1
-        while ix > 0 && result[ix] == 10 {
-            result[ix--] = 0
-            result[ix] += 1
-        }
-        if result[0] == 10 {
-            result[0] = 0
-            result.insert(1, atIndex: 0)
-        }
-        return result;
-    }
-    // O(n)
-    
-    // MARK: 6.5 Delete a key from an array
     
 }
 
@@ -160,6 +137,43 @@ str = String(format: "%x", swapped)
 print("\(num) reversed in binary = \(str)")
 print("reverse digits 1234 = \(epi.reverseDigits(1201))")
 print("is palindrome = \(epi.isPalindrome(212))")
-print("plus one = \(epi.plusOne([9, 9, 9, 9]))")
 
+
+// MARK: - 6. Arrays
+
+let arrays = Arrays()
+print("plus one = \(arrays.plusOne([9, 9, 9, 9]))")
+print("delete key from array = \(arrays.deleteKeyFromArray2([5, 3, 7, 11, 2, 3, 13, 5, 7], key: 7))")
+var input = [2, 3, 5, 5, 7, 11, 11, 13]
+arrays.deleteDuplicatesFromArray(&input)
+print("dedupe sorted array = \(input))")
+
+print("can reach end = \(arrays.canReachEnd([3, 3, 1, 0, 2, 0, 1]))")
+var dutch = [2, 3, 5, 7, 9, 11, 13, 17]
+// arrays.dutchFlagPartition(4, input : &dutch)
+print("dutch flag partition = \(dutch)")
+
+var matrix = [
+     [1, 2, 3],
+     [4, 5, 6],
+     [7, 8, 9]
+   ]
+
+var matrix2 = [
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 10, 11, 12],
+    [13, 14, 15, 16]
+]
+
+
+print("spiral order = \(arrays.spiralOrdering(matrix, n: 3))")
+print("spiral order = \(arrays.spiralOrdering(matrix2, n: 4))")
+
+arrays.rotateMatrix(&matrix, n: 3)
+arrays.rotateMatrix(&matrix2, n: 4)
+print("rotate matrix = \(matrix)")
+print("rotate matrix2 = \(matrix2)")
+
+print("pascal triangle = \(arrays.generatePascalTriangle(4))")
 
