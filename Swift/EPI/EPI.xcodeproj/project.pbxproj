@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FADD376C1D8BAFE300A41BA3 /* 9_StacksAndQueues.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD376B1D8BAFE300A41BA3 /* 9_StacksAndQueues.swift */; };
 		FAF4A04A1D83BA0300E9A52A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4A0491D83BA0300E9A52A /* main.swift */; };
 		FAF4A0511D83E33D00E9A52A /* 6_Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4A0501D83E33D00E9A52A /* 6_Arrays.swift */; };
+		FAF4A0531D87B32900E9A52A /* 7_Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4A0521D87B32900E9A52A /* 7_Strings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,9 +26,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FADD376B1D8BAFE300A41BA3 /* 9_StacksAndQueues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 9_StacksAndQueues.swift; sourceTree = "<group>"; };
 		FAF4A0461D83BA0300E9A52A /* EPI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EPI; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF4A0491D83BA0300E9A52A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FAF4A0501D83E33D00E9A52A /* 6_Arrays.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 6_Arrays.swift; sourceTree = "<group>"; };
+		FAF4A0521D87B32900E9A52A /* 7_Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 7_Strings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 			children = (
 				FAF4A0491D83BA0300E9A52A /* main.swift */,
 				FAF4A0501D83E33D00E9A52A /* 6_Arrays.swift */,
+				FAF4A0521D87B32900E9A52A /* 7_Strings.swift */,
+				FADD376B1D8BAFE300A41BA3 /* 9_StacksAndQueues.swift */,
 			);
 			path = EPI;
 			sourceTree = "<group>";
@@ -92,11 +98,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Akshay Bhandary";
 				TargetAttributes = {
 					FAF4A0451D83BA0300E9A52A = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -122,6 +129,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FADD376C1D8BAFE300A41BA3 /* 9_StacksAndQueues.swift in Sources */,
+				FAF4A0531D87B32900E9A52A /* 7_Strings.swift in Sources */,
 				FAF4A0511D83E33D00E9A52A /* 6_Arrays.swift in Sources */,
 				FAF4A04A1D83BA0300E9A52A /* main.swift in Sources */,
 			);
@@ -143,8 +152,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -187,8 +198,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -207,6 +220,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -214,6 +228,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -221,6 +236,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -243,6 +259,7 @@
 				FAF4A04F1D83BA0300E9A52A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

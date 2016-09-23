@@ -20,7 +20,7 @@ let preComputedReverse : [Int : Int] = [
 class EPI {
     // MARK: - 5.1 Compute the Parity of a word
     
-    func parity1(x : UInt64) -> Int32 {
+    func parity1(_ x : UInt64) -> Int32 {
         var result : Int32 = 0
         var inter = x
         while x != 0 {
@@ -31,7 +31,7 @@ class EPI {
     }
     // O(n)
     
-    func parity2(x : UInt64) -> Int32 {
+    func parity2(_ x : UInt64) -> Int32 {
         var result : Int32 = 0
         var mutableX = x
         while mutableX != 0 {
@@ -42,7 +42,7 @@ class EPI {
     }
     // O(k)
     
-    func parity3(x : Int64) -> Int32 {
+    func parity3(_ x : Int64) -> Int32 {
         var result : Int32 = 0
         let mask : Int64 = 0xFFFF
         let kWordSize : Int64 = 8
@@ -55,7 +55,7 @@ class EPI {
     }
     // O(n / L)
     
-    func parity4(x : Int64) -> Int32 {
+    func parity4(_ x : Int64) -> Int32 {
         var x = x
         x ^= x >> 32
         x ^= x >> 16
@@ -68,7 +68,7 @@ class EPI {
     // O(log n)
     
     // MARK: - 5.2 Swap bits
-    func swapBits(x : Int, i : Int, j : Int) -> Int {
+    func swapBits(_ x : Int, i : Int, j : Int) -> Int {
         
         if ((x >> i) & 1) ^ ((x >> j) & 1) != 0 {
             let mask = 1 << i | 1 << j;
@@ -79,7 +79,7 @@ class EPI {
     // O(1)
     
     // MARK: - 5.3 Reverse Bits
-    func reverseBits(x : Int) -> Int {
+    func reverseBits(_ x : Int) -> Int {
         let kWordSize = 8
         let mask = 0xFFFF
         return preComputedReverse[x & mask]! << 3 * kWordSize |
@@ -92,7 +92,7 @@ class EPI {
     // MARK: - 5.4 Closest Integer with the same weight
     
     // MARK: - 5.8 Reverse Digits
-    func reverseDigits(x : Int) -> Int {
+    func reverseDigits(_ x : Int) -> Int {
         var temp = x
         var result = 0
         
@@ -104,7 +104,7 @@ class EPI {
     }
     
     // MARK: - 5.9 Check if a decimal integer is a palindrome
-    func isPalindrome(x : Int) -> Bool {
+    func isPalindrome(_ x : Int) -> Bool {
         let digitCount = Int(log10(Double(x))) + 1
 
         var power10 = Int(pow(10.0, Double(digitCount - 1)));
@@ -176,4 +176,27 @@ print("rotate matrix = \(matrix)")
 print("rotate matrix2 = \(matrix2)")
 
 print("pascal triangle = \(arrays.generatePascalTriangle(4))")
+
+
+// MARK: - 7. Strings
+let strings = Strings()
+print("palindromicity = \(strings.isPalindrome("A man, a plan, a canal, Panama"))")
+print("reverse words in a sentence : \(strings.reverseWords("A man a plan a canal Panama"))")
+print("string to int = \(strings.stringToInt("-1234f"))")
+print("convert base = \(strings.convertBase("11011", b1: 2, b2:16))")
+print("convert excel col = \(strings.SSColDecodeID("Z"))")
+print("look and say = \(strings.lookAndSay(4))");
+
+print("Roman to Decimal = \(strings.convertFromRomanToDecimal("LIX"))")
+print("RLE = \(strings.encoding(s: "aaaaabccd"))");
+print("RLE = \(strings.decoding(s: "5a1b2c1d"))");
+print("RLE = \(strings.badDecoding(s: "5xa1b12xc1d2x372x"))");
+print("Snake String = \(strings.snakeString(s:"Hello World!"))");
+
+
+// MARK: - 9. Stacks
+let stacks = Stacks();
+let s = "()[]{()()}";
+print("Is welformed = \(stacks.isWellFormed(s))");
+
 
