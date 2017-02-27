@@ -8,7 +8,7 @@ import static java.lang.Math.min;
 /**
  * Created by axa on 2/16/17.
  */
-public class Arrays {
+public class ArraysLC {
     // 485. Max Consecutive Ones
     // Time: O(n)
     // Space: O(c)

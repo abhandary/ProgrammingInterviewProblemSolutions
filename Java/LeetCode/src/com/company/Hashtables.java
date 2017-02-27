@@ -208,6 +208,35 @@ public class Hashtables {
     }
 
 
+    // 290. Word Pattern
+    // Time: O(n), Space: O(n)
+    public boolean wordPattern(String pattern, String str) {
+        String[] words = str.split(" ");
+
+        if (words.length != pattern.length()) { return false; }
+
+        HashMap<Character, String> hm = new HashMap<>();
+        HashMap<String, Character> reverse = new HashMap<>();
+
+        int ix = 0;
+        for (char c : pattern.toCharArray()) {
+            if (hm.get(c) == null && reverse.get(words[ix]) == null) {
+                hm.put(c, words[ix]);
+                reverse.put(words[ix], c);
+            }
+            else if (hm.get(c) != null && reverse.get(words[ix]) != null) {
+                if (!hm.get(c).equals(words[ix]) || reverse.get(words[ix]) != c) {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+            ix += 1;
+        }
+        return true;
+    }
+
     // 205. Isomorphic Strings
     // Time: O(n), Space: O(n)
     // https://leetcode.com/problems/isomorphic-strings/?tab=Description
