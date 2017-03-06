@@ -11,6 +11,7 @@ public class DivideAndConquer {
     // Time: O(n log n), Space: O(log n) for the recursive stack
     // https://leetcode.com/problems/different-ways-to-add-parentheses/?tab=Description
     public List<Integer> diffWaysToCompute(String input) {
+
         List<Integer> result = new ArrayList<Integer>();
         for (int ix = 0; ix < input.length(); ix++) {
             if (input.charAt(ix) == '*' ||
