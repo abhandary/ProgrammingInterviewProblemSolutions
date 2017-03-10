@@ -4,6 +4,7 @@ import java.util.*;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;
+import java.lang.Math;
 
 /**
  * Created by axa on 2/16/17.
@@ -127,6 +128,36 @@ public class ArraysLC {
 //    * If max3 == null then return max1 instead of max3, else return max3
 
 
+    // 384. Shuffle an Array
+    // Time: O(n), space: O(c) outside of the result
+    // https://leetcode.com/problems/shuffle-an-array/?tab=Description
+    int[] n;
+    Random random;
+    public ArraysLC(int[] nums) {
+        n = nums;
+        random = new Random();
+    }
+
+    public ArraysLC() {
+    }
+
+    /** Resets the array to its original configuration and return it. */
+    public int[] reset() {
+        return n;
+    }
+
+    /** Returns a random shuffling of the array. */
+    public int[] shuffle() {
+        int[] result = n.clone();
+        for (int ix = result.length - 1; ix > 0; ix--) {
+            int val = random.nextInt(ix + 1);
+            int temp = result[ix];
+            result[ix] = result[val];
+            result[val] = temp;
+        }
+        return result;
+    }
+
     // 283. Move Zeroes
     // Time: O(n)
     // Space: O(c)
@@ -140,6 +171,20 @@ public class ArraysLC {
         }
         while (dest < nums.length) {
             nums[dest++] = 0;
+        }
+    }
+
+    public void moveZeroes2(int[] nums) {
+        int ix = 0;
+        int jx = 0;
+        while (jx < nums.length) {
+            if (nums[jx] != 0) {
+                nums[ix++] = nums[jx];
+            }
+            jx++;
+        }
+        while (ix < nums.length) {
+            nums[ix++] = 0;
         }
     }
 
@@ -444,6 +489,31 @@ public class ArraysLC {
 
     }
 
+    // 73. Set Matrix Zeroes
+    // Time: O(m x n); Space: O(m + n)
+    // https://leetcode.com/problems/set-matrix-zeroes/?tab=Description
+    public void setZeroes(int[][] matrix) {
+        if (matrix.length == 0) { return; }
+
+        int[] rows = new int[matrix.length];
+        int[] cols = new int[matrix[0].length];
+        for (int ix = 0; ix < matrix.length; ix++) {
+            for (int jx = 0; jx < matrix[0].length; jx++) {
+                if (matrix[ix][jx] == 0) {
+                    rows[ix] = 1;
+                    cols[jx] = 1;
+                }
+            }
+        }
+        for (int ix = 0; ix < matrix.length; ix++) {
+            for (int jx = 0; jx < matrix[0].length; jx++) {
+                if (rows[ix] == 1 || cols[jx] == 1) {
+                    matrix[ix][jx] = 0;
+                }
+            }
+        }
+    }
+
     // 66. Plus One
     // Time: O(n), Space: O(c) outside of the result
     // https://leetcode.com/problems/plus-one/?tab=Description
@@ -512,6 +582,48 @@ public class ArraysLC {
         return result;
     }
 
+    // 55. Jump Game
+    public boolean canJump(int[] nums) {
+        if (nums.length == 0) { return false; }
+        int maxJump = 0;
+        for (int ix = 0; ix < nums.length && maxJump >= ix; ix++) {
+            maxJump = max(maxJump, nums[ix] + ix);
+        }
+
+        return maxJump >= nums.length - 1;
+    }
+
+    // 53. Maximum Subarray
+    // Time: O(n), Space: O(c)
+    // https://leetcode.com/problems/maximum-subarray/?tab=Description
+    public int maxSubArray(int[] nums) {
+
+        if (nums.length == 0) { return Integer.MIN_VALUE; }
+
+        int maxTillHere = nums[0];
+        int max = nums[0];
+        for (int ix = 1; ix < nums.length; ix++) {
+            maxTillHere = Math.max(nums[ix], maxTillHere + nums[ix]);
+            max = Math.max(max, maxTillHere);
+        }
+        return max;
+    }
+
+    // Time: O(n), Space: O(n)
+    public int maxSubArrayDP(int[] A) {
+        int n = A.length;
+        int[] dp = new int[n];//dp[i] means the maximum subarray ending with A[i];
+        dp[0] = A[0];
+        int max = dp[0];
+
+        for(int i = 1; i < n; i++){
+            dp[i] = A[i] + (dp[i - 1] > 0 ? dp[i - 1] : 0);
+            max = Math.max(max, dp[i]);
+        }
+
+        return max;
+    }
+
     // 48. Rotate Image
     // Time: O(m x n), Space: O(c)
     // https://leetcode.com/problems/rotate-image/?tab=Description
@@ -535,17 +647,96 @@ public class ArraysLC {
         }
     }
 
-    // 55. Jump Game
-    public boolean canJump(int[] nums) {
-        if (nums.length == 0) { return false; }
-        int maxJump = 0;
-        for (int ix = 0; ix < nums.length && maxJump >= ix; ix++) {
-            maxJump = max(maxJump, nums[ix] + ix);
+    // 40. Combination Sum II
+    // Time: ??, Space ??
+    // PRACTICE, VERIFY WITH TEST CASES
+    // https://leetcode.com/problems/combination-sum-ii/?tab=Description
+    private void combinationSum2Helper(int[] candidates, int target, List<List<Integer>> result, List<Integer> partial, int begin) {
+        if (target < 0) { return; }
+        if (target == 0) {
+            result.add(new ArrayList<>(partial));
+            return;
         }
-
-        return maxJump >= nums.length - 1;
+        for (int ix = begin; ix < candidates.length; ix++) {
+            if (ix > begin && candidates[ix] == candidates[ix - 1]) { continue; }
+            if (target - candidates[ix] >= 0) {
+                partial.add(candidates[ix]);
+                combinationSum2Helper(candidates, target - candidates[ix], result, partial, ix + 1);
+                partial.remove(partial.size() - 1);
+            }
+        }
     }
 
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        List<List<Integer>> result = new ArrayList<>();
+        combinationSum2Helper(candidates, target, result, new ArrayList<>(), 0);
+        return result;
+    }
+
+    // 39. Combination Sum
+    // [2, 3, 6, 7] target = 7
+    // PRACTICE, VERIFY WITH TEST CASES
+
+    private void combinationSumHelper(int[] candidates, int target, List<List<Integer>> result, List<Integer> partial, int begin) {
+        if (target < 0) { return; }
+        if (target == 0) {
+            result.add(new ArrayList<>(partial));
+            return;
+        }
+        for (int ix = begin; ix < candidates.length; ix++) {
+            if (target - candidates[ix] >= 0) {
+                partial.add(candidates[ix]);
+                combinationSumHelper(candidates, target - candidates[ix], result, partial, ix);
+                partial.remove(partial.size() - 1);
+            }
+        }
+    }
+
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        // Arrays.sort(candidates);
+        List<List<Integer>> result = new ArrayList<>();
+        combinationSumHelper(candidates, target, result, new ArrayList<>(), 0);
+        return result;
+    }
+
+    // 31. Next Permutation
+    // Time: O(n), Space: O(c)
+    // https://leetcode.com/problems/next-permutation/?tab=Description
+    private void swap(int[] nums, int ix, int jx) {
+        int temp = nums[ix];
+        nums[ix] = nums[jx];
+        nums[jx] = temp;
+    }
+
+    private void reverse2(int[] nums, int start, int end) {
+        while (start < end) {
+            swap(nums, start, end);
+            start++; end--;
+        }
+    }
+
+    public void nextPermutation(int[] nums) {
+        if (nums.length < 2) { return; }
+        int n = nums.length;
+        int jx = n - 1;
+        while (jx > 0) {
+            if (nums[jx - 1] < nums[jx]) break;
+            jx--;
+        }
+        if (jx == 0) {
+            reverse2(nums, 0, n - 1);
+            return;
+        }
+        int ix = nums.length - 1;
+        int index = jx - 1;
+        while (ix >= jx) {
+            if (nums[ix] > nums[index]) break;
+            ix--;
+        }
+        swap(nums, index, ix);
+        reverse2(nums, jx, n - 1);
+    }
 
     // 27. Remove Element
     // Time: O(n), space: O(c)
@@ -585,7 +776,100 @@ public class ArraysLC {
         return ix + 1;
     }
 
-    // 11. Container With Most Water
+
+    // 18. 4Sum
+    // Time: O(n3), Space: O(c)
+    // https://leetcode.com/problems/4sum/?tab=Description
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (nums.length < 3) { return result; }
+        Arrays.sort(nums);
+        int n = nums.length;
+        for (int ix = 0; ix < nums.length - 3; ix++) {
+            if (ix > 0 && nums[ix] == nums[ix - 1]) continue;
+            if (nums[ix] + nums[ix + 1] + nums[ix + 2] + nums[ix + 3] > target) break;
+            if (nums[ix] + nums[n - 1] + nums[n - 2] + nums[n - 3] < target) continue;
+            for (int jx = ix + 1; jx < nums.length - 2; jx++) {
+                if (jx > ix + 1 && nums[jx] == nums[jx - 1]) continue;
+                if (nums[ix] + nums[jx] + nums[jx + 1] + nums[jx + 2] > target) break;
+                if (nums[ix] + nums[jx] + nums[n - 1] + nums[n - 2] < target) continue;
+                int left = jx + 1;
+                int right = n - 1;
+                while (left < right) {
+                    int sum = nums[ix] + nums[jx] + nums[left] + nums[right];
+                    if (sum < target) {
+                        left++;
+                    } else if (sum > target) {
+                        right--;
+                    } else {
+                        result.add(Arrays.asList(nums[ix], nums[jx], nums[left], nums[right]));
+                        while (left < right && nums[left] == nums[left + 1]) { left++; }
+                        while (left < right && nums[right] == nums[right - 1]) { right--;}
+                        left++; right--;
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    // 16. 3Sum Closest
+    // Time: O(n2), Space: O(n)
+    // https://leetcode.com/problems/3sum-closest/?tab=Description
+    public int threeSumClosest(int[] nums, int target) {
+        Arrays.sort(nums);
+        int minDiffSoFar = Integer.MAX_VALUE;
+        int sumOfMinDiff  = 0;
+        for (int ix = 0; ix < nums.length - 2; ix++) {
+            int jx = ix + 1, zx = nums.length - 1;
+            while (jx < zx) {
+                int sum = nums[ix] + nums[jx] + nums[zx];
+                int diff = Math.abs(target - sum);
+                if (diff == 0) { return sum; }
+                if (diff < minDiffSoFar) {
+                    minDiffSoFar = diff;
+                    sumOfMinDiff = sum;
+                }
+                if (sum > target) {
+                    zx--;
+                } else {
+                    jx++;
+                }
+            }
+        }
+        return sumOfMinDiff;
+    }
+
+    // 15. 3Sum
+    // Time: O(n2), Space: O(c)
+    // https://leetcode.com/problems/3sum/?tab=Description
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (nums.length < 3) { return result; }
+
+        Arrays.sort(nums);
+        for (int ix = 0; ix < nums.length - 2; ix++) {
+            if (ix == 0 || nums[ix] != nums[ix - 1]) {
+                int jx = ix + 1;
+                int zx = nums.length - 1;
+                while (jx < zx) {
+                    int sum = nums[ix] + nums[jx] + nums[zx];
+                    if (sum == 0) {
+                        result.add(Arrays.asList(nums[ix], nums[jx], nums[zx]));
+                        while (jx < zx && nums[jx] == nums[jx + 1]) { jx++; }
+                        while (jx < zx && nums[zx - 1] == nums[zx]) { zx--; }
+                        jx++; zx--;
+                    } else if (sum > 0) {
+                        zx--;
+                    } else {
+                        jx++;
+                    }
+                }
+            }
+        }
+
+
+        // 11. Container With Most Water
     // Time: O(n), Space: O(c)
     // https://leetcode.com/problems/container-with-most-water/?tab=Solutions
     public int maxArea(int[] height) {
@@ -615,6 +899,8 @@ public class ArraysLC {
         }
         return maxA;
     }
+
+
 
     // 1. Two Sum
     public int[] twoSumBasic(int[] nums, int target) {
