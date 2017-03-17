@@ -117,6 +117,91 @@ public class Strings {
         return new String(chars);
     }
 
+    // 125. Valid Palindrome
+    // Time: O(n), Space: O(c)
+    // https://leetcode.com/problems/valid-palindrome/?tab=Description
+    public boolean isPalindrome(String s) {
+
+        int ix = 0;
+        int jx = s.length() - 1;
+        while (ix <= jx) {
+            while (ix <= jx && !Character.isLetterOrDigit(s.charAt(ix))) { ix++; }
+            while (ix <= jx && !Character.isLetterOrDigit(s.charAt(jx))) { jx--; }
+            if (ix <= jx && Character.toLowerCase(s.charAt(ix++)) != Character.toLowerCase(s.charAt(jx--))) return false;
+        }
+        return true;
+    }
+
+    // 71. Simplify Path
+    // Time: O(n)
+    // https://leetcode.com/problems/simplify-path/?tab=Description
+    public String simplifyPath(String path) {
+        String[] tokens = path.split("/");
+        if (tokens.length == 0) { return "/"; }
+        Stack<String> stack = new Stack<>();
+        for (int ix = 0; ix < tokens.length; ix++) {
+            if (tokens[ix].length() == 0) continue;
+            if (tokens[ix].equals(".")) continue;
+            if (tokens[ix].equals("..")) { if (!stack.empty()) stack.pop(); }
+            else {
+                stack.push(tokens[ix]);
+            }
+        }
+        if (stack.empty()) { return "/"; }
+        StringBuilder result = new StringBuilder();
+        while (!stack.empty()) {
+            result.append(new StringBuilder(stack.pop()).reverse().toString());
+            result.append("/");
+        }
+        return result.reverse().toString();
+    }
+
+    public String simplifyPath2(String path) {
+        Deque<String> stack = new LinkedList<>();
+        Set<String> skip = new HashSet<>(Arrays.asList("..",".",""));
+        for (String dir : path.split("/")) {
+            if (dir.equals("..") && !stack.isEmpty()) stack.pop();
+            else if (!skip.contains(dir)) stack.push(dir);
+        }
+        String res = "";
+        for (String dir : stack) res = "/" + dir + res;
+        return res.isEmpty() ? "/" : res;
+    }
+
+    // 58. Length of Last Word
+    // https://leetcode.com/problems/length-of-last-word/?tab=Description
+    public int lengthOfLastWord(String s) {
+
+        if (s.length() == 0) { return 0; }
+        s = s.trim();
+        char[] schars = s.toCharArray();
+        if (s.indexOf(' ') == -1) { return schars.length; }
+
+        int ix = 0;
+
+        for (ix = schars.length - 1; ix >= 0; ix--) {
+            if (schars[ix] == ' ') break;
+        }
+        return schars.length - ix - 1;
+    }
+
+    public int lengthOfLastWord2(String s) {
+
+        if (s.length() == 0) { return 0; }
+
+        char[] schars = s.toCharArray();
+
+        int jx = schars.length - 1;
+
+        int ix = 0;
+        while (jx >= 0 && schars[jx] == ' ') { jx--; }
+
+        for (ix = jx; ix >= 0; ix--) {
+            if (schars[ix] == ' ') break;
+        }
+        return jx - ix;
+    }
+
     // 38. Count and Say
     // Time: ??, space: ??
     // https://leetcode.com/problems/count-and-say/?tab=Description
@@ -155,6 +240,64 @@ public class Strings {
         }
         out += parts[0];
         return out;
+    }
+
+
+    // 14. Longest Common Prefix
+    // Time: O(longest string in strs), Space: O(c) outside of the result
+    // https://leetcode.com/problems/longest-common-prefix/?tab=Description
+    public String longestCommonPrefix(String[] strs) {
+        String prefix = "";
+        int jx = 0;
+        char c = 0;
+        if (strs.length == 0) { return prefix; }
+        while (true) {
+            int ix = 0;
+            for (ix = 0; ix < strs.length; ix++) {
+                if (jx >= strs[ix].length()) return prefix;
+                if (ix == 0) { c = strs[ix].charAt(jx); }
+                else if (c != strs[ix].charAt(jx)) break;
+            }
+            if (ix == strs.length) { prefix += c; }
+            else return prefix;
+            jx++;
+        }
+    }
+
+    // 5. Longest Palindromic Substring
+    // PRACTICE, VERIFY WITH TEST CASES
+    // https://leetcode.com/problems/longest-palindromic-substring/?tab=Description
+    int[] palindromeLength(char[] schars, int ix, int jx) {
+
+        do {
+            ix--; jx++;
+        }while(ix >= 0 && jx < schars.length && schars[ix] == schars[jx]);
+
+        return new int[]{ix + 1, jx - 1};
+    }
+
+    // "babad"
+
+    public String longestPalindrome(String s) {
+        char[] schars = s.toCharArray();
+        int[] maxResult = new int[]{0, 0};
+        int maxSoFar = 1;
+        for (int ix = 0; ix < schars.length - 1; ix++) {
+            int[] result = palindromeLength(schars, ix, ix);
+            int len = result[1] - result[0] + 1;
+            if (len > maxSoFar) {
+                maxSoFar = len;
+                maxResult = result;
+            }
+            if (schars[ix] != schars[ix + 1]) continue;
+            result = palindromeLength(schars, ix, ix + 1);
+            len = result[1] - result[0] + 1;
+            if (len > maxSoFar) {
+                maxSoFar = len;
+                maxResult = result;
+            }
+        }
+        return s.substring(maxResult[0], maxResult[1] + 1);
     }
 
     // 3. Longest Substring Without Repeating Characters

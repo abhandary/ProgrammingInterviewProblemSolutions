@@ -197,4 +197,22 @@ public class Bits {
         }
         return num;
     }
+
+    // 67. Add Binary
+    // https://leetcode.com/problems/add-binary/?tab=Description
+    public String addBinary(String a, String b) {
+        char[] bchars = b.toCharArray();
+        char[] achars = a.toCharArray();
+        StringBuilder result = new StringBuilder();
+        int ix = achars.length - 1, jx = bchars.length - 1;
+        int c = 0;
+        while (ix >= 0 || jx >= 0 || c == 1) {
+            c += (ix >= 0 ? achars[ix] - '0' : 0);
+            c += (jx >= 0 ? bchars[jx] - '0' : 0);
+            result.append((c % 2) + "");
+            c /= 2;
+            ix--; jx--;
+        }
+        return result.reverse().toString();
+    }
 }

@@ -23,6 +23,78 @@ class TreeLinkNode {
  */
 public class Trees {
 
+
+    // 450. Delete Node in a BST
+    // Time: O(h), Space: O(h) for the recursion stack
+    // PRACTICE, READ
+    // https://leetcode.com/problems/delete-node-in-a-bst/#/description
+    public TreeNode deleteNode(TreeNode root, int key) {
+        if (root == null) { return null; }
+        if (key < root.val) {
+            root.left = deleteNode(root.left, key);
+        } else if (key > root.val) {
+            root.right = deleteNode(root.right, key);
+        } else {
+            if (root.left == null) { return root.right; }
+            if (root.right == null) { return root.left; }
+            TreeNode minNode = findMin(root.right);
+            root.val = minNode.val;
+            root.right = deleteNode(root.right, root.val);
+        }
+        return root;
+    }
+
+    TreeNode findMin(TreeNode root) {
+        while (root.left != null) {
+            root = root.left;
+        }
+        return root;
+    }
+
+    // PRACTICE, READ!!
+    private TreeNode deleteRootNode(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        if (root.left == null) {
+            return root.right;
+        }
+        if (root.right == null) {
+            return root.left;
+        }
+        TreeNode next = root.right;
+        TreeNode pre = null;
+        for(; next.left != null; pre = next, next = next.left);
+        next.left = root.left;
+        if(root.right != next) {
+            pre.left = next.right;
+            next.right = root.right;
+        }
+        return next;
+    }
+
+    public TreeNode deleteNodeIterative(TreeNode root, int key) {
+        TreeNode cur = root;
+        TreeNode pre = null;
+        while(cur != null && cur.val != key) {
+            pre = cur;
+            if (key < cur.val) {
+                cur = cur.left;
+            } else if (key > cur.val) {
+                cur = cur.right;
+            }
+        }
+        if (pre == null) {
+            return deleteRootNode(cur);
+        }
+        if (pre.left == cur) {
+            pre.left = deleteRootNode(cur);
+        } else {
+            pre.right = deleteRootNode(cur);
+        }
+        return root;
+    }
+
     // 404. Sum of Left Leaves
     // Time: O(n log n), Space: O( log n) for a balanced tree
 

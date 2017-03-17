@@ -31,6 +31,48 @@ public class BinarySearch {
         return mid;
     }
 
+    // 287. Find the Duplicate Number
+    // Time: < O(n2) > O(n log n), Space: O(c)
+    // PRACTICE, UNDERSTAND!
+    // https://leetcode.com/problems/find-the-duplicate-number/#/description
+    public int findDuplicate(int[] nums) {
+        int low = 1;
+        int high = nums.length - 1;
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            int count = 0;
+            for (int ix = 0; ix < nums.length; ix++) {
+                if (nums[ix] <= mid) count++;
+            }
+            if (count <= mid) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        return low;
+    }
+
+    // Time: O(n), Space: O(c)
+    // Figure OUT how!!
+    public int findDuplicateLinear(int[] nums) {
+        if (nums.length == 0) { return -1; }
+        int slow = nums[0];
+        int fast = nums[nums[0]];
+        while (slow != fast) {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        }
+
+        fast = 0;
+        while (fast != slow) {
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return fast;
+    }
+
+
     // 278. First Bad Version
     // Time: O(log n), Space: O(c)
     // https://leetcode.com/problems/first-bad-version/?tab=Description
