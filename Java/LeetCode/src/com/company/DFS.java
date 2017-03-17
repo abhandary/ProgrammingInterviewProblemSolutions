@@ -88,31 +88,7 @@ public class DFS {
 
     // 199. Binary Tree Right Side View
     // https://leetcode.com/problems/binary-tree-right-side-view/?tab=Description
-    public List<Integer> rightSideView(TreeNode root) {
-        Queue<TreeNode> q = new ArrayDeque<>();
-        List<Integer> result = new ArrayList<>();
-        if (root == null) { return result; }
-        q.offer(root);
-        int numInLevel = 1;
-        while (!q.isEmpty()) {
-            TreeNode current = q.poll();
-            if (current.left != null) {
-                q.offer(current.left);
-            }
-            if (current.right != null) {
-                q.offer(current.right);
-            }
-
-            if (numInLevel == 1) {
-                result.add(current.val);
-            }
-            numInLevel--;
-            if (numInLevel == 0) {
-                numInLevel = q.size();
-            }
-        }
-        return result;
-    }
+    // @see Trees
 
     // 133. Clone Graph
     // Time: O(V * E)??, Space: O(n)
@@ -140,7 +116,7 @@ public class DFS {
 
     // 114. Flatten Binary Tree to Linked List
     // Time: O(n), Space: O(h) for the recursion
-    // https://leetcode.com/problems/flatten-binary-tree-to-linked-list/?tab=Description
+    // https://discuss.leetcode.com/topic/11444/my-short-post-order-traversal-java-solution-for-share/2
     public void flatten(TreeNode root) {
         if (root == null) { return; }
         flatten(root.right);
@@ -150,9 +126,33 @@ public class DFS {
         prev = root;
     }
 
+    //https://discuss.leetcode.com/topic/3995/share-my-simple-non-recursive-solution-o-1-space-complexity
+    void flattenItr(TreeNode root) {
+        TreeNode now = root;
+        while (now != null)
+        {
+            if(now.left != null)
+            {
+                //Find current node's prenode that links to current node's right subtree
+                TreeNode pre = now.left;
+                while(pre.right != null)
+                {
+                    pre = pre.right;
+                }
+                pre.right = now.right;
+                //Use current node's left subtree to replace its right subtree(original right
+                //subtree is already linked by current node's prenode
+                now.right = now.left;
+                now.left = null;
+            }
+            now = now.right;
+        }
+    }
+
+
     // 113. Path Sum II
     // Time: O(n), Space: O(h)
-    // https://leetcode.com/problems/path-sum-ii/?tab=Description
+    // https://discuss.leetcode.com/topic/5414/dfs-with-one-linkedlist-accepted-java-solution
     void pathSumHelper(TreeNode root, int sum, List<Integer> partial, List<List<Integer>> result) {
         if (root == null) { return; }
         sum -= root.val;
@@ -178,7 +178,7 @@ public class DFS {
 
     // 112. Path Sum
     // Time: O(n), Space: O(h)
-    // https://leetcode.com/problems/path-sum/?tab=Description
+    // https://discuss.leetcode.com/topic/3149/accepted-my-recursive-solution-in-java
     public boolean hasPathSum(TreeNode root, int sum) {
 
         if (root == null) { return false; }
@@ -198,6 +198,15 @@ public class DFS {
         }
         return false;
     }
+
+    public boolean hasPathSum2(TreeNode root, int sum) {
+        if(root == null) return false;
+
+        if(root.left == null && root.right == null && sum - root.val == 0) return true;
+
+        return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
+    }
+
 
     // 109. Convert Sorted List to Binary Search Tree
     // Time: O(n log n), space: O(log n)
@@ -224,39 +233,7 @@ public class DFS {
 
     // 103. Binary Tree Zigzag Level Order Traversal
     // https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/?tab=Description
-    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> result = new ArrayList<>();
-        if (root == null) { return result; }
-        Queue<TreeNode> q = new ArrayDeque<TreeNode>();
-        q.offer(root);
-        boolean leftToRight = false;
-        int numInLevel = q.size();
-        List<Integer> level = new ArrayList<>();
-        while (!q.isEmpty()) {
-            TreeNode current = q.poll();
-            level.add(current.val);
-            numInLevel--;
-
-            if (current.left != null) {
-                q.offer(current.left);
-            }
-            if (current.right != null) {
-                q.offer(current.right);
-            }
-            if (numInLevel == 0) {
-
-                if (leftToRight) {
-                    Collections.reverse(level);
-                }
-                result.add(level);
-                level = new ArrayList<>();
-                numInLevel = q.size();
-                leftToRight = !leftToRight;
-            }
-        }
-
-        return result;
-    }
+    // @see Trees
 
     // 101. Symmetric Tree
     // Time: O(n), space: O(h)

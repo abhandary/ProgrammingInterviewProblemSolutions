@@ -11,9 +11,10 @@ import java.lang.Math;
  */
 public class BFS {
 
-    // 515. Find Largest Value in Each Tree Row
+    // LC: 515. Find Largest Value in Each Tree Row
     // Time: O(n), Space: O(c)
-    // https://leetcode.com/problems/find-largest-value-in-each-tree-row/?tab=Description
+    // SP: https://discuss.leetcode.com/topic/78991/python-bfs
+    // https://discuss.leetcode.com/topic/79178/9ms-java-dfs-solution
     public List<Integer> largestValues(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         if (root == null) { return result; }
@@ -38,7 +39,8 @@ public class BFS {
         return result;
     }
 
-    // 513. Find Bottom Left Tree Value
+    // LC: 513. Find Bottom Left Tree Value
+    // Given a binary tree, find the leftmost value in the last row of the tree.
     // Time: O(n), space: O(2 raise d)
     // https://leetcode.com/problems/find-bottom-left-tree-value/?tab=Description
     public int findBottomLeftValue(TreeNode root) {
@@ -61,5 +63,19 @@ public class BFS {
             }
         }
         return leftMost;
+    }
+
+    // SP:  https://discuss.leetcode.com/topic/78981/right-to-left-bfs-python-java
+    public int findLeftMostNodeSP(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            root = queue.poll();
+            if (root.right != null)
+                queue.add(root.right);
+            if (root.left != null)
+                queue.add(root.left);
+        }
+        return root.val;
     }
 }

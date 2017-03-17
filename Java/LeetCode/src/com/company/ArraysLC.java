@@ -11,7 +11,7 @@ import java.lang.Math;
  */
 public class ArraysLC {
 
-    // 532. K-diff Pairs in an Array
+    // LC: 532. K-diff Pairs in an Array
     // Given an array of integers and an integer k, you need to find the number of unique k-diff pairs in the array.
     // Here a k-diff pair is defined as an integer pair (i, j), where i and j are both numbers in the array and their absolute difference is k.
     // Time:   Space:
@@ -42,7 +42,7 @@ public class ArraysLC {
         return count;
     }
 
-    // 495. Teemo Attacking
+    // LC: 495. Teemo Attacking
     // Time: O(n), Space: O(c)
     // In LLP world, there is a hero called Teemo and his attacking can make his enemy Ashe be in poisoned condition.
     // Now, given the Teemo's attacking ascending time series towards Ashe and the poisoning time duration per Teemo's attacking, you need to output the total time that Ashe is in poisoned condition.
@@ -58,7 +58,7 @@ public class ArraysLC {
         return total + duration;
     }
 
-    // 485. Max Consecutive Ones
+    // LC: 485. Max Consecutive Ones
     // Time: O(n), Space: O(c)
     // https://discuss.leetcode.com/topic/75437/java-4-lines-concise-solution-with-explanation
     // https://discuss.leetcode.com/topic/75430/easy-java-solution
@@ -77,7 +77,7 @@ public class ArraysLC {
     }
 
 
-    // 448. Find All Numbers that Disappeared in an Array
+    // LC: 448. Find All Numbers that Disappeared in an Array
     // Time: O(n), Space: O(c)
     // https://discuss.leetcode.com/topic/65738/java-accepted-simple-solution
     //  * Iterate over the array.
@@ -104,7 +104,7 @@ public class ArraysLC {
         return result;
     }
 
-    // 442. Find All Duplicates in an Array
+    // LC: 442. Find All Duplicates in an Array
     // Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
     // Find all the elements that appear twice in this array.
     // Time: O(n) Space: O(c)
@@ -123,7 +123,7 @@ public class ArraysLC {
     }
 
 
-    // 414. Third Maximum Number
+    // LC: 414. Third Maximum Number
     // Time: O(n)
     // Space: O(c)
     // https://discuss.leetcode.com/topic/63715/java-neat-and-easy-understand-solution-o-n-time-o-1-space
@@ -176,7 +176,7 @@ public class ArraysLC {
 //    * If max3 == null then return max1 instead of max3, else return max3
 
 
-    // 384. Shuffle an Array
+    // LC: 384. Shuffle an Array
     // Time: O(n), space: O(c) outside of the result
     // https://leetcode.com/problems/shuffle-an-array/?tab=Description
     int[] n;
@@ -206,7 +206,7 @@ public class ArraysLC {
         return result;
     }
 
-    // 289. Game of Life
+    // LC: 289. Game of Life
     // Time:   Space:
     // https://discuss.leetcode.com/topic/29054/easiest-java-solution-with-explanation/2
     public void gameOfLife(int[][] board) {
@@ -246,7 +246,7 @@ public class ArraysLC {
         return lives;
     }
 
-    // 287. Find the Duplicate Number
+    // LC: 287. Find the Duplicate Number
     // Given an array nums containing n + 1 integers where each integer is between 1 and n (inclusive), prove that
     // at least one duplicate number must exist. Assume that there is only one duplicate number, find the duplicate one.
     // https://discuss.leetcode.com/topic/25913/my-easy-understood-solution-with-o-n-time-and-o-1-space-without-modifying-the-array-with-clear-explanation/2
@@ -282,7 +282,7 @@ public class ArraysLC {
         return low;
     }
 
-    // 283. Move Zeroes
+    // LC: 283. Move Zeroes
     // Time: O(n), Space: O(1)
     // https://discuss.leetcode.com/topic/24716/simple-o-n-java-solution-using-insert-index
     public void moveZeroes(int[] nums) {
@@ -311,7 +311,7 @@ public class ArraysLC {
         }
     }
 
-    // 268. Missing Number
+    // LC: 268. Missing Number
     // Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from
     // the array.
     // Time: O(n), Space: O(c)
@@ -356,7 +356,7 @@ public class ArraysLC {
         return left;
     }
 
-    // 238. Product of Array Except Self
+    // LC: 238. Product of Array Except Self
     // Given an array of n integers where n > 1, nums, return an array output such that output[i] is equal to the
     // product of all the elements of nums except nums[i].
     // @todo: UNSOLVED
@@ -377,7 +377,7 @@ public class ArraysLC {
         return result;
     }
 
-    // 229. Majority Element II
+    // LC: 229. Majority Element II
     // Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times. The algorithm
     // should run in linear time and in O(1) space.
     // @todo: UNSOLVED
@@ -420,7 +420,7 @@ public class ArraysLC {
         return result;
     }
 
-    // 228. Summary Ranges
+    // LC: 228. Summary Ranges
     // Given a sorted integer array without duplicates, return the summary of its ranges.
     // For example, given [0,1,2,4,5,7], return ["0->2","4->5","7"].
     // Time:    Space:
@@ -447,7 +447,7 @@ public class ArraysLC {
     }
 
 
-    // 219. Contains Duplicate II
+    // LC: 219. Contains Duplicate II
     // Time O(n), Space O(n)
     // Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array
     // such that nums[i] = nums[j] and the absolute difference between i and j is at most k.
@@ -476,7 +476,7 @@ public class ArraysLC {
     }
 
 
-    // 217. Contains Duplicate
+    // LC: 217. Contains Duplicate
     // Given an array of integers, find if the array contains any duplicates. Your function should return true if
     // any value appears at least twice in the array, and it should return false if every element is distinct.
     // Time: O(n), Space: O(n)
@@ -492,7 +492,7 @@ public class ArraysLC {
         return false;
     }
 
-    // 216. Combination Sum III
+    // LC: 216. Combination Sum III
     // Find all possible combinations of k numbers that add up to a number n, given that
     // only numbers from 1 to 9 can be used and each combination should be a unique set of numbers.
     // Time:   Space:
@@ -517,7 +517,7 @@ public class ArraysLC {
         }
     }
 
-    // 209. Minimum Size Subarray Sum
+    // LC: 209. Minimum Size Subarray Sum
     // Time:   Space:
     // Given an array of n positive integers and a positive integer s, find the minimal length of a contiguous
     // subarray of which the sum ≥ s. If there isn't one, return 0 instead.
@@ -542,7 +542,7 @@ public class ArraysLC {
         return min == Integer.MAX_VALUE ? 0 : min;
     }
 
-    // 189. Rotate Array
+    // LC: 189. Rotate Array
     // Time: O(n), Space: O(c)
     // https://discuss.leetcode.com/topic/14341/easy-to-read-java-solution
     private void reverse(int[] nums, int ix, int jx) {
@@ -575,7 +575,7 @@ public class ArraysLC {
         reverse(nums, 0, n - 1);
     }
 
-    // 169. Majority Element
+    // LC: 169. Majority Element
     // Time: O(n), Space: O(c) - Moore Voting Algorithm
     // https://discuss.leetcode.com/topic/8692/o-n-time-o-1-space-fastest-solution
     public int majorityElement(int[] nums) {
@@ -663,7 +663,7 @@ public class ArraysLC {
 //        return major;
 //    }
 
-    // 167. Two Sum II - Input array is sorted
+    // LC: 167. Two Sum II - Input array is sorted
     // Given an array of integers that is already sorted in ascending order,
     // find two numbers such that they add up to a specific target number.
     // Time: O(n), Space: O(c)
@@ -697,7 +697,7 @@ public class ArraysLC {
         return empty;
     }
 
-    // 162. Find Peak Element
+    // LC: 162. Find Peak Element
     // @todo: UNSOLVED?
     // https://discuss.leetcode.com/topic/5848/o-logn-solution-javacode/2
     public int findPeakElement(int[] num) {
@@ -731,7 +731,7 @@ public class ArraysLC {
         }
     }
 
-    // 154. Find Minimum in Rotated Sorted Array II
+    // LC: 154. Find Minimum in Rotated Sorted Array II
     // Time: O(log n) Space: O(1)
     // @todo: UNSOLVED
     // https://discuss.leetcode.com/topic/25248/super-simple-and-clean-java-binary-search
@@ -750,7 +750,7 @@ public class ArraysLC {
         return nums[l];
     }
 
-    // 153. Find Minimum in Rotated Sorted Array
+    // LC: 153. Find Minimum in Rotated Sorted Array
     // Time: O(log n), Space: O(c)
     // https://discuss.leetcode.com/topic/4100/compact-and-clean-c-solution
     public int findMin(int[] nums) {
@@ -768,7 +768,7 @@ public class ArraysLC {
         return nums[left];
     }
 
-    // 152. Maximum Product Subarray
+    // LC: 152. Maximum Product Subarray
     // Time:   Space:
     // @todo: UNSOLVED
     // https://discuss.leetcode.com/topic/3607/sharing-my-solution-o-1-space-o-n-running-time
@@ -792,7 +792,7 @@ public class ArraysLC {
         return maxsofar;
     }
 
-    //  128. Longest Consecutive Sequence
+    //  LC: 128. Longest Consecutive Sequence
     // @todo: UNSOLVED
     // https://discuss.leetcode.com/topic/6148/my-really-simple-java-o-n-solution-accepted
     public int longestConsecutive(int[] num) {
@@ -823,9 +823,9 @@ public class ArraysLC {
         return res;
     }
 
-    // 126. Word Ladder II
+    // LC: 126. Word Ladder II
 
-    // 123. Best Time to Buy and Sell Stock III
+    // LC: 123. Best Time to Buy and Sell Stock III
     // Time O(n), O(1).
     // @todo: UNSOLVED
     // https://discuss.leetcode.com/topic/5934/is-it-best-solution-with-o-n-o-1
@@ -841,7 +841,7 @@ public class ArraysLC {
         return release2; ///Since release1 is initiated as 0, so release2 will always higher than release1.
     }
 
-    // 122. Best Time to Buy and Sell Stock II
+    // LC: 122. Best Time to Buy and Sell Stock II
     // Time: O(n)
     // @todo: UNSOLVED
     // https://discuss.leetcode.com/topic/726/is-this-question-a-joke/13
@@ -854,7 +854,7 @@ public class ArraysLC {
         return total;
     }
 
-    // 121. Best Time to Buy and Sell Stock
+    // LC: 121. Best Time to Buy and Sell Stock
     // Time: O(n)
     // https://discuss.leetcode.com/topic/19853/kadane-s-algorithm-since-no-one-has-mentioned-about-this-so-far-in-case-if-interviewer-twists-the-input
     public int maxProfit(int[] prices) {
@@ -870,7 +870,7 @@ public class ArraysLC {
         return max;
     }
 
-    // 120. Triangle
+    // LC: 120. Triangle
     // Time: O(n * m)
     public int minimumTotal(List<List<Integer>> triangle) {
         if (triangle.size() == 0) { return 0; }
@@ -905,7 +905,7 @@ public class ArraysLC {
         return triangle.get(0).get(0);
     }
 
-    // 119. Pascal's Triangle II
+    // LC: 119. Pascal's Triangle II
     // @todo: UNSOLVED
     // https://discuss.leetcode.com/topic/4722/my-accepted-java-solution-any-better-code
     public List<Integer> getRow(int rowIndex) {
@@ -931,7 +931,7 @@ public class ArraysLC {
 //        return A;
 //    }
 
-    // 118. Pascal's Triangle
+    // LC: 118. Pascal's Triangle
     // Time: O(n2), space: O(c) outside the result
     // https://leetcode.com/problems/pascals-triangle/?tab=Description
     public List<List<Integer>> generate(int numRows) {
@@ -978,7 +978,7 @@ public class ArraysLC {
 
     }
 
-    // 106. Construct Binary Tree from Inorder and Postorder Traversal
+    // LC: 106. Construct Binary Tree from Inorder and Postorder Traversal
     // https://discuss.leetcode.com/topic/3296/my-recursive-java-code-with-o-n-time-and-o-n-space
     // @todo: UNSOLVED
     public TreeNode buildTree2(int[] inorder, int[] postorder) {
@@ -1003,7 +1003,7 @@ public class ArraysLC {
         return root;
     }
 
-    // 105. Construct Binary Tree from Preorder and Inorder Traversal
+    // LC: 105. Construct Binary Tree from Preorder and Inorder Traversal
     // https://discuss.leetcode.com/topic/3695/my-accepted-java-solution
     // @todo: UNSOLVED
     public TreeNode buildTree(int[] preorder, int[] inorder) {
@@ -1028,7 +1028,7 @@ public class ArraysLC {
         return root;
     }
 
-    // 90. Subsets II
+    // LC: 90. Subsets II
     // @todo: UNSOLVED
     // https://discuss.leetcode.com/topic/22638/very-simple-and-fast-java-solution
     public List<List<Integer>> subsetsWithDup(int[] nums) {
@@ -1053,7 +1053,7 @@ public class ArraysLC {
         return;
     }
 
-    // 88. Merge Sorted Array
+    // LC: 88. Merge Sorted Array
     // @todo: UNSOLVED
     // Time: O(m + n)
     // https://discuss.leetcode.com/topic/10257/3-line-java-solution
@@ -1063,7 +1063,7 @@ public class ArraysLC {
         while (j>-1)         A[k--]=B[j--];
     }
 
-    // 85. Maximal Rectangle
+    // LC: 85. Maximal Rectangle
     // @todo: UNSOLVED
     // https://leetcode.com/problems/maximal-rectangle/#/solutions
     public int maximalRectangle(char[][] matrix) {
@@ -1131,7 +1131,7 @@ public class ArraysLC {
 //        return maxA;
 //    }
 
-    // 84. Largest Rectangle in Histogram
+    // LC: 84. Largest Rectangle in Histogram
     // https://discuss.leetcode.com/topic/7599/o-n-stack-based-java-solution
     // @todo: UNSOLVED, didn't pass all tests
     public int largestRectangleArea(int[] height) {
@@ -1151,7 +1151,7 @@ public class ArraysLC {
         return maxArea;
     }
 
-    // 81. Search in Rotated Sorted Array II
+    // LC: 81. Search in Rotated Sorted Array II
     // https://discuss.leetcode.com/topic/8087/c-concise-log-n-solution
     // @todo: UNSOLVED
     // Time: O(log n)
@@ -1187,7 +1187,7 @@ public class ArraysLC {
         return false;
     }
 
-    // 80. Remove Duplicates from Sorted Array II
+    // LC: 80. Remove Duplicates from Sorted Array II
     // https://discuss.leetcode.com/topic/17180/3-6-easy-lines-c-java-python-ruby
     // @todo: UNSOLVED
     // Time: O(n)
@@ -1199,7 +1199,7 @@ public class ArraysLC {
         return i;
     }
 
-    // 79. Word Search
+    // LC: 79. Word Search
     // https://discuss.leetcode.com/topic/7907/accepted-very-short-java-solution-no-additional-space
     boolean visit(char[][] board, String word, int wx, int ix, int jx) {
         int[][] next = {{0, -1}, {0, 1}, {1, 0}, {-1, 0}};
@@ -1238,7 +1238,7 @@ public class ArraysLC {
         return false;
     }
 
-    // 78. Subsets
+    // LC: 78. Subsets
     // https://discuss.leetcode.com/topic/46159/a-general-approach-to-backtracking-questions-in-java-subsets-permutations-combination-sum-palindrome-partitioning
     // Time: O(2 raised n) same as the number of subsets of n, Space: O(c)
     public List<List<Integer>> subsets(int[] nums) {
@@ -1260,7 +1260,7 @@ public class ArraysLC {
         return result;
     }
 
-    // 75. Sort Colors
+    // LC: 75. Sort Colors
     // Time: O(n)
     public void sortColors(int[] nums) {
         int numRed = 0, numWhite = 0, numBlue = 0;
@@ -1303,7 +1303,7 @@ public class ArraysLC {
         }
     }
 
-    // 74. Search a 2D Matrix
+    // LC: 74. Search a 2D Matrix
     // @todo: UNSOLVED
     // Time: O(log (m + n)
     // https://discuss.leetcode.com/topic/3227/don-t-treat-it-as-a-2d-matrix-just-treat-it-as-a-sorted-list
@@ -1349,7 +1349,7 @@ public class ArraysLC {
         return false;
     }
 
-    // 73. Set Matrix Zeroes
+    // LC: 73. Set Matrix Zeroes
     // Time: O(m x n); Space: O(m + n)
     // https://discuss.leetcode.com/topic/5056/any-shorter-o-1-space-solution
     public void setZeroes(int[][] matrix) {
@@ -1393,7 +1393,7 @@ public class ArraysLC {
 //        }
 //    }
 
-    // 66. Plus One
+    // LC: 66. Plus One
     // Time: O(n), Space: O(c) outside of the result
     // https://leetcode.com/problems/plus-one/?tab=Description
     public int[] plusOne(int[] digits) {
@@ -1428,7 +1428,7 @@ public class ArraysLC {
         return newNumber;
     }
 
-    // 64. Minimum Path Sum
+    // LC: 64. Minimum Path Sum
     // Time: O(m * n)
     // https://discuss.leetcode.com/topic/15269/10-lines-28ms-o-n-space-dp-solution-in-c-with-explanations
     public int minPathSum(int[][] grid) {
@@ -1443,7 +1443,7 @@ public class ArraysLC {
         return grid[m - 1][n - 1];
     }
 
-    // 63. Unique Paths II
+    // LC: 63. Unique Paths II
     // Time O(m * n), Space: O(1) outside of the input
     // https://leetcode.com/problems/unique-paths-ii/#/solutions
     // https://discuss.leetcode.com/topic/10974/short-java-solution
@@ -1469,7 +1469,7 @@ public class ArraysLC {
         return grid[m - 1][n - 1];
     }
 
-    // 62. Unique Paths
+    // LC: 62. Unique Paths
     // Time O(m * n), Space: O(1) outside of the input
     // https://discuss.leetcode.com/topic/15265/0ms-5-lines-dp-solution-in-c-with-explanations
     public int uniquePaths(int m, int n) {
@@ -1484,7 +1484,7 @@ public class ArraysLC {
         return grid[m - 1][n - 1];
     }
 
-    // 59. Spiral Matrix II
+    // LC: 59. Spiral Matrix II
     // https://discuss.leetcode.com/topic/4362/my-super-simple-solution-can-be-used-for-both-spiral-matrix-i-and-ii
     public int[][] generateMatrix(int n) {
         // Declaration
@@ -1529,7 +1529,7 @@ public class ArraysLC {
         return matrix;
     }
 
-    // 57. Insert Interval
+    // LC: 57. Insert Interval
     // @todo: UNSOLVED, HARD
     // https://discuss.leetcode.com/topic/7808/short-and-straight-forward-java-solution/1
     public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
@@ -1551,7 +1551,7 @@ public class ArraysLC {
         return result;
     }
 
-    // 56. Merge Intervals
+    // LC: 56. Merge Intervals
     // Time: O(n)
     // @todo: UNSOLVED
     //https://discuss.leetcode.com/topic/4319/a-simple-java-solution
@@ -1588,7 +1588,7 @@ public class ArraysLC {
         return result;
     }
 
-    // 55. Jump Game
+    // LC: 55. Jump Game
     // Time: O(n), space: O(c)
     // https://discuss.leetcode.com/topic/4911/linear-and-simple-solution-in-c/2
     public boolean canJump(int[] nums) {
@@ -1602,7 +1602,7 @@ public class ArraysLC {
     }
 
 
-    // 54. Spiral Matrix
+    // LC: 54. Spiral Matrix
     // Time: O(m * n), Space: O(1)
     // https://discuss.leetcode.com/topic/3713/super-simple-and-easy-to-understand-solution/2
     public List<Integer> spiralOrder2(int[][] matrix) {
@@ -1683,7 +1683,7 @@ public class ArraysLC {
 
 
 
-    // 53. Maximum Subarray
+    // LC: 53. Maximum Subarray
     // https://discuss.leetcode.com/topic/6413/dp-solution-some-thoughts
     // Time: O(n), space: O(1)
     public int maxSubArray2(int[] nums) {
@@ -1725,7 +1725,7 @@ public class ArraysLC {
         return max;
     }
 
-    // 48. Rotate Image
+    // LC: 48. Rotate Image
     // Time: O(m x n), Space: O(c)
     // @todo: UNSOLVED
     // https://discuss.leetcode.com/topic/6796/a-common-method-to-rotate-the-image
@@ -1749,7 +1749,7 @@ public class ArraysLC {
         }
     }
 
-    // 45. Jump Game II
+    // LC: 45. Jump Game II
     // Time: O(n), BFS??
     // @todo: UNSOLVED
     // https://discuss.leetcode.com/topic/3191/o-n-bfs-solution
@@ -1782,7 +1782,7 @@ public class ArraysLC {
         return sc;
     }
 
-    // 42. Trapping Rain Water
+    // LC: 42. Trapping Rain Water
     // @todo: UNSOLVED, HARD
     // https://discuss.leetcode.com/topic/3016/share-my-short-solution
     public int trap(int[] A){
@@ -1806,7 +1806,7 @@ public class ArraysLC {
         return max;
     }
 
-    // 41. First Missing Positive
+    // LC: 41. First Missing Positive
     // @todo: UNSOLVED, HARD
     // Time: O(n), Space: O(1)
     // https://discuss.leetcode.com/topic/2633/share-my-o-n-time-o-1-space-solution/2
@@ -1844,7 +1844,7 @@ public class ArraysLC {
     }
 
 
-    // 40. Combination Sum II
+    // LC: 40. Combination Sum II
     // Time: ??, Space ??
     // @todo: UNSOLVED
     // https://discuss.leetcode.com/topic/19845/java-solution-using-dfs-easy-understand
@@ -1871,7 +1871,7 @@ public class ArraysLC {
         return result;
     }
 
-    // 39. Combination Sum
+    // LC: 39. Combination Sum
     // [2, 3, 6, 7] target = 7
     // @todo: UNSOLVED
     // https://discuss.leetcode.com/topic/46161/a-general-approach-to-backtracking-questions-in-java-subsets-permutations-combination-sum-palindrome-partitioning
@@ -1897,7 +1897,7 @@ public class ArraysLC {
         return result;
     }
 
-    // 35. Search Insert Position
+    // LC: 35. Search Insert Position
     // Time: O(log n), Space: O(c)
     // https://discuss.leetcode.com/topic/7874/my-8-line-java-solution
     public int searchInsert(int[] nums, int target) {
@@ -1915,7 +1915,7 @@ public class ArraysLC {
         return low;
     }
 
-    // 34. Search for a Range
+    // LC: 34. Search for a Range
     // Time: O(log n), Space: O(c)
     // https://discuss.leetcode.com/topic/6327/a-very-simple-java-solution-with-only-one-binary-search-algorithm
     public int[] searchRange(int[] nums, int target) {
@@ -1948,7 +1948,7 @@ public class ArraysLC {
         return result;
     }
 
-    // 33. Search in Rotated Sorted Array
+    // LC: 33. Search in Rotated Sorted Array
     // Time: O(log n), Space: O(c)
     // https://discuss.leetcode.com/topic/3538/concise-o-log-n-binary-search-solution
     public int search(int[] nums, int target) {
@@ -1976,7 +1976,7 @@ public class ArraysLC {
         return -1;
     }
 
-    // 31. Next Permutation
+    // LC: 31. Next Permutation
     // Time: O(n), Space: O(c)
     // https://discuss.leetcode.com/topic/14124/sharing-my-clean-and-easy-understand-java-code-with-explanation
     private void swap(int[] nums, int ix, int jx) {
@@ -2014,7 +2014,7 @@ public class ArraysLC {
         reverse2(nums, jx, n - 1);
     }
 
-    // 27. Remove Element
+    // LC: 27. Remove Element
     // Time: O(n), space: O(c)
     public int removeElement(int[] nums, int val) {
         int ix = 0;
@@ -2026,7 +2026,7 @@ public class ArraysLC {
         return ix;
     }
 
-    // 26. Remove Duplicates from Sorted Array
+    // LC: 26. Remove Duplicates from Sorted Array
     // Time: O(n), Space: O(c)
     // https://leetcode.com/problems/remove-duplicates-from-sorted-array/?tab=Description
     public int removeDuplicates(int[] nums) {
@@ -2053,7 +2053,7 @@ public class ArraysLC {
     }
 
 
-    // 18. 4Sum
+    // LC: 18. 4Sum
     // Time: O(n3), Space: O(c)
     // https://discuss.leetcode.com/topic/28641/my-16ms-c-code
     public List<List<Integer>> fourSum(int[] nums, int target) {
@@ -2089,7 +2089,7 @@ public class ArraysLC {
         return result;
     }
 
-    // 16. 3Sum Closest
+    // LC: 16. 3Sum Closest
     // Time: O(n2), Space: O(n)
     // https://discuss.leetcode.com/topic/5192/java-solution-with-o-n2-for-reference
     public int threeSumClosest(int[] nums, int target) {
@@ -2116,7 +2116,7 @@ public class ArraysLC {
         return sumOfMinDiff;
     }
 
-    // 15. 3Sum
+    // LC: 15. 3Sum
     // Time: O(n2), Space: O(c)
     // https://leetcode.com/problems/3sum/?tab=Description
     public List<List<Integer>> threeSum(int[] nums) {
@@ -2154,7 +2154,7 @@ public class ArraysLC {
     }
 
 
-    // 11. Container With Most Water
+    // LC: 11. Container With Most Water
     // Time: O(n), Space: O(c)
     // https://discuss.leetcode.com/topic/25004/easy-concise-java-o-n-solution-with-proof-and-explanation/2
     public int maxArea(int[] height) {
@@ -2185,7 +2185,7 @@ public class ArraysLC {
         return maxA;
     }
 
-    // 4. Median of Two Sorted Arrays
+    // LC: 4. Median of Two Sorted Arrays
     // @todo: HARD, UNSOLVED, EXCEEDS TIME LIMIT
     // https://discuss.leetcode.com/topic/16797/very-concise-o-log-min-m-n-iterative-solution-with-detailed-explanation/2
     double findMedianSortedArrays(int[] nums1, int[] nums2) {
@@ -2213,7 +2213,7 @@ public class ArraysLC {
     }
 
 
-    // 1. Two Sum
+    // LC: 1. Two Sum
     public int[] twoSumBasic(int[] nums, int target) {
         int[] result = new int[2];
         Hashtable<Integer, Integer> hs = new Hashtable<>();
