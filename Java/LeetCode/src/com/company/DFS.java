@@ -13,8 +13,292 @@ class UndirectedGraphNode {
  */
 public class DFS {
 
+    // LC: 529. Minesweeper
+    // https://leetcode.com/problems/minesweeper/#/description
+    // https://discuss.leetcode.com/topic/80802/java-solution-dfs-bfs
+    public char[][] updateBoardDFS(char[][] board, int[] click) {
+        int m = board.length, n = board[0].length;
+        int row = click[0], col = click[1];
 
+        if (board[row][col] == 'M') { // Mine
+            board[row][col] = 'X';
+        }
+        else { // Empty
+            // Get number of mines first.
+            int count = 0;
+            for (int i = -1; i < 2; i++) {
+                for (int j = -1; j < 2; j++) {
+                    if (i == 0 && j == 0) continue;
+                    int r = row + i, c = col + j;
+                    if (r < 0 || r >= m || c < 0 || c < 0 || c >= n) continue;
+                    if (board[r][c] == 'M' || board[r][c] == 'X') count++;
+                }
+            }
+
+            if (count > 0) { // If it is not a 'B', stop further DFS.
+                board[row][col] = (char)(count + '0');
+            }
+            else { // Continue DFS to adjacent cells.
+                board[row][col] = 'B';
+                for (int i = -1; i < 2; i++) {
+                    for (int j = -1; j < 2; j++) {
+                        if (i == 0 && j == 0) continue;
+                        int r = row + i, c = col + j;
+                        if (r < 0 || r >= m || c < 0 || c < 0 || c >= n) continue;
+                        if (board[r][c] == 'E') updateBoardDFS(board, new int[] {r, c});
+                    }
+                }
+            }
+        }
+
+        return board;
+    }
+
+    public char[][] updateBoardBFS(char[][] board, int[] click) {
+        int m = board.length, n = board[0].length;
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(click);
+
+        while (!queue.isEmpty()) {
+            int[] cell = queue.poll();
+            int row = cell[0], col = cell[1];
+
+            if (board[row][col] == 'M') { // Mine
+                board[row][col] = 'X';
+            }
+            else { // Empty
+                // Get number of mines first.
+                int count = 0;
+                for (int i = -1; i < 2; i++) {
+                    for (int j = -1; j < 2; j++) {
+                        if (i == 0 && j == 0) continue;
+                        int r = row + i, c = col + j;
+                        if (r < 0 || r >= m || c < 0 || c < 0 || c >= n) continue;
+                        if (board[r][c] == 'M' || board[r][c] == 'X') count++;
+                    }
+                }
+
+                if (count > 0) { // If it is not a 'B', stop further DFS.
+                    board[row][col] = (char)(count + '0');
+                }
+                else { // Continue BFS to adjacent cells.
+                    board[row][col] = 'B';
+                    for (int i = -1; i < 2; i++) {
+                        for (int j = -1; j < 2; j++) {
+                            if (i == 0 && j == 0) continue;
+                            int r = row + i, c = col + j;
+                            if (r < 0 || r >= m || c < 0 || c < 0 || c >= n) continue;
+                            if (board[r][c] == 'E') {
+                                queue.add(new int[] {r, c});
+                                board[r][c] = 'B'; // Avoid to be added again.
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return board;
+    }
+
+    // LC: 514. Freedom Trail
+    // https://leetcode.com/problems/freedom-trail/#/description
+    // https://discuss.leetcode.com/topic/81684/concise-java-dp-solution
+    public int findRotateSteps(String ring, String key) {
+        int n = ring.length();
+        int m = key.length();
+        int[][] dp = new int[m + 1][n];
+
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = 0; j < n; j++) {
+                dp[i][j] = Integer.MAX_VALUE;
+                for (int k = 0; k < n; k++) {
+                    if (ring.charAt(k) == key.charAt(i)) {
+                        int diff = Math.abs(j - k);
+                        int step = Math.min(diff, n - diff);
+                        dp[i][j] = Math.min(dp[i][j], step + dp[i + 1][k]);
+                    }
+                }
+            }
+        }
+
+        return dp[0][0] + m;
+    }
+
+    // LC: 513. Find Bottom Left Tree Value
+    // @see BFS
+
+
+    // LC: 494. Target Sum
+    // You are given a list of non-negative integers, a1, a2, ..., an, and a target, S. Now you have 2 symbols + and -.
+    // For each integer, you should choose one from + and - as its new symbol.
+    // Find out how many ways to assign symbols to make sum of integers equal to target S.
+    // Input: nums is [1, 1, 1, 1, 1], S is 3.
+    // Output: 5
+    // Explanation:
+    //       -1+1+1+1+1 = 3
+    //        +1-1+1+1+1 = 3
+    //        +1+1-1+1+1 = 3
+    //        +1+1+1-1+1 = 3
+    //        +1+1+1+1-1 = 3
+    // There are 5 ways to assign symbols to make the sum of nums be target 3.
+    // Note:
+    // The length of the given array is positive and will not exceed 20.
+    // The sum of elements in the given array will not exceed 1000.
+    // Your output answer is guaranteed to be fitted in a 32-bit integer.
+    // https://discuss.leetcode.com/topic/76243/java-15-ms-c-3-ms-o-ns-iterative-dp-solution-using-subset-sum-with-explanation
+    public int findTargetSumWays(int[] nums, int s) {
+        int sum = 0;
+        for (int n : nums)
+            sum += n;
+        return sum < s || (s + sum) % 2 > 0 ? 0 : subsetSum(nums, (s + sum) >>> 1);
+    }
+
+    public int subsetSum(int[] nums, int s) {
+        int[] dp = new int[s + 1];
+        dp[0] = 1;
+        for (int n : nums)
+            for (int i = s; i >= n; i--)
+                dp[i] += dp[i - n];
+        return dp[s];
+    }
+
+
+    // LC: 491. Increasing Subsequences
+    // Given an integer array, your task is to find all the different possible increasing subsequences of the given
+    // array, and the length of an increasing subsequence should be at least 2 .
+    // Example:
+    // Input: [4, 6, 7, 7]
+    // Output: [[4, 6], [4, 7], [4, 6, 7], [4, 6, 7, 7], [6, 7], [6, 7, 7], [7,7], [4,7,7]]
+    // Note:
+    // The length of the given array will not exceed 15.
+    // The range of integer in the given array is [-100,100].
+    // The given array may contain duplicates, and two equal integers should also be considered as a special case of
+    // increasing sequence.
+    // https://discuss.leetcode.com/topic/76249/java-20-lines-backtracking-solution-using-set-beats-100
+    // https://discuss.leetcode.com/topic/76282/simple-python
+    // https://discuss.leetcode.com/topic/76211/clean-20ms-solution
+    public List<List<Integer>> findSubsequences(int[] nums) {
+        Set<List<Integer>> res= new HashSet<List<Integer>>();
+        List<Integer> holder = new ArrayList<Integer>();
+        findSequence(res, holder, 0, nums);
+        List result = new ArrayList(res);
+        return result;
+    }
+
+    public void findSequence(Set<List<Integer>> res, List<Integer> holder, int index, int[] nums) {
+        if (holder.size() >= 2) {
+            res.add(new ArrayList(holder));
+        }
+        for (int i = index; i < nums.length; i++) {
+            if(holder.size() == 0 || holder.get(holder.size() - 1) <= nums[i]) {
+                holder.add(nums[i]);
+                findSequence(res, holder, i + 1, nums);
+                holder.remove(holder.size() - 1);
+            }
+        }
+    }
+
+
+
+
+    // LC: 488. Zuma Game
+    // No clean solution so far
+
+    // LC: 473. Matchsticks to Square
+    // Remember the story of Little Match Girl? By now, you know exactly what matchsticks the little match girl has,
+    // please find out a way you can make one square by using up all those matchsticks. You should not break any stick,
+    // but you can link them up, and each matchstick must be used exactly one time.
+    // Your input will be several matchsticks the girl has, represented with their stick length. Your output will either
+    // be true or false, to represent whether you could make one square using all the matchsticks the little match girl
+    // has.
+    // e.g.1 Input: [1,1,2,2,2]
+    // Output: true
+    // Explanation: You can form a square with length 2, one side of the square came two sticks with length 1.
+    // e.g.2 Input: [3,3,3,3,4]
+    // Output: false
+    // Explanation: You cannot find a way to form a square with all the matchsticks.
+    // https://discuss.leetcode.com/topic/72107/java-dfs-solution-with-explanation
+    public boolean makesquare(int[] nums) {
+        if (nums == null || nums.length < 4) return false;
+        int sum = 0;
+        for (int num : nums) sum += num;
+        if (sum % 4 != 0) return false;
+
+        return dfs(nums, new int[4], 0, sum / 4);
+    }
+
+    private boolean dfs(int[] nums, int[] sums, int index, int target) {
+        if (index == nums.length) {
+            if (sums[0] == target && sums[1] == target && sums[2] == target) {
+                return true;
+            }
+            return false;
+        }
+
+        for (int i = 0; i < 4; i++) {
+            if (sums[i] + nums[index] > target) continue;
+            sums[i] += nums[index];
+            if (dfs(nums, sums, index + 1, target)) return true;
+            sums[i] -= nums[index];
+        }
+
+        return false;
+    }
     
+    // LC: 472. Concatenated Words
+    // Given a list of words (without duplicates), please write a program that returns all concatenated words in the
+    // given list of words.
+    // A concatenated word is defined as a string that is comprised entirely of at least two shorter words in the given
+    // array.
+    // Input: ["cat","cats","catsdogcats","dog","dogcatsdog","hippopotamuses","rat","ratcatdogcat"]
+    // Output: ["catsdogcats","dogcatsdog","ratcatdogcat"]
+    // Explanation: "catsdogcats" can be concatenated by "cats", "dog" and "cats";
+    // "dogcatsdog" can be concatenated by "dog", "cats" and "dog";
+    // "ratcatdogcat" can be concatenated by "rat", "cat", "dog" and "cat".
+    // Note:
+    // The number of elements of the given array will not exceed 10,000
+    // The length sum of elements in the given array will not exceed 600,000.
+    // All the input string will only include lower case letters.
+    // The returned elements order does not matter.
+    // https://discuss.leetcode.com/topic/72113/java-dp-solution
+    public static List<String> findAllConcatenatedWordsInADict(String[] words) {
+        List<String> result = new ArrayList<>();
+        Set<String> preWords = new HashSet<>();
+        Arrays.sort(words, new Comparator<String>() {
+            public int compare (String s1, String s2) {
+                return s1.length() - s2.length();
+            }
+        });
+
+        for (int i = 0; i < words.length; i++) {
+            if (canForm(words[i], preWords)) {
+                result.add(words[i]);
+            }
+            preWords.add(words[i]);
+        }
+
+        return result;
+    }
+
+    private static boolean canForm(String word, Set<String> dict) {
+        if (dict.isEmpty()) return false;
+        boolean[] dp = new boolean[word.length() + 1];
+        dp[0] = true;
+        for (int i = 1; i <= word.length(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (!dp[j]) continue;
+                if (dict.contains(word.substring(j, i))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[word.length()];
+    }
+
+
+
 
 
     int[][] cache;
@@ -209,6 +493,8 @@ public class DFS {
     // "(a)())()" -> ["(a)()()", "(a())()"]
     // ")(" -> [""]
     // https://discuss.leetcode.com/topic/34875/easy-short-concise-and-fast-java-dfs-3-ms-solution
+    // https://discuss.leetcode.com/topic/28827/share-my-java-bfs-solution
+    // SP: https://discuss.leetcode.com/topic/28833/short-python-bfs
     public List<String> removeInvalidParentheses(String s) {
         List<String> ans = new ArrayList<>();
         remove(s, ans, 0, 0, new char[]{'(', ')'});
@@ -232,6 +518,8 @@ public class DFS {
             ans.add(reversed);
     }
 
+
+
     // LC: 257. Binary Tree Paths
     // @see Trees
 
@@ -254,7 +542,6 @@ public class DFS {
     //  The input prerequisites is a graph represented by a list of edges, not adjacency matrices. Read more about how
     //  a graph is represented.
     //  You may assume that there are no duplicate edges in the input prerequisites.
-    // https://discuss.leetcode.com/topic/13873/two-ac-solution-in-java-using-bfs-and-dfs-with-explanation
     // https://discuss.leetcode.com/topic/17354/java-dfs-double-cache-visiting-each-vertex-once-433ms
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         List<List<Integer>> adj = new ArrayList<>(numCourses);
@@ -282,6 +569,70 @@ public class DFS {
         }
         visited[v] = true;
         stack.push(v);
+        return true;
+    }
+
+    // https://discuss.leetcode.com/topic/13873/two-ac-solution-in-java-using-bfs-and-dfs-with-explanation
+    private void initialiseGraph(int[] incLinkCounts, List<List<Integer>> adjs, int[][] prerequisites){
+        int n = incLinkCounts.length;
+        while (n-- > 0) adjs.add(new ArrayList<>());
+        for (int[] edge : prerequisites) {
+            incLinkCounts[edge[0]]++;
+            adjs.get(edge[1]).add(edge[0]);
+        }
+    }
+
+    public int[] findOrderBFSDFS(int numCourses, int[][] prerequisites) {
+        int[] incLinkCounts = new int[numCourses];
+        List<List<Integer>> adjs = new ArrayList<>(numCourses);
+        initialiseGraph(incLinkCounts, adjs, prerequisites);
+        //return solveByBFS(incLinkCounts, adjs);
+        return solveByDFS(adjs);
+    }
+
+    private int[] solveByBFS(int[] incLinkCounts, List<List<Integer>> adjs){
+        int[] order = new int[incLinkCounts.length];
+        Queue<Integer> toVisit = new ArrayDeque<>();
+        for (int i = 0; i < incLinkCounts.length; i++) {
+            if (incLinkCounts[i] == 0) toVisit.offer(i);
+        }
+        int visited = 0;
+        while (!toVisit.isEmpty()) {
+            int from = toVisit.poll();
+            order[visited++] = from;
+            for (int to : adjs.get(from)) {
+                incLinkCounts[to]--;
+                if (incLinkCounts[to] == 0) toVisit.offer(to);
+            }
+        }
+        return visited == incLinkCounts.length ? order : new int[0];
+    }
+
+    private int[] solveByDFS(List<List<Integer>> adjs) {
+        BitSet hasCycle = new BitSet(1);
+        BitSet visited = new BitSet(adjs.size());
+        BitSet onStack = new BitSet(adjs.size());
+        Deque<Integer> order = new ArrayDeque<>();
+        for (int i = adjs.size() - 1; i >= 0; i--) {
+            if (visited.get(i) == false && hasOrder(i, adjs, visited, onStack, order) == false) return new int[0];
+        }
+        int[] orderArray = new int[adjs.size()];
+        for (int i = 0; !order.isEmpty(); i++) orderArray[i] = order.pop();
+        return orderArray;
+    }
+
+    private boolean hasOrder(int from, List<List<Integer>> adjs, BitSet visited, BitSet onStack, Deque<Integer> order) {
+        visited.set(from);
+        onStack.set(from);
+        for (int to : adjs.get(from)) {
+            if (visited.get(to) == false) {
+                if (hasOrder(to, adjs, visited, onStack, order) == false) return false;
+            } else if (onStack.get(to) == true) {
+                return false;
+            }
+        }
+        onStack.clear(from);
+        order.push(from);
         return true;
     }
 
@@ -361,6 +712,9 @@ public class DFS {
     }
 
     // LC: 200. Number of Islands
+    // Given a 2d grid map of '1's (land) and '0's (water), count the number of islands. An island is surrounded by
+    // water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of
+    // the grid are all surrounded by water.
     // https://leetcode.com/problems/number-of-islands/?tab=Description
     // Time: O(m * n)??, Space: O(m + n) for the recursion stack
     // ==== test it ===
@@ -392,6 +746,53 @@ public class DFS {
         return numIslands;
     }
 
+    // https://discuss.leetcode.com/topic/16546/java-dfs-and-bfs-solution
+    public int numIslandsBFS(char[][] grid) {
+        int count=0;
+        for(int i=0;i<grid.length;i++)
+            for(int j=0;j<grid[0].length;j++){
+                if(grid[i][j]=='1'){
+                    bfsFill(grid,i,j);
+                    count++;
+                }
+            }
+        return count;
+    }
+    private void bfsFill(char[][] grid,int x, int y){
+        grid[x][y]='0';
+        int n = grid.length;
+        int m = grid[0].length;
+        LinkedList<Integer> queue = new LinkedList<Integer>();
+        int code = x*m+y;
+        queue.offer(code);
+        while(!queue.isEmpty())
+        {
+            code = queue.poll();
+            int i = code/m;
+            int j = code%m;
+            if(i>0 && grid[i-1][j]=='1')    //search upward and mark adjacent '1's as '0'.
+            {
+                queue.offer((i-1)*m+j);
+                grid[i-1][j]='0';
+            }
+            if(i<n-1 && grid[i+1][j]=='1')  //down
+            {
+                queue.offer((i+1)*m+j);
+                grid[i+1][j]='0';
+            }
+            if(j>0 && grid[i][j-1]=='1')  //left
+            {
+                queue.offer(i*m+j-1);
+                grid[i][j-1]='0';
+            }
+            if(j<m-1 && grid[i][j+1]=='1')  //right
+            {
+                queue.offer(i*m+j+1);
+                grid[i][j+1]='0';
+            }
+        }
+    }
+
     // LC: 199. Binary Tree Right Side View
     // https://leetcode.com/problems/binary-tree-right-side-view/?tab=Description
     // @see Trees
@@ -418,6 +819,31 @@ public class DFS {
         HashMap<UndirectedGraphNode, UndirectedGraphNode> hm = new HashMap<>();
         cloneGraphHelper(node, hm);
         return hm.get(node);
+    }
+
+    public UndirectedGraphNode cloneGraphBFS(UndirectedGraphNode node) {
+        if (node == null) return null;
+
+        UndirectedGraphNode newNode = new UndirectedGraphNode(node.label); //new node for return
+        HashMap<Integer, UndirectedGraphNode> map = new HashMap(); //store visited nodes
+
+        map.put(newNode.label, newNode); //add first node to HashMap
+
+        LinkedList<UndirectedGraphNode> queue = new LinkedList(); //to store **original** nodes need to be visited
+        queue.add(node); //add first **original** node to queue
+
+        while (!queue.isEmpty()) { //if more nodes need to be visited
+            UndirectedGraphNode n = queue.pop(); //search first node in the queue
+            for (UndirectedGraphNode neighbor : n.neighbors) {
+                if (!map.containsKey(neighbor.label)) { //add to map and queue if this node hasn't been searched before
+                    map.put(neighbor.label, new UndirectedGraphNode(neighbor.label));
+                    queue.add(neighbor);
+                }
+                map.get(n.label).neighbors.add(map.get(neighbor.label)); //add neighbor to new created nodes
+            }
+        }
+
+        return newNode;
     }
 
 
@@ -528,7 +954,7 @@ public class DFS {
         return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
     }
 
-    // 111. Minimum Depth of Binary Tree
+    // LC: 111. Minimum Depth of Binary Tree
     // Given a binary tree, find its minimum depth.
     // The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
     // @see Trees
@@ -594,6 +1020,25 @@ public class DFS {
         if (right == null) { return false; }
 
         return left.val == right.val && isSymmetricHelper(left.right, right.left) && isSymmetricHelper(left.left, right.right);
+    }
+
+    public boolean isSymmetricBFS(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        if(root == null) return true;
+        q.add(root.left);
+        q.add(root.right);
+        while(q.size() > 1){
+            TreeNode left = q.poll(),
+                    right = q.poll();
+            if(left== null&& right == null) continue;
+            if(left == null ^ right == null) return false;
+            if(left.val != right.val) return false;
+            q.add(left.left);
+            q.add(right.right);
+            q.add(left.right);
+            q.add(right.left);
+        }
+        return true;
     }
 
     public boolean isSymmetric(TreeNode root) {

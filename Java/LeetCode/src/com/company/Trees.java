@@ -757,6 +757,27 @@ public class Trees {
 
     }
 
+    // BFS https://discuss.leetcode.com/topic/25893/bfs-c-8ms-beats-99-94-submissions
+    int minDepthBFS(TreeNode root) {
+        if (root == null) return 0;
+        Queue<TreeNode> Q = new LinkedList<>();
+
+        Q.offer(root);
+        int i = 0;
+        while (!Q.isEmpty()) {
+            i++;
+            int k = Q.size();
+            for (int j=0; j<k; j++) {
+                TreeNode rt = Q.poll();
+                if (rt.left != null) Q.offer(rt.left);
+                if (rt.right != null) Q.offer(rt.right);
+
+                if (rt.left==null && rt.right==null) return i;
+            }
+        }
+        return -1; //For the compiler thing. The code never runs here.
+    }
+
     // LC: 110. Balanced Binary Tree
     // Given a binary tree, determine if it is height-balanced.
     // For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two

@@ -24,30 +24,68 @@
       <file leaf-file-name="Trees.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Trees.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="278" column="7" lean-forward="false" selection-start-line="278" selection-start-column="7" selection-end-line="278" selection-end-column="7" />
+            <state relative-caret-position="104">
+              <caret line="532" column="11" lean-forward="false" selection-start-line="532" selection-start-column="11" selection-end-line="532" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#8722#8732#0" expanded="true" />
+                <element signature="e#13123#13131#0" expanded="true" />
                 <element signature="e#13525#13533#0" expanded="true" />
-                <element signature="e#18262#18263#0" expanded="true" />
-                <element signature="e#18326#18327#0" expanded="true" />
                 <element signature="e#20397#20406#0" expanded="true" />
-                <element signature="e#28336#28346#0" expanded="true" />
-                <element signature="e#28403#28418#0" expanded="true" />
-                <element signature="e#28617#28626#0" expanded="true" />
-                <element signature="e#29094#29109#0" expanded="true" />
+                <element signature="e#29020#29030#0" expanded="true" />
+                <element signature="e#29087#29102#0" expanded="true" />
+                <element signature="e#29301#29310#0" expanded="true" />
+                <element signature="e#29778#29793#0" expanded="true" />
+                <element signature="e#30939#30949#0" expanded="true" />
+                <element signature="e#32829#32839#0" expanded="true" />
+                <element signature="e#32941#32950#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DFS.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DFS.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/DFS.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="101">
-              <caret line="16" column="4" lean-forward="false" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-              <folding />
+            <state relative-caret-position="284">
+              <caret line="495" column="0" lean-forward="false" selection-start-line="495" selection-start-column="0" selection-end-line="495" selection-end-column="0" />
+              <folding>
+                <element signature="e#7076#7091#0" expanded="true" />
+                <element signature="e#7139#7148#0" expanded="true" />
+                <element signature="e#10961#10962#0" expanded="true" />
+                <element signature="e#11025#11026#0" expanded="true" />
+                <element signature="e#30940#30949#0" expanded="true" />
+                <element signature="e#40215#40225#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BFS.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/BFS.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="149">
+              <caret line="14" column="11" lean-forward="false" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="11" />
+              <folding>
+                <element signature="e#3333#3334#0" expanded="true" />
+                <element signature="e#3391#3392#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DivideAndConquer.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/company/DivideAndConquer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="359" column="6" lean-forward="false" selection-start-line="359" selection-start-column="6" selection-end-line="359" selection-end-column="6" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#766#767#0" expanded="true" />
+                <element signature="e#822#823#0" expanded="true" />
+                <element signature="e#7023#7031#0" expanded="true" />
+                <element signature="e#8330#8339#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -55,11 +93,9 @@
       <file leaf-file-name="ArraysLC.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="58">
-              <caret line="958" column="11" lean-forward="false" selection-start-line="958" selection-start-column="11" selection-end-line="958" selection-end-column="11" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="118">
+              <caret line="1598" column="11" lean-forward="false" selection-start-line="1598" selection-start-column="11" selection-end-line="1598" selection-end-column="11" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -76,36 +112,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>384. Shuffle an Array</find>
-      <find>414. Third Maximum Number</find>
-      <find>442. Find All Duplicates in an Array</find>
-      <find>448. Find All Numbers that Disappeared in an Array</find>
-      <find>485. Max Consecutive Ones</find>
-      <find>495. Teemo Attacking</find>
-      <find>532. K-diff Pairs in an Array</find>
-      <find>Recover Binary Search Tree</find>
-      <find>same tree</find>
-      <find>101. Symmetric Tree</find>
-      <find>104. Maximum Depth of Binary Tree</find>
-      <find>105. Construct Binary Tree from Preorder and Inorder Traversal</find>
-      <find>106. Construct Binary Tree from Inorder and Postorder Traversal</find>
-      <find>108. Convert Sorted Array to Binary Search Tree</find>
-      <find>109. Convert Sorted List to Binary Search Tree</find>
-      <find>110. Balanced Binary Tree</find>
+      <find>102. Binary Tree Level Order Traversal</find>
+      <find>103. Binary Tree Zigzag Level Order Traversal</find>
+      <find>107. Binary Tree Level Order Traversal II</find>
       <find>111. Minimum Depth of Binary Tree</find>
-      <find>112. Path Sum</find>
-      <find>113. Path Sum II</find>
-      <find>114. Flatten Binary Tree to Linked List</find>
-      <find>116. Populating Next Right Pointers in Each Node</find>
-      <find>117. Populating Next Right Pointers in Each Node II</find>
-      <find>124. Binary Tree Maximum Path Sum</find>
-      <find>129. Sum Root to Leaf Numbers</find>
+      <find>126. Word Ladder II</find>
       <find>133. Clone Graph</find>
-      <find>257. Binary Tree Paths</find>
-      <find>329. Longest Increasing Path in a Matrix</find>
-      <find>House Robber III</find>
+      <find>199. Binary Tree Right Side View</find>
+      <find>200. Number of Islands</find>
+      <find>207. Course Schedule</find>
+      <find>210. Course Schedule II</find>
+      <find>279. Perfect Squares</find>
+      <find>301. Remove Invalid Parentheses</find>
+      <find>310. Minimum Height Trees</find>
+      <find>417. Pacific Atlantic Water Flow</find>
+      <find>407. Trapping Rain Water II</find>
+      <find>529. Minesweeper</find>
       <find>@see</find>
-      <find>394. Decode String</find>
+      <find>Median of Two Sorted Arrays</find>
+      <find>-&gt;</find>
+      <find>53. Maximum Subarray</find>
+      <find>23. Merge k Sorted Lists</find>
+      <find>169. Majority Element</find>
+      <find>215. Kth Largest Element in an Array</find>
+      <find>less</find>
+      <find>218. The Skyline Problem</find>
+      <find>Search a 2D Matrix II</find>
+      <find>241. Different Ways to Add Parentheses</find>
+      <find>312. Burst Balloons</find>
+      <find>Count of Range Sum</find>
+      <find>514. Freedom Trail</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -120,7 +156,6 @@
         <option value="$PROJECT_DIR$/src/com/company/Arrays.java" />
         <option value="$PROJECT_DIR$/src/com/company/BSTs.java" />
         <option value="$PROJECT_DIR$/src/com/company/Heaps.java" />
-        <option value="$PROJECT_DIR$/src/com/company/DivideAndConquer.java" />
         <option value="$PROJECT_DIR$/src/com/company/NoCategory.java" />
         <option value="$PROJECT_DIR$/src/com/company/Math.java" />
         <option value="$PROJECT_DIR$/src/com/company/LinkedLists.java" />
@@ -130,7 +165,6 @@
         <option value="$PROJECT_DIR$/src/com/company/RandomizedSet.java" />
         <option value="$PROJECT_DIR$/src/com/company/RandomizedCollection.java" />
         <option value="$PROJECT_DIR$/src/com/company/NestedInteger.java" />
-        <option value="$PROJECT_DIR$/src/com/company/BFS.java" />
         <option value="$PROJECT_DIR$/src/com/company/Strings.java" />
         <option value="$PROJECT_DIR$/src/com/company/Stacks.java" />
         <option value="$PROJECT_DIR$/src/com/company/Bits.java" />
@@ -142,14 +176,16 @@
         <option value="$PROJECT_DIR$/src/com/company/ArraysLC.java" />
         <option value="$PROJECT_DIR$/src/com/company/Trees.java" />
         <option value="$PROJECT_DIR$/src/com/company/DFS.java" />
+        <option value="$PROJECT_DIR$/src/com/company/BFS.java" />
+        <option value="$PROJECT_DIR$/src/com/company/DivideAndConquer.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="58" />
+    <option name="x" value="216" />
     <option name="y" value="26" />
-    <option name="width" value="1298" />
-    <option name="height" value="806" />
+    <option name="width" value="1151" />
+    <option name="height" value="703" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -166,6 +202,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -196,33 +235,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LeetCode" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LeetCode" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="company" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DFS.java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="RunManager" selected="Application.Main">
@@ -473,7 +487,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="58" y="26" width="1298" height="806" extended-state="0" />
+    <frame x="216" y="26" width="1151" height="703" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -490,8 +504,8 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20416024" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23337856" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22762816" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41009465" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -533,20 +547,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2070">
           <caret line="140" column="12" lean-forward="false" selection-start-line="140" selection-start-column="12" selection-end-line="140" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="30" column="27" lean-forward="false" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#8722#8732#0" expanded="true" />
+            <element signature="e#13123#13131#0" expanded="true" />
+            <element signature="e#13525#13533#0" expanded="true" />
+            <element signature="e#20397#20406#0" expanded="true" />
+            <element signature="e#29020#29030#0" expanded="true" />
+            <element signature="e#29087#29102#0" expanded="true" />
+            <element signature="e#29301#29310#0" expanded="true" />
+            <element signature="e#29778#29793#0" expanded="true" />
+            <element signature="e#30939#30949#0" expanded="true" />
+            <element signature="e#32829#32839#0" expanded="true" />
+            <element signature="e#32941#32950#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java" />
     <entry file="file://$PROJECT_DIR$/src/com/company/Hashtables.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -562,47 +580,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2220">
           <caret line="150" column="9" lean-forward="true" selection-start-line="150" selection-start-column="9" selection-end-line="150" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Sort.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="28" column="23" lean-forward="false" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Strings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="17" lean-forward="false" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
           <folding>
-            <element signature="e#2668#2669#0" expanded="false" />
-            <element signature="e#2715#2716#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#8722#8732#0" expanded="true" />
+            <element signature="e#13123#13131#0" expanded="true" />
+            <element signature="e#13525#13533#0" expanded="true" />
+            <element signature="e#20397#20406#0" expanded="true" />
+            <element signature="e#29020#29030#0" expanded="true" />
+            <element signature="e#29087#29102#0" expanded="true" />
+            <element signature="e#29301#29310#0" expanded="true" />
+            <element signature="e#29778#29793#0" expanded="true" />
+            <element signature="e#30939#30949#0" expanded="true" />
+            <element signature="e#32829#32839#0" expanded="true" />
+            <element signature="e#32941#32950#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/DivideAndConquer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="47" column="5" lean-forward="true" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/DFS.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Sort.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/Strings.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/DivideAndConquer.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/DFS.java" />
     <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -611,16 +609,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="27" lean-forward="true" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java" />
     <entry file="file://$PROJECT_DIR$/src/com/company/Hashtables.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -636,20 +625,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2760">
           <caret line="190" column="33" lean-forward="true" selection-start-line="190" selection-start-column="33" selection-end-line="190" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#8722#8732#0" expanded="true" />
+            <element signature="e#13123#13131#0" expanded="true" />
+            <element signature="e#13525#13533#0" expanded="true" />
+            <element signature="e#20397#20406#0" expanded="true" />
+            <element signature="e#29020#29030#0" expanded="true" />
+            <element signature="e#29087#29102#0" expanded="true" />
+            <element signature="e#29301#29310#0" expanded="true" />
+            <element signature="e#29778#29793#0" expanded="true" />
+            <element signature="e#30939#30949#0" expanded="true" />
+            <element signature="e#32829#32839#0" expanded="true" />
+            <element signature="e#32941#32950#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java" />
     <entry file="file://$PROJECT_DIR$/src/com/company/Hashtables.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -665,7 +658,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8722#8732#0" expanded="true" />
+            <element signature="e#13123#13131#0" expanded="true" />
+            <element signature="e#13525#13533#0" expanded="true" />
+            <element signature="e#20397#20406#0" expanded="true" />
+            <element signature="e#29020#29030#0" expanded="true" />
+            <element signature="e#29087#29102#0" expanded="true" />
+            <element signature="e#29301#29310#0" expanded="true" />
+            <element signature="e#29778#29793#0" expanded="true" />
+            <element signature="e#30939#30949#0" expanded="true" />
+            <element signature="e#32829#32839#0" expanded="true" />
+            <element signature="e#32941#32950#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -677,16 +683,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java" />
     <entry file="file://$PROJECT_DIR$/src/com/company/Hashtables.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -706,16 +703,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java" />
     <entry file="file://$PROJECT_DIR$/src/com/company/Hashtables.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3360">
@@ -727,16 +715,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java" />
     <entry file="file://$PROJECT_DIR$/src/com/company/Hashtables.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -748,16 +727,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java" />
     <entry file="file://$PROJECT_DIR$/src/com/company/Hashtables.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -769,61 +739,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Heaps.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding>
-            <element signature="e#538#539#0" expanded="false" />
-            <element signature="e#594#595#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/DivideAndConquer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/NoCategory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="56" column="19" lean-forward="false" selection-start-line="56" selection-start-column="19" selection-end-line="56" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/LinkedLists.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Math.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="34" lean-forward="false" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/Heaps.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/NoCategory.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/LinkedLists.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/Math.java" />
     <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -832,98 +752,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/wordladder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/RandomizedSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1573#1574#0" expanded="false" />
-            <element signature="e#1633#1634#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/RandomizedCollection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Design.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/NestedInteger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/BSTs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/BFS.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="13" column="11" lean-forward="false" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Strings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="303" column="0" lean-forward="false" selection-start-line="303" selection-start-column="0" selection-end-line="303" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Sort.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="136" column="18" lean-forward="false" selection-start-line="136" selection-start-column="18" selection-end-line="136" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Bits.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="106" column="12" lean-forward="false" selection-start-line="106" selection-start-column="12" selection-end-line="106" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/BinarySearch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="33" column="7" lean-forward="false" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/wordladder.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/RandomizedSet.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/RandomizedCollection.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/NestedInteger.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/BSTs.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/Strings.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/Sort.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/Bits.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/BinarySearch.java" />
     <entry file="file://$PROJECT_DIR$/src/com/company/Hashtables.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -935,71 +772,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Stacks.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="609" column="11" lean-forward="false" selection-start-line="609" selection-start-column="7" selection-end-line="609" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#13841#13850#0" expanded="true" />
-            <element signature="e#20255#20265#0" expanded="true" />
-            <element signature="e#24018#24029#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Backtracking.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/DynamicProgramming.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="121" column="5" lean-forward="false" selection-start-line="121" selection-start-column="5" selection-end-line="121" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="958" column="11" lean-forward="false" selection-start-line="958" selection-start-column="11" selection-end-line="958" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Stacks.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/Backtracking.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/company/DynamicProgramming.java" />
     <entry file="file://$PROJECT_DIR$/src/com/company/Trees.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="278" column="7" lean-forward="false" selection-start-line="278" selection-start-column="7" selection-end-line="278" selection-end-column="7" />
+        <state relative-caret-position="104">
+          <caret line="532" column="11" lean-forward="false" selection-start-line="532" selection-start-column="11" selection-end-line="532" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#8722#8732#0" expanded="true" />
+            <element signature="e#13123#13131#0" expanded="true" />
             <element signature="e#13525#13533#0" expanded="true" />
-            <element signature="e#18262#18263#0" expanded="true" />
-            <element signature="e#18326#18327#0" expanded="true" />
             <element signature="e#20397#20406#0" expanded="true" />
-            <element signature="e#28336#28346#0" expanded="true" />
-            <element signature="e#28403#28418#0" expanded="true" />
-            <element signature="e#28617#28626#0" expanded="true" />
-            <element signature="e#29094#29109#0" expanded="true" />
+            <element signature="e#29020#29030#0" expanded="true" />
+            <element signature="e#29087#29102#0" expanded="true" />
+            <element signature="e#29301#29310#0" expanded="true" />
+            <element signature="e#29778#29793#0" expanded="true" />
+            <element signature="e#30939#30949#0" expanded="true" />
+            <element signature="e#32829#32839#0" expanded="true" />
+            <element signature="e#32941#32950#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/DFS.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="16" column="4" lean-forward="false" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+        <state relative-caret-position="284">
+          <caret line="495" column="0" lean-forward="false" selection-start-line="495" selection-start-column="0" selection-end-line="495" selection-end-column="0" />
+          <folding>
+            <element signature="e#7076#7091#0" expanded="true" />
+            <element signature="e#7139#7148#0" expanded="true" />
+            <element signature="e#10961#10962#0" expanded="true" />
+            <element signature="e#11025#11026#0" expanded="true" />
+            <element signature="e#30940#30949#0" expanded="true" />
+            <element signature="e#40215#40225#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/BFS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="14" column="11" lean-forward="false" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="11" />
+          <folding>
+            <element signature="e#3333#3334#0" expanded="true" />
+            <element signature="e#3391#3392#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Design.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="40" column="87" lean-forward="true" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="87" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/ArraysLC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="1598" column="11" lean-forward="false" selection-start-line="1598" selection-start-column="11" selection-end-line="1598" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/DivideAndConquer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="359" column="6" lean-forward="false" selection-start-line="359" selection-start-column="6" selection-end-line="359" selection-end-column="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#766#767#0" expanded="true" />
+            <element signature="e#822#823#0" expanded="true" />
+            <element signature="e#7023#7031#0" expanded="true" />
+            <element signature="e#8330#8339#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
