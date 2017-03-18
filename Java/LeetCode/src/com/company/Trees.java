@@ -271,6 +271,11 @@ public class Trees {
 
     // LC: 337. House Robber III
     // @todo: UNSOLVED
+    // The thief has found himself a new place for his thievery again. There is only one entrance to this area,
+    // called the "root." Besides the root, each house has one and only one parent house. After a tour, the smart thief
+    // realized that "all houses in this place forms a binary tree". It will automatically contact the police if two
+    // directly-linked houses were broken into on the same night.
+    // Determine the maximum amount of money the thief can rob tonight without alerting the police.
     // https://discuss.leetcode.com/topic/39834/step-by-step-tackling-of-the-problem
     public int rob(TreeNode root) {
         int[] res = robSub(root);
@@ -774,6 +779,7 @@ public class Trees {
 
     // LC: 108: Convert Sorted Array to Binary Search Tree
     // Time: O(n), Space: O(log n) for the recursion
+    // https://discuss.leetcode.com/topic/3158/my-accepted-java-solution
     private TreeNode sortedArrayToBSTHelper(int[] nums, int sx, int ex) {
         if (sx > ex) {
             return null;
@@ -835,14 +841,7 @@ public class Trees {
     // @see Arrays
 
     // LC: 104. Maximum Depth of Binary Tree
-    // https://discuss.leetcode.com/topic/4087/simple-solution-using-java
-    // https://discuss.leetcode.com/topic/7139/can-leetcode-share-top-performing-solution-s-of-problems-for-each-supported-language
-    public int maxDepth(TreeNode root) {
-        if(root==null){
-            return 0;
-        }
-        return 1+Math.max(maxDepth(root.left),maxDepth(root.right));
-    }
+    // @see DFS
 
     // LC: 103. Binary Tree Zigzag Level Order Traversal
     // https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/?tab=Description

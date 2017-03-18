@@ -134,25 +134,5 @@ public class Sort {
     }
 
     // 75. Sort Colors
-    // Time: O(n), Space: O(c)
-    // https://leetcode.com/problems/sort-colors/?tab=Description
-    public void sortColors(int[] nums) {
-        int numRed = 0, numWhite = 0, numBlue = 0;
-
-        for (int num : nums) {
-            if (num == 0) { numRed++; }
-            if (num == 1) { numWhite++; }
-            if (num == 2) { numBlue++; }
-        }
-        int ix = 0;
-        for (; ix < numRed; ix++) {
-            nums[ix] = 0;
-        }
-        for (int jx = 0; jx < numWhite; jx++) {
-            nums[ix++] = 1;
-        }
-        for (int jx = 0; jx < numBlue; jx++) {
-            nums[ix++] = 2;
-        }
-    }
+    // @see Arrays
 }

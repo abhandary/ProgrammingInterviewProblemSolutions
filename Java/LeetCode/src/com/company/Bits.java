@@ -188,6 +188,7 @@ public class Bits {
 
     // 136. Single Number
     // Time: O(n), Space: O(c)
+    // Given an array of integers, every element appears twice except for one. Find that single one.
     // https://leetcode.com/problems/single-number/?tab=Description
     public int singleNumber(int[] nums) {
         if (nums.length == 0) { return -1; }

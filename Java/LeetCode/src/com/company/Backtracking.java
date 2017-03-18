@@ -11,65 +11,10 @@ public class Backtracking {
 
 
    // 79. Word Search
-    // https://leetcode.com/problems/word-search/?tab=Description
-    // Time: O(m * n), Space: O(k) for the recursion stack
-    boolean visit(char[][] board, String word, int wx, int ix, int jx) {
-        int[][] next = {{0, -1}, {0, 1}, {1, 0}, {-1, 0}};
-
-        if (ix < 0 || ix >= board.length) { return  false; }
-        if (jx < 0 || jx >= board[0].length) { return false; }
-
-        char current = board[ix][jx];
-        if (current == ' ') { return false; }
-        if (current != word.charAt(wx)) { return false; }
-
-        if (wx == word.length() - 1) { return true; }
-
-        board[ix][jx] = ' ';
-        for (int nx = 0; nx < next.length; nx++) {
-            if (visit(board, word, wx + 1, ix + next[nx][0], jx + next[nx][1])) {
-                return true;
-            }
-        }
-        board[ix][jx] = current;
-        return false;
-    }
-
-    public boolean exist(char[][] board, String word) {
-        if (word.length() == 0) { return false; }
-        for (int ix = 0; ix < board.length; ix++) {
-            for (int jx = 0; jx < board[0].length; jx++) {
-                char current = board[ix][jx];
-                boolean exists = false;
-                if (current == word.charAt(0)) {
-                    exists = visit(board, word, 0, ix, jx);
-                }
-                if (exists == true) { return true; }
-            }
-        }
-        return false;
-    }
+    // @see Arrays
 
     // 78. Subsets
-    // https://leetcode.com/problems/subsets/?tab=Description
-    public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
-        if (nums.length == 0) { return  result; }
-
-        for (int ix = 0; ix < 1 << nums.length; ix++) {
-            int bits = ix;
-            List<Integer> set = new ArrayList<>();
-            while (bits > 0) {
-                int next = bits & ~(bits - 1);
-                int val = (int) (Math.log(next)/Math.log(2));
-                set.add(nums[val]);
-                bits &= (bits - 1);
-            }
-            result.add(set);
-        }
-
-        return result;
-    }
+    // @see Arrays
 
     // 77. Combinations
     // https://leetcode.com/problems/combinations/?tab=Description

@@ -574,7 +574,7 @@ public class Stacks {
 
     // LC: 94. Binary Tree Inorder Traversal
     // Time: O(n), Space: O(h)
-    // https://leetcode.com/problems/binary-tree-inorder-traversal/?tab=Description
+    // https://discuss.leetcode.com/topic/6478/iterative-solution-in-java-simple-and-readable
     public List<Integer> inorderTraversal(TreeNode root) {
         ArrayList<Integer> result = new ArrayList<>();
         if (root == null) { return result; }

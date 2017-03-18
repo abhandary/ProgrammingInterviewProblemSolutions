@@ -300,22 +300,6 @@ public class Strings {
         return s.substring(maxResult[0], maxResult[1] + 1);
     }
 
-    // 3. Longest Substring Without Repeating Characters
-    // Time: O(n), Space: O(c)
-    // https://leetcode.com/problems/longest-substring-without-repeating-characters/?tab=Description
-    public int lengthOfLongestSubstring(String s) {
-        HashMap<Character, Integer> hm = new HashMap<>();
-        char[] schars = s.toCharArray();
-        int start = 0;
-        int val = 0;
-        int max = 0;
-        for (int ix = 0; ix < schars.length; ix++) {
-            if (hm.get(schars[ix]) != null && hm.get(schars[ix]) > start) {
-                start = hm.get(schars[ix]) + 1;
-            }
-            // max = Math.max(max, ix - start + 1);
-            hm.put(schars[ix], ix);
-        }
-        return max;
-    }
+    // LC: 3. Longest Substring Without Repeating Characters
+    // @see Hashtables
 }

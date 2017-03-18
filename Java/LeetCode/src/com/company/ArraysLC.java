@@ -475,12 +475,20 @@ public class ArraysLC {
         return false;
     }
 
+    public boolean containsNearbyDuplicate2(int[] nums, int k) {
+        Set<Integer> set = new HashSet<Integer>();
+        for(int i = 0; i < nums.length; i++){
+            if(i > k) set.remove(nums[i-k-1]);
+            if(!set.add(nums[i])) return true;
+        }
+        return false;
+    }
 
     // LC: 217. Contains Duplicate
-    // Given an array of integers, find if the array contains any duplicates. Your function should return true if
-    // any value appears at least twice in the array, and it should return false if every element is distinct.
+    // Given an array of integers, find if the array contains any duplicates. Your function should return true
+    // if any value appears at least twice in the array, and it should return false if every element is distinct.
+    // https://discuss.leetcode.com/topic/14730/possible-solutions
     // Time: O(n), Space: O(n)
-    // https://leetcode.com/problems/contains-duplicate/?tab=Description
     public boolean containsDuplicate(int[] nums) {
         Set<Integer> set = new HashSet<>();
         for (int val : nums) {
@@ -842,68 +850,13 @@ public class ArraysLC {
     }
 
     // LC: 122. Best Time to Buy and Sell Stock II
-    // Time: O(n)
-    // @todo: UNSOLVED
-    // https://discuss.leetcode.com/topic/726/is-this-question-a-joke/13
-    public int maxProfit2(int[] prices) {
-        int total = 0;
-        for (int i=0; i< prices.length-1; i++) {
-            if (prices[i+1]>prices[i]) total += prices[i+1]-prices[i];
-        }
-
-        return total;
-    }
+    // @see Dynamic Programming
 
     // LC: 121. Best Time to Buy and Sell Stock
-    // Time: O(n)
-    // https://discuss.leetcode.com/topic/19853/kadane-s-algorithm-since-no-one-has-mentioned-about-this-so-far-in-case-if-interviewer-twists-the-input
-    public int maxProfit(int[] prices) {
-        if (prices.length == 0) { return 0; }
-        int minSoFar = prices[0];
-        int max = 0;
-        for (int ix = 1; ix < prices.length; ix++) {
-            if (prices[ix] > minSoFar) {
-                max = Math.max(max, prices[ix] - minSoFar);
-            }
-            minSoFar = Math.min(minSoFar, prices[ix]);
-        }
-        return max;
-    }
+    // @see Dynamic Programming
 
     // LC: 120. Triangle
-    // Time: O(n * m)
-    public int minimumTotal(List<List<Integer>> triangle) {
-        if (triangle.size() == 0) { return 0; }
-        List<Integer> lastRow = new ArrayList<>(triangle.get(0));
-        int min = lastRow.get(0);
-        for (int ix = 1; ix < triangle.size(); ix++) {
-
-            List<Integer> currentRow = new ArrayList<>(triangle.get(ix));
-            int val = currentRow.get(0) + lastRow.get(0);
-            currentRow.set(0, val);
-            min = Math.min(min, val);
-            val = currentRow.get(currentRow.size() - 1) + lastRow.get(lastRow.size() - 1);
-            currentRow.set(currentRow.size() - 1, val);
-            min = Math.min(min, val);
-            for (int jx = 1; jx < currentRow.size() - 1; jx++) {
-                val = triangle.get(ix).get(jx);
-                int localMin = val + Math.min(lastRow.get(jx - 1), lastRow.get(jx));
-                min = Math.min(min, localMin);
-                currentRow.set(jx, localMin);
-            }
-            lastRow = currentRow;
-        }
-        return min;
-    }
-
-    // https://discuss.leetcode.com/topic/8077/my-8-line-dp-java-code-4-meaningful-lines-with-o-1-space
-    // @todo: UNSOLVED
-    public int minimumTotal2(List<List<Integer>> triangle) {
-        for(int i = triangle.size() - 2; i >= 0; i--)
-            for(int j = 0; j <= i; j++)
-                triangle.get(i).set(j, triangle.get(i).get(j) + Math.min(triangle.get(i + 1).get(j), triangle.get(i + 1).get(j + 1)));
-        return triangle.get(0).get(0);
-    }
+    // @see Dynamic Programming
 
     // LC: 119. Pascal's Triangle II
     // @todo: UNSOLVED
@@ -1065,7 +1018,9 @@ public class ArraysLC {
 
     // LC: 85. Maximal Rectangle
     // @todo: UNSOLVED
-    // https://leetcode.com/problems/maximal-rectangle/#/solutions
+    // https://discuss.leetcode.com/topic/6650/share-my-dp-solution
+    // https://discuss.leetcode.com/topic/1634/a-o-n-2-solution-based-on-largest-rectangle-in-histogram
+    // https://discuss.leetcode.com/topic/21772/my-java-solution-based-on-maximum-rectangle-in-histogram-with-explanation
     public int maximalRectangle(char[][] matrix) {
         if (matrix==null||matrix.length==0||matrix[0].length==0)
             return 0;
@@ -1429,60 +1384,18 @@ public class ArraysLC {
     }
 
     // LC: 64. Minimum Path Sum
-    // Time: O(m * n)
-    // https://discuss.leetcode.com/topic/15269/10-lines-28ms-o-n-space-dp-solution-in-c-with-explanations
-    public int minPathSum(int[][] grid) {
-        if (grid.length == 0) { return 0; }
-        int m = grid.length, n = grid[0].length;
-        for (int ix = 0; ix < m; ix++) {
-            for (int jx = 0; jx < n; jx++) {
-                if (ix == 0 && jx == 0) continue;
-                grid[ix][jx] += Math.min((ix > 0 ? grid[ix - 1][jx] : Integer.MAX_VALUE), (jx > 0 ? grid[ix][jx - 1] : Integer.MAX_VALUE));
-            }
-        }
-        return grid[m - 1][n - 1];
-    }
+    // @see Dynamic Programming
 
     // LC: 63. Unique Paths II
     // Time O(m * n), Space: O(1) outside of the input
     // https://leetcode.com/problems/unique-paths-ii/#/solutions
     // https://discuss.leetcode.com/topic/10974/short-java-solution
-    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-        if (obstacleGrid.length == 0) return 0;
-        if (obstacleGrid[0][0] == 1) return 0; // IMP edge case
-
-        int m = obstacleGrid.length, n = obstacleGrid[0].length;
-        int[][] grid = new int[m][n];
-        grid[0][0] = 1;
-        for (int ix = 0; ix < m; ix++) {
-            for (int jx = 0; jx < n; jx++) {
-                if (ix == 0 && jx == 0) continue;
-                if (obstacleGrid[ix][jx] == 1) continue; // IMP to edge cases like [[0, 1]]
-                if (ix > 0 && obstacleGrid[ix - 1][jx] != 1) {
-                    grid[ix][jx] += grid[ix - 1][jx];
-                }
-                if (jx > 0 && obstacleGrid[ix][jx - 1] != 1) {
-                    grid[ix][jx] += grid[ix][jx - 1];
-                }
-            }
-        }
-        return grid[m - 1][n - 1];
-    }
+    // @see Dynamic Programming
 
     // LC: 62. Unique Paths
     // Time O(m * n), Space: O(1) outside of the input
     // https://discuss.leetcode.com/topic/15265/0ms-5-lines-dp-solution-in-c-with-explanations
-    public int uniquePaths(int m, int n) {
-        int[][] grid = new int[m][n];
-        grid[0][0] = 1;
-        for (int ix = 0; ix < m; ix++) {
-            for (int jx = 0; jx < n; jx++) {
-                if (ix == 0 && jx == 0) continue;
-                grid[ix][jx] = (ix > 0 ? grid[ix - 1][jx] : 0) + (jx > 0 ? grid[ix][jx - 1] : 0);
-            }
-        }
-        return grid[m - 1][n - 1];
-    }
+    // @see Dynamic Programming
 
     // LC: 59. Spiral Matrix II
     // https://discuss.leetcode.com/topic/4362/my-super-simple-solution-can-be-used-for-both-spiral-matrix-i-and-ii
@@ -1898,8 +1811,7 @@ public class ArraysLC {
     }
 
     // LC: 35. Search Insert Position
-    // Time: O(log n), Space: O(c)
-    // https://discuss.leetcode.com/topic/7874/my-8-line-java-solution
+    // @see Binary Search
     public int searchInsert(int[] nums, int target) {
         if (nums.length == 0) { return -1; }
         int low = 0, high = nums.length - 1;
@@ -1916,65 +1828,10 @@ public class ArraysLC {
     }
 
     // LC: 34. Search for a Range
-    // Time: O(log n), Space: O(c)
-    // https://discuss.leetcode.com/topic/6327/a-very-simple-java-solution-with-only-one-binary-search-algorithm
-    public int[] searchRange(int[] nums, int target) {
-        int[] result = new int[]{-1, -1};
-        if (nums.length == 0) { return result; }
-        int low = 0, high = nums.length - 1;
-
-        do {
-            int mid = low + (high - low) / 2;
-            if (nums[mid] < target) {
-                low = mid + 1;
-            } else {
-                high = mid;
-            }
-        }while (low < high);
-        if (low >= nums.length || nums[low] != target) { return result; }
-        result[0] = low;
-
-        high = nums.length - 1;
-
-        while (low < high){
-            int mid = low + (high - low) / 2 + 1;
-            if (nums[mid] > target)  {
-                high = mid - 1;
-            } else {
-                low = mid;
-            }
-        }
-        result[1] = high;
-        return result;
-    }
+    // @see Binary Search
 
     // LC: 33. Search in Rotated Sorted Array
-    // Time: O(log n), Space: O(c)
-    // https://discuss.leetcode.com/topic/3538/concise-o-log-n-binary-search-solution
-    public int search(int[] nums, int target) {
-        if (nums.length == 0) return -1;
-        int low = 0, high = nums.length - 1;
-        do {
-            int mid = low + (high - low) / 2;
-            if (nums[mid] == target) { return mid; }
-
-            if (nums[low] <= nums[mid]) {
-                if (target >= nums[low] && target < nums[mid]) {
-                    high = mid - 1;
-                } else {
-                    low = mid + 1;
-                }
-            } else {
-                if (target > nums[mid] && target <= nums[high]) {
-                    low = mid + 1;
-                } else {
-                    high = mid - 1;
-                }
-            }
-
-        } while (low <= high);
-        return -1;
-    }
+    // @see Binary Search
 
     // LC: 31. Next Permutation
     // Time: O(n), Space: O(c)
@@ -2054,40 +1911,7 @@ public class ArraysLC {
 
 
     // LC: 18. 4Sum
-    // Time: O(n3), Space: O(c)
-    // https://discuss.leetcode.com/topic/28641/my-16ms-c-code
-    public List<List<Integer>> fourSum(int[] nums, int target) {
-        List<List<Integer>> result = new ArrayList<>();
-        if (nums.length < 3) { return result; }
-        Arrays.sort(nums);
-        int n = nums.length;
-        for (int ix = 0; ix < nums.length - 3; ix++) {
-            if (ix > 0 && nums[ix] == nums[ix - 1]) continue;
-            if (nums[ix] + nums[ix + 1] + nums[ix + 2] + nums[ix + 3] > target) break;
-            if (nums[ix] + nums[n - 1] + nums[n - 2] + nums[n - 3] < target) continue;
-            for (int jx = ix + 1; jx < nums.length - 2; jx++) {
-                if (jx > ix + 1 && nums[jx] == nums[jx - 1]) continue;
-                if (nums[ix] + nums[jx] + nums[jx + 1] + nums[jx + 2] > target) break;
-                if (nums[ix] + nums[jx] + nums[n - 1] + nums[n - 2] < target) continue;
-                int left = jx + 1;
-                int right = n - 1;
-                while (left < right) {
-                    int sum = nums[ix] + nums[jx] + nums[left] + nums[right];
-                    if (sum < target) {
-                        left++;
-                    } else if (sum > target) {
-                        right--;
-                    } else {
-                        result.add(Arrays.asList(nums[ix], nums[jx], nums[left], nums[right]));
-                        while (left < right && nums[left] == nums[left + 1]) { left++; }
-                        while (left < right && nums[right] == nums[right - 1]) { right--;}
-                        left++; right--;
-                    }
-                }
-            }
-        }
-        return result;
-    }
+    // @see Hashtables
 
     // LC: 16. 3Sum Closest
     // Time: O(n2), Space: O(n)
@@ -2214,21 +2038,5 @@ public class ArraysLC {
 
 
     // LC: 1. Two Sum
-    public int[] twoSumBasic(int[] nums, int target) {
-        int[] result = new int[2];
-        Hashtable<Integer, Integer> hs = new Hashtable<>();
-        for (int ix = 0; ix < nums.length; ix++) {
-            if (hs.get(target - nums[ix]) != null) {
-                result[0] = hs.get(target - nums[ix]);
-                result[1] = ix;
-                return result;
-            }
-            hs.put(nums[ix], ix);
-        }
-
-        return result;
-    }
-
-
-
+    // @see Hashtables
 }

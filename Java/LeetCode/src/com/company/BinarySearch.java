@@ -100,7 +100,7 @@ public class BinarySearch {
 
     // 35. Search Insert Position
     // Time: O(log n), space: O(c)
-    // https://leetcode.com/problems/search-insert-position/?tab=Description
+    // https://discuss.leetcode.com/topic/7874/my-8-line-java-solution
     public int searchInsert(int[] nums, int target) {
         if (nums.length == 0) { return -1; }
         int low = 0, high = nums.length - 1;
@@ -118,7 +118,7 @@ public class BinarySearch {
 
     // 34. Search for a Range
     // Time: O(log n), Space: O(c)
-    // https://leetcode.com/problems/search-for-a-range/?tab=Description
+    // https://discuss.leetcode.com/topic/6327/a-very-simple-java-solution-with-only-one-binary-search-algorithm
     public int[] searchRange(int[] nums, int target) {
         int[] result = new int[]{-1, -1};
         if (nums.length == 0) { return result; }
@@ -151,7 +151,7 @@ public class BinarySearch {
 
     // 33. Search in Rotated Sorted Array
     // Time: O(log n), space: O(c)
-    // https://leetcode.com/problems/search-in-rotated-sorted-array/?tab=Solutions
+    // https://discuss.leetcode.com/topic/3538/concise-o-log-n-binary-search-solution
     public int search(int[] nums, int target) {
         if (nums.length == 0) return -1;
         int low = 0, high = nums.length - 1;

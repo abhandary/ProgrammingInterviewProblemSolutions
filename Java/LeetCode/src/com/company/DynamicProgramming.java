@@ -108,9 +108,22 @@ public class DynamicProgramming {
         return maxSoFar;
     }
 
+    // LC: 122. Best Time to Buy and Sell Stock II
+    // Time: O(n)
+    // @todo: UNSOLVED
+    // https://discuss.leetcode.com/topic/726/is-this-question-a-joke/13
+    public int maxProfit2(int[] prices) {
+        int total = 0;
+        for (int i=0; i< prices.length-1; i++) {
+            if (prices[i+1]>prices[i]) total += prices[i+1]-prices[i];
+        }
+
+        return total;
+    }
+
     // 121. Best Time to Buy and Sell Stock
     // Time: O(n), Space: O(c)
-    // https://leetcode.com/problems/best-time-to-buy-and-sell-stock/#/description
+    // https://discuss.leetcode.com/topic/19853/kadane-s-algorithm-since-no-one-has-mentioned-about-this-so-far-in-case-if-interviewer-twists-the-input
     public int maxProfit(int[] prices) {
         if (prices.length == 0) { return 0; }
         int minSoFar = prices[0];
@@ -275,7 +288,7 @@ public class DynamicProgramming {
 
     // 64. Minimum Path Sum
     // Time: O(m * n), Space: O(m * n)
-    // https://leetcode.com/problems/minimum-path-sum/?tab=Description
+    // https://discuss.leetcode.com/topic/15269/10-lines-28ms-o-n-space-dp-solution-in-c-with-explanations
     public int minPathSum(int[][] grid) {
         if (grid.length == 0) {
             return 0;
@@ -291,7 +304,8 @@ public class DynamicProgramming {
     }
     // 63. Unique Paths II
     // Time: O(m * n), Space: O(m * n) outside of the input
-    // https://leetcode.com/problems/unique-paths-ii/?tab=Description
+    // https://leetcode.com/problems/unique-paths-ii/#/solutions
+    // https://discuss.leetcode.com/topic/10974/short-java-solution
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
         if (obstacleGrid.length == 0) return 0;
         if (obstacleGrid[0][0] == 1) return 0; // IMP edge case
