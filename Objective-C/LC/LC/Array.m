@@ -118,6 +118,31 @@
     return result;
 }
 
+#pragma mark - 1. Two Sum
+// https://leetcode.com/problems/two-sum/#/description
+- (NSArray*) twoSum:(NSArray*) nums
+             target:(int) target {
+    
+    NSMutableArray* result = [NSMutableArray array];
+    NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+    for (int ix = 0; ix < nums.count; ix++) {
+        dict[nums[ix]] = @(ix);
+    }
+    
+    for (int ix = 0; ix < nums.count; ix++) {
+        NSNumber* stored = 0;
+        if ((stored = dict[@(target - [nums[ix] integerValue])]) != nil &&
+            [stored integerValue] != ix) {
+            
+            [result addObject:stored];
+            [result addObject:@(ix)];
+            return result;
+        }
+    }
+    return result;
+}
+
+
 @end
 
 
