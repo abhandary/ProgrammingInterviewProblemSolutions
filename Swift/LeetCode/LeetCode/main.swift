@@ -2079,11 +2079,17 @@ class Solution {
 
 // MARK: - ========= Tests ===============
 
-let math = Math();
-let result = math.isPalindrome(10);
-print(result);
+//let parser = Parser();
+//let result = parser.decode("bce12xac10x1e5xgf11x");
+//print(result);
 
-
+let dfs = DFS();
+let count = dfs.numIslands([["1", "1", "1", "1", "0"],
+                ["1", "1", "0", "1", "0"],
+                ["1", "1", "0", "0", "0"],
+                ["0", "0", "0", "0", "0"]]
+);
+print(count);
 
 
 

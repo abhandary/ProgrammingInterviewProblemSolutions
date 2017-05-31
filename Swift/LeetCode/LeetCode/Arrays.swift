@@ -28,6 +28,34 @@ func == (lhs: SetInteger, rhs: SetInteger) -> Bool {
 class Arrays {
     
     
+    // LC: 485. Max Consecutive Ones
+    func findMaxConsecutiveOnes(_ nums: [Int]) -> Int {
+        guard nums.count > 0 else { return 0; }
+        
+        var maxOnes = 0;
+        var ix = 0;
+        while ix < nums.count {
+            var count = 0;
+            while ix < nums.count && nums[ix] == 1 { count += 1; ix += 1; }
+            maxOnes = max(maxOnes, count);
+            ix += 1;
+        }
+        return maxOnes;
+    }
+    
+    func findMaxConsecutiveOnes2(_ nums: [Int]) -> Int {
+        guard nums.count > 0 else { return 0; }
+        
+        var maxOnes = 0;
+        var count = 0;
+        for value in nums {
+            if value == 1 { count += 1; }
+            else { count = 0; }
+            maxOnes = max(maxOnes, count)
+        }
+        return maxOnes;
+    }
+    
     // LC: 448. Find All Numbers Disappeared in an Array
     func findDisappearedNumbers(_ nums: [Int]) -> [Int] {
         guard nums.count > 0 else { return [] }
@@ -47,6 +75,9 @@ class Arrays {
         return result;
         
     }
+    
+    // LC: 414. Third Maximum Number
+    
     
     // LC: 283. Move Zeroes
     func moveZeroes(_ nums: inout [Int]) {
@@ -214,6 +245,26 @@ class Arrays {
         return maxSoFar;
     }
     
+    // LC: 118. Pascal's Triangle
+    func generate(_ numRows: Int) -> [[Int]] {
+        
+        
+        
+        var result = [[Int]]();
+        guard numRows > 0 else { return result; }
+        for nx in 1...numRows {
+            
+            var row = [Int](repeating: 1, count: nx);
+            var ix = 1
+            while ix < nx-1 {
+                row[ix] = result[nx - 2][ix - 1] + result[nx - 2][ix];
+                ix += 1;
+            }
+            result.append(row);
+        }
+        return result;
+        
+    }
     
     // LC: 88. Merge Sorted Array
     func merge(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
@@ -318,7 +369,44 @@ class Arrays {
         return maxSoFar >= nums.count - 1;
     }
     
+    // LC: 54. Spiral Matrix
+    func spiralOrder(_ matrix: [[Int]]) -> [Int] {
+        var result  = [Int]();
+        guard matrix.count > 0 else { return result; }
+        
+        var startRow = 0;
+        var endRow  = matrix.count - 1;
+        var startCol = 0;
+        var endCol = matrix[0].count - 1;
+        
+        while startRow <= endRow && startCol <= endCol  {
+            
+            for jx in startCol...endCol {
+                result.append(matrix[startRow][jx]);
+            }
+            startRow += 1;
+            if startRow > endRow { break; }
+            for ix in startRow...endRow {
+                result.append(matrix[ix][endCol]);
+            }
+            
+            endCol -= 1;
+            if startCol > endCol { break; }
+            for jx in (startCol...endCol).reversed() {
+                result.append(matrix[endRow][jx]);
+            }
+            
+            endRow -= 1;
+            if startRow > endRow { break; }
+            for ix in (startRow...endRow).reversed() {
+                result.append(matrix[ix][startCol]);
+            }
+            startCol += 1
+        } 
+        return result;
+    }
     
+    // LC: 40 Combination Sum 2
     
     // 39. Combination Sum
     var result : [[Int]]!
@@ -403,6 +491,7 @@ class Arrays {
         return [startIx, endIx];
     }
 
+    // LC: @todo 31 Next Permutation
     
     // LC: 33 Search in Rotated Sorted Array
     func search(_ nums : [Int], _ target : Int) -> Int {
@@ -466,6 +555,12 @@ class Arrays {
         return wx;
     }
     
+    
+
+    // LC: @todo 4 Sum
+    
+    // LC: @todo 16. Three Sum Closest
+    
     // 15. 3Sum
     // https://leetcode.com/problems/3sum/#/description
     func threeSum(_ nums: [Int]) -> [[Int]] {
@@ -517,7 +612,7 @@ class Arrays {
     
     // 1. Two Sum
     // https://leetcode.com/problems/two-sum/#/description
-    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+    func twoSum2(_ nums: [Int], _ target: Int) -> [Int] {
 
         var map = [Int : Int]();
 
