@@ -95,6 +95,19 @@ class Arrays {
         
     }
     
+    func moveZeroes2(_ nums: inout [Int]) {
+       	var wx = 0
+        for rx in 0..<nums.count {
+            if nums[rx] == 0 { continue; }
+            nums[wx] = nums[rx];
+            wx += 1;
+        }
+        while wx < nums.count {
+            nums[wx] = 0; wx += 1;
+        }
+        
+    }
+    
     // LC: 268. Missing Number
     func missingNumberAS(_ nums: [Int]) -> Int {
         guard nums.count > 0 else { return 0; }
@@ -309,6 +322,33 @@ class Arrays {
         
     }
     
+    // LC: 75. Sort Colors
+    func sortColors(_ nums: inout [Int]) {
+        var numRed = 0;    // 0
+        var numWhite = 0;  // 1
+        var numBlue = 0;   // 2
+        
+        for num in nums {
+            if num == 0 { numRed += 1; }
+            else if num == 1 { numWhite += 1; }
+            else { numBlue += 1; }
+        }
+        
+        var ix = 0
+        while numRed > 0 {
+            nums[ix] = 0; numRed -= 1;
+            ix += 1;
+        }
+        while numWhite > 0 {
+            nums[ix] = 1; numWhite -= 1;
+            ix += 1;
+        }
+        while numBlue > 0 {
+            nums[ix] = 2; numBlue -= 1;
+            ix += 1;
+        }
+    }
+    
     // LC: 73. Set Matrix Zeroes
     func setZeroes(_ matrix: inout [[Int]]) {
         guard matrix.count > 0 else { return; }
@@ -335,20 +375,19 @@ class Arrays {
     
     
     // LC: 66 Plus One
-    func plusOne(_ digits : [Int]) -> [Int]? {
-        guard digits.count > 0 else { return nil; }
-        
-        
-
+    func plusOne(_ digits: [Int]) -> [Int] {
         var result = digits;
-        result[result.count - 1] += 1;
+        guard digits.count > 0 else { return result; }
+        
         var ix = result.count - 1;
+        result[ix] = result[ix] + 1
+        
         while result[ix] == 10 && ix > 0 {
             result[ix] = 0;
-            result[ix - 1] += 1;
-            ix -= 1;  // IMP
+            ix -= 1;
+            result[ix] = result[ix] + 1;
         }
-        if result[0] == 10 {
+        if ix == 0 && result[ix] == 10 {
             result[0] = 0;
             result.insert(1, at: 0);
         }
@@ -537,20 +576,28 @@ class Arrays {
         return wx;
     }
     
+    func removeElement2(_ nums: inout [Int], _ val: Int) -> Int {
+        var wx = -1
+        for rx in 0..<nums.count {
+            if nums[rx] == val { continue; }
+            wx += 1;
+            nums[wx] = nums[rx]
+        }
+        return wx + 1;
+    }
+    
     // 26. Remove Duplicates from Sorted Array
     // https://leetcode.com/problems/remove-duplicates-from-sorted-array/#/description
     func removeDuplicates(_ nums: inout [Int]) -> Int {
-        
-        guard nums.count > 0 else { return 0; }
-        
+
+        // IMP to check nums.count against 0, for empty input array
+        guard nums.count > 0 else { return nums.count; }
         var wx = 1;
-        var rx = 1;
-        while rx < nums.count {
-            if nums[rx] != nums[rx - 1] {
-                nums[wx] = nums[rx];
-                wx += 1;
-            }
-            rx += 1;
+        
+        for rx in 1..<nums.count {
+            if nums[rx] == nums[rx - 1] { continue; }
+            nums[wx] = nums[rx];
+            wx += 1;
         }
         return wx;
     }
@@ -559,7 +606,34 @@ class Arrays {
 
     // LC: @todo 4 Sum
     
-    // LC: @todo 16. Three Sum Closest
+    // LC: 16. Three Sum Closest
+    func threeSumClosest(_ nums: [Int], _ target: Int) -> Int {
+        let snums = nums.sorted();
+        var minDiffSoFar = Int.max;
+        guard snums.count >= 3 else { return minDiffSoFar; }
+        var minSum = 0;
+        for ix in 0..<nums.count - 2 {
+            var jx = ix + 1;
+            var kx = nums.count - 1;
+            
+            if ix > 0 && snums[ix] == snums[ix - 1] { continue; }
+            
+            while jx < kx {
+                let sum = snums[ix] + snums[jx] + snums[kx];
+                if sum == target {
+                    return target;
+                } else if sum > target {
+                    kx -= 1;
+                    if sum - target < minDiffSoFar { minDiffSoFar = sum - target; minSum = sum; }
+                } else {
+                    jx += 1;
+                    if target - sum < minDiffSoFar { minDiffSoFar = target - sum; minSum = sum; }
+                }
+            }
+        }
+        return minSum;
+        
+    }
     
     // 15. 3Sum
     // https://leetcode.com/problems/3sum/#/description
@@ -612,20 +686,18 @@ class Arrays {
     
     // 1. Two Sum
     // https://leetcode.com/problems/two-sum/#/description
-    func twoSum2(_ nums: [Int], _ target: Int) -> [Int] {
-
-        var map = [Int : Int]();
-
-        for (index, value) in nums.enumerated() {
-            map[value] = index;
-        }
-        for (index, value) in nums.enumerated() {
-            
-            if let stored = map[target - value], index != stored {
-                return [index, stored];
+    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+        var result = [Int]();
+        var hmap = [Int : Int]();
+        for (index, num) in  nums.enumerated() {
+            if let storedIx = hmap[target - num] {
+                result.append(storedIx);
+                result.append(index);
+                return result;
             }
+            hmap[num] = index;
         }
-        return [Int]();
+        return result;
     }
     
     
