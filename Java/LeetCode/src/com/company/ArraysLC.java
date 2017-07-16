@@ -1722,6 +1722,10 @@ public class ArraysLC {
     // LC: 41. First Missing Positive
     // @todo: UNSOLVED, HARD
     // Time: O(n), Space: O(1)
+    // https://discuss.leetcode.com/topic/8293/my-short-c-solution-o-1-space-and-o-n-time/2
+    // much easier
+
+
     // https://discuss.leetcode.com/topic/2633/share-my-o-n-time-o-1-space-solution/2
     public int firstMissingPositive(int[] A) {
         int n=A.length;
