@@ -25,6 +25,15 @@ func == (lhs: SetInteger, rhs: SetInteger) -> Bool {
 }
 
 
+class Interval {
+    public var start: Int
+    public var end: Int
+    public init(_ start: Int, _ end: Int) {
+        self.start = start
+        self.end = end
+    }
+}
+
 class Arrays {
 
     // @todo:581. Shortest Unsorted Continuous Subarray
@@ -467,11 +476,129 @@ class Arrays {
     
     // @todo:62. Unique Paths
     
-    // @todo:59. Spiral Matrix 2
     
-    // @todo:57. Insert Interval
+    // @LC:59. Spiral Matrix 2
+    // Discussion: https://discuss.leetcode.com/topic/4362/my-super-simple-solution-can-be-used-for-both-spiral-matrix-i-and-ii
+    // Time: O(m x n)
+    func generateMatrix(_ n: Int) -> [[Int]] {
+        
+        // Declaration
+        let row = [Int](repeating: 0, count: n)
+        var matrix = [[Int]](repeating: row, count: n);
+        
+        // Edge Case
+        guard n > 0 else { return matrix; }
+        
+        // Normal Case
+        var rowStart = 0;
+        var rowEnd = n-1;
+        var colStart = 0;
+        var colEnd = n-1;
+        var num = 1;
+        
+        while (rowStart <= rowEnd && colStart <= colEnd) {
+            for ix in colStart...colEnd {
+                matrix[rowStart][ix] = num; num += 1;
+            }
+            rowStart += 1
+            if rowStart > rowEnd { break; }
+            for ix in rowStart...rowEnd {
+                matrix[ix][colEnd] = num; num += 1;
+            }
+            colEnd -= 1
+            if colStart > colEnd { break; }
+            for ix in (colStart...colEnd).reversed() {
+                matrix[rowEnd][ix] = num;  num += 1;
+            }
+            rowEnd -= 1
+            if rowStart > rowEnd { break; }
+            for ix in (rowStart...rowEnd).reversed() {
+                matrix[ix][colStart] = num; num += 1
+            }
+            colStart += 1
+        }
+        
+        return matrix;
+        
+    }
     
-    // @todo:56. Merge Intervals
+    
+    // @LC:57. Insert Interval
+    // Discussion: https://discuss.leetcode.com/topic/7808/short-and-straight-forward-java-solution/1
+    // Time: O(n), Space: O(1)
+    func insert(_ intervals: [Interval], _ newInterval: Interval) -> [Interval] {
+        guard intervals.count > 0 else { return [newInterval]; }
+        
+        var result = [Interval]()
+        let mergedInterval = newInterval;
+        var ix = 0;
+        while ix < intervals.count {
+            if intervals[ix].end < mergedInterval.start {
+                result.append(intervals[ix]);
+            } else if intervals[ix].start <= mergedInterval.end  {
+                mergedInterval.start = min(intervals[ix].start, mergedInterval.start);
+                mergedInterval.end   = max(intervals[ix].end, mergedInterval.end);
+            } else {
+                break;
+            }
+            ix += 1;
+        }
+        result.append(mergedInterval)
+        while ix < intervals.count { result.append(intervals[ix]); ix += 1; }
+        
+        return result;
+        
+    }
+    
+    func insert2(_ intervals: [Interval], _ newInterval: Interval) -> [Interval] {
+        guard intervals.count > 0 else { return [newInterval]; }
+        
+        let mergedInterval = newInterval
+        var result = [Interval]()
+        var ix = 0;
+        
+        while ix < intervals.count && intervals[ix].end < mergedInterval.start{
+            result.append(intervals[ix]); ix += 1
+        }
+        
+        while ix < intervals.count && intervals[ix].start <= mergedInterval.end{
+            mergedInterval.start = min(mergedInterval.start, intervals[ix].start);
+            mergedInterval.end = max(mergedInterval.end, intervals[ix].end)
+            ix += 1
+        }
+        
+        result.append(mergedInterval)
+        
+        while ix < intervals.count {
+            result.append(intervals[ix]); ix += 1;
+        }
+        
+        return result;
+    }
+    
+    
+    // @LC:56. Merge Intervals
+    // Time: O(n), Space: O(1)
+    // Discussion: https://discuss.leetcode.com/topic/4319/a-simple-java-solution
+    func merge(_ intervals: [Interval]) -> [Interval] {
+        guard intervals.count > 0 else { return intervals; }
+        
+        let sortedIntervals = intervals.sorted { $0.start < $1.start }
+        
+        var start = sortedIntervals[0].start
+        var end   = sortedIntervals[0].end
+        var result = [Interval]();
+        for interval in sortedIntervals {
+            if interval.start <= end {
+                end = max(end, interval.end)
+            } else {
+                result.append(Interval(start, end));
+                start = interval.start; end = interval.end
+            }
+        }
+        result.append(Interval(start, end))
+        return result;
+    }
     
     
     // LC:55. Jump Game
