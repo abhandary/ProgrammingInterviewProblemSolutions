@@ -317,6 +317,22 @@ class Arrays {
     
     // @todo:120. Triange
     
+    // LC:119. Pascal's Triangle II 
+    func getRow(_ rowIndex: Int) -> [Int] {
+        var lastRow = [1]
+        if rowIndex == 0 { return lastRow }
+        var currentRow : [Int]!
+        for rx in 1...rowIndex {
+            currentRow = [Int](repeating : 1, count : rx + 1)
+            if  (currentRow.count - 1) <= 1 { lastRow = currentRow; continue; }
+            for jx in 1..<(currentRow.count - 1) {
+                currentRow[jx] = lastRow[jx - 1] + lastRow[jx]
+            }
+            lastRow = currentRow
+        }
+        return currentRow;
+    }
+    
     // LC:118. Pascal's Triangle
     func generate(_ numRows: Int) -> [[Int]] {
         
@@ -340,7 +356,32 @@ class Arrays {
     
     // @todo:106. Construct Binary Tree from Inorder and Postorder Traversal
     
-    // @todo:105. Construct Binary Tree from Preorder and Inorder Traversal
+    // @LC:105. Construct Binary Tree from Preorder and Inorder Traversal
+    // Time: O(n), Space: O(h)
+    var treeMap = [Int : Int]()
+    
+    func buildTreeHelper(_ preorder : [Int], _ inorder : [Int], _ pstart : Int, _ pend : Int, _ istart : Int, _ iend : Int) -> TreeNode? {
+        guard pstart <= pend && istart <= iend else { return nil; }
+        let root = TreeNode(preorder[pstart])
+        
+        if let ix = treeMap[root.val] {
+            let pLeftLen = ix - istart
+            let pRightLen = iend - ix
+            root.left = buildTreeHelper(preorder, inorder, pstart + 1, pstart + pLeftLen, istart, ix - 1)
+            root.right = buildTreeHelper(preorder, inorder, pstart + pLeftLen + 1, pend, ix + 1, iend)
+        }
+        return root
+    }
+    
+    func buildTree(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+        guard preorder.count > 0 && inorder.count > 0 else { return nil; }
+        
+        for (ix, val) in inorder.enumerated() {
+            treeMap[val] = ix
+        }
+        
+        return buildTreeHelper(preorder, inorder, 0, preorder.count - 1, 0, inorder.count - 1)
+    }
     
     // @todo:90. Subsets 2
     
@@ -393,8 +434,59 @@ class Arrays {
         
     }
     
-    // @todo:78. Subsets
+    // LC:79. Word Search
+    // @todo: optimize to use a hashmap 
+    // Space: O(m + n) Time O(m * n * L)
+    func existHelper(_ board : inout [[Character]], _ word : [Character], _ wx : Int, _ ix : Int, _ jx : Int) -> Bool {
+        
+        
+        if wx == word.count { return true; }
+        guard ix >= 0 && jx >= 0 && ix < board.count && jx < board[0].count else { return false; }
+        
+        
+        if word[wx] != board[ix][jx] { return false; }
+        let temp = board[ix][jx]
+        board[ix][jx] = "$"
+        let shifts = [[0, -1], [0, 1], [1, 0], [-1, 0]]
+        for shift in shifts {
+            if existHelper(&board, word, wx + 1, ix + shift[0], jx + shift[1]) == true {
+                return true;
+            }
+        }
+        board[ix][jx] = temp
+        return false;
+    }
     
+    func exist(_ board: [[Character]], _ word: String) -> Bool {
+        guard board.count > 0 else { return false; }
+        
+        var board = board
+        let wchars = Array(word.characters)
+        for ix in 0..<board.count {
+            for jx in 0..<board[0].count {
+                if existHelper(&board, wchars, 0, ix, jx)  == true { return true; }
+            }
+        }
+        return false;
+    }
+    
+    // @LC:78. Subsets
+    func subsets(_ nums: [Int]) -> [[Int]] {
+        let n = nums.count;
+        var result = [[Int]]();
+        
+        for ix in 0..<(1 << n) {
+            var partial = [Int]();
+            var num = ix;
+            while num > 0 {
+                let bitSet = Double(num & ~(num - 1));
+                partial.append(nums[Int(log(bitSet) / log(2))]);
+                num &= (num - 1);
+            }
+            result.append(partial);
+        }
+        return result;
+    }
     
     // LC:75. Sort Colors
     func sortColors(_ nums: inout [Int]) {
@@ -423,7 +515,41 @@ class Arrays {
         }
     }
     
-    // @todo:74. Search a 2D Matrix
+    // @LC:74. Search a 2D Matrix
+    /*
+    [
+     [1,   3,  5,  7],
+     [10, 11, 16, 20],
+     [23, 30, 34, 50]
+    ]
+     
+     */
+    
+    // m = 4
+    // n = 3
+    //
+    // 1. l = 0, h = 11, mid = 5, ix = 1, jx = 1
+    // 2. l = 0, h = 4, mid = 2, ix = 2, jx = 0
+    // 3. l = 0, h = 1, mid = 1, ix = 0, jx = 1
+    
+    func searchMatrix(_ matrix: [[Int]], _ target: Int) -> Bool {
+        guard matrix.count > 0 else { return false; }
+        
+        let n = matrix.count
+        let m = matrix[0].count
+        var l = 0, h = m * n - 1;
+        
+        while l <= h {
+            let mid = h - ((h - l) / 2)
+            if matrix[mid / m][mid % m] == target { return true; }
+            if matrix[mid / m][mid % m] < target {
+                l = mid + 1
+            } else {
+                h = mid - 1;
+            }
+        }
+        return false;
+    }
     
     // LC:73. Set Matrix Zeroes
     func setZeroes(_ matrix: inout [[Int]]) {
@@ -472,9 +598,48 @@ class Arrays {
 
     // @todo:64. Minimum Path Sum
     
-    // @todo:63. Unique Paths 2
     
-    // @todo:62. Unique Paths
+    // @LC:63. Unique Paths 2
+    func uniquePathsWithObstaclesHelper(_ obstacleGrid: [[Int]], _ ix : Int, _ jx : Int) -> Int {
+        guard ix >= 0 && jx >= 0 else { return 0; }
+        
+        if obstacleGrid[ix][jx] == 1 { return 0; }
+        
+        if ix == 0 && jx == 0 { return 1; }
+        
+        let lookupStr = "\(ix),\(jx)"
+        if let result = hmap[lookupStr] {
+            return result;
+        }
+        
+        let result = uniquePathsWithObstaclesHelper(obstacleGrid, ix - 1, jx) +
+            uniquePathsWithObstaclesHelper(obstacleGrid, ix, jx - 1);
+        hmap[lookupStr] = result;
+        return result;
+    }
+    
+    func uniquePathsWithObstacles(_ obstacleGrid: [[Int]]) -> Int {
+        
+        guard obstacleGrid.count > 0 else { return 0; }
+        return uniquePathsWithObstaclesHelper(obstacleGrid, obstacleGrid.count - 1, obstacleGrid[0].count - 1);
+    }
+    
+    
+    
+    // @LC:62. Unique Paths
+    var hmap = [String : Int]()
+    
+    func uniquePaths(_ m: Int, _ n: Int) -> Int {
+        if (m == 1 ||  n == 1) { return 1; }
+        
+        let lookupStr = "\(m),\(n)"
+        if let result = hmap[lookupStr] {
+            return result;
+        }
+        let paths = uniquePaths(m - 1, n) + uniquePaths(m, n - 1);
+        hmap[lookupStr] = paths;
+        return paths;
+    }
     
     
     // @LC:59. Spiral Matrix 2
@@ -1007,7 +1172,7 @@ class Arrays {
 
     // @todo:18 4. Sum
     
-    // LC:16. Three Sum Closest
+    // LC:16. 3Sum Closest
     func threeSumClosest(_ nums: [Int], _ target: Int) -> Int {
         let snums = nums.sorted();
         var minDiffSoFar = Int.max;

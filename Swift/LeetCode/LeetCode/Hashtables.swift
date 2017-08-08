@@ -30,6 +30,13 @@ class Hashtables {
     // LC:594. Longest Harmonious Subsequence
     
     // LC:575. Distribute Candies
+    func distributeCandies(_ candies: [Int]) -> Int {
+        var set = Set<Int>()
+        for candy in candies {
+            set.insert(candy)
+        }
+        return set.count >= candies.count / 2 ? candies.count / 2 : set.count
+    }
     
     // LC:554. Brick Wall
 
@@ -46,10 +53,62 @@ class Hashtables {
     // LC:454. 4Sum II
     
     // LC:451. Sort Characters By Frequency
+    // Time: O(N + UlogU), Space: O(U)
+    // @todo: NP
+    func frequencySort(_ s: String) -> String {
+        let schars = Array(s.characters)
+        var htable = [Character : Int]()
+        
+        for schar in schars {
+            if let count = htable[schar] {
+                htable[schar] = count + 1;
+            } else {
+                htable[schar] = 1
+            }
+        }
+        let sortedTable = htable.sorted { $0.value > $1.value }
+        var result = ""
+        for tuple in sortedTable {
+            result += String(repeating: String(tuple.key), count: tuple.value)
+        }
+        return result;
+    }
+    
     
     // LC:447. Number of Boomerangs
     
     // LC:438. Find All Anagrams in a String
+    // @todo: executed 34/36 cases
+    var pmap = [Character : Int]()
+    
+    func isAnagram(_ ssub : ArraySlice<Character>) -> Bool {
+        var lpmap = pmap
+        for ss in ssub {
+            if let val = lpmap[ss] {
+                lpmap[ss] = (val == 1 ? nil : (val - 1))
+            } else {
+                return false
+            }
+        }
+        return lpmap.count == 0
+    }
+    
+    func findAnagrams(_ s: String, _ p: String) -> [Int] {
+        let schars = Array(s.characters)
+        let pchars  = Array(p.characters)
+        
+        for pc in pchars {
+            pmap[pc] = (pmap[pc] == nil ? 1 : (pmap[pc]! + 1))
+        }
+        
+        if p.characters.count > s.characters.count { return []; }
+        var result = [Int]()
+        for sx in 0...(schars.count - p.characters.count) {
+            let ssub = schars[sx..<(sx + p.characters.count)]
+            if isAnagram(ssub)  { result.append(sx); }
+        }
+        return result;
+    }
     
     // LC:409 Longest Palindrome
     func longestPalindrome(_ s: String) -> Int {
@@ -97,16 +156,38 @@ class Hashtables {
     }
 
     // LC:389. Find the Difference
+    // easier to use XOR
+    func findTheDifference(_ s: String, _ t: String) -> Character {
+        var smap = [Character : Int]()
+        let schars = Array(s.characters)
+        for sc in schars {
+            smap[sc] = smap[sc] == nil ? 1 : smap[sc]! + 1
+        }
+        let tchars = Array(t.characters)
+        var ix = 0;
+        while ix < tchars.count {
+            if let count = smap[tchars[ix]] {
+                smap[tchars[ix]] = ((count == 1) ? nil :( count - 1))
+            } else {
+                return tchars[ix]
+            }
+            ix += 1
+        }
+        return tchars[ix]
+    }
     
     // LC:381. Insert Delete GetRandom O(1) - Duplicates allowed
     
     // LC:380. Insert Delete GetRandom O(1)
     
     // LC:359. Logger Rate Limiter
+    // @locked
     
     // LC:358. Rearrange String k Distance Apart
+    // @locked
     
     // LC:356. Line Reflection
+    // @locked
     
     // LC:355. Design Twitter
     
@@ -136,12 +217,84 @@ class Hashtables {
     }
 
     // LC:347. Top K Frequent Elements
+    // Discussion: https://discuss.leetcode.com/topic/44237/java-o-n-solution-bucket-sort
+    // Time: O(N), Space: O(N)
+    func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
+        
+        var result = [Int]()
+        
+        guard nums.count > 0 else { return result; }
+        guard nums.count > k else { return nums; }
+        
+        var buckets = [[Int]](repeating: [Int](), count : nums.count + 1)
+        
+        var freqMap = [Int : Int]()
+        
+        for num in nums {
+            freqMap[num] = (freqMap[num] == nil) ? 1 : (freqMap[num]!  + 1)
+        }
+        for key in freqMap.keys {
+            if let freq = freqMap[key] {
+                buckets[freq].append(key)
+            }
+        }
+        
+        for ix in (0..<buckets.count).reversed() {
+            if buckets[ix].count > 0 {
+                result.append(contentsOf: buckets[ix])
+            }
+            if result.count >= k { break; }
+        }
+        result.removeLast(result.count - k)
+        return result;
+    }
     
     
     // LC:340. Longest Substring with At Most K Distinct Characters
     // @locked
     
     // LC:336. Palindrome Pairs
+    // @todo: Doesn't solve all cases
+    // Needs Practice
+    func palindromePairs(_ words: [String]) -> [[Int]] {
+        var wmap = [String : Int]()
+        var result = [[Int]]()
+        
+        for (ix, word) in words.enumerated() {
+            wmap[word] = ix
+        }
+        
+        for (ix, word) in words.enumerated() {
+            let wchars = Array(word.characters)
+            for jx in 0..<wchars.count {
+                let str1 = jx > 0 ? String(wchars[0..<jx]) : ""
+                let str2 = String(wchars[jx..<wchars.count])
+                if isPalindrome(str1) {
+                    let str2rev = String(str2.characters.reversed())
+                    if let wx = wmap[str2rev], wx != ix {
+                        result.append([wx, ix])
+                    }
+                }
+                if str2.characters.count > 0 && isPalindrome(str2) {
+                    let str1rev = String(str1.characters.reversed())
+                    if let wx = wmap[str1rev], wx != ix  {
+                        result.append([ix, wx])
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    
+    func isPalindrome(_ str : String) -> Bool {
+        let schars = Array(str.characters)
+        var ix = 0, jx = schars.count - 1;
+        while (ix < jx) {
+            if schars[ix] != schars[jx] { return false; }
+            ix += 1; jx -= 1;
+        }
+        return true;
+    }
     
     // LC:325. Maximum Size Subarray Sum Equals k
     
@@ -149,21 +302,71 @@ class Hashtables {
     
     // LC:311. Sparse Matrix Multiplication
     
+    
     // LC:299. Bulls and Cows
+    func getHint(_ secret: String, _ guess: String) -> String {
+        var cows = 0
+        var bulls = 0
+        var numbers = [Int](repeating: 0, count:10)
+        
+        let schars = Array(secret.characters)
+        let gchars = Array(guess.characters)
+        
+        for ix in 0..<schars.count {
+            if schars[ix] == gchars[ix] {
+                bulls += 1
+            } else {
+                let sval = Int(String(schars[ix]))!
+                let gval = Int(String(gchars[ix]))!
+                if numbers[sval] < 0 { cows += 1; }
+                if numbers[gval] > 0 { cows += 1; }
+                numbers[sval] += 1
+                numbers[gval] -= 1
+            }
+        }
+        return "\(bulls)A\(cows)B"
+    }
     
     // LC:290. Word Pattern
+    // Time: O(N), Space: O(N) where N is the number of words in the string
+    func wordPattern(_ pattern: String, _ str: String) -> Bool {
+        let pchars = Array(pattern.characters)
+        
+        let sarray = str.characters.split{$0 == " "}.map(String.init)
+        if sarray.count != pchars.count { return false; }
+        var fmap = [String : Character]()
+        var rmap = [Character : String]()
+        
+        for (ix, string) in sarray.enumerated() {
+            if fmap[string] == nil && rmap[pchars[ix]] == nil {
+                fmap[string] = pchars[ix]
+                rmap[pchars[ix]] = string
+            } else if let pchar = fmap[string],
+                let s = rmap[pchars[ix]] {
+                if pchar != pchars[ix] || s != string { return false; }
+            } else {
+                return false
+            }
+        }
+        return true
+    }
+
     
     // LC:288. Unique Word Abbreviation
     
     // LC:274. H-Index
     
     // LC:266. Palindrome Permutation
+    // @locked
     
     // LC:249. Group Shifted Strings
+    // @locked
     
     // LC:246. Strobogrammatic Number
+    // @locked
     
     // LC:244. Shortest Word Distance II
+    // @locked
     
     // LC:242. Valid Anagram
     // Time: O(n log n), Space: O(1) outside of the string
@@ -278,9 +481,32 @@ class Hashtables {
     }
     
     // LC:202. 	Happy Number
+    func digitSquareSum(_ n : Int) -> Int {
+        var sum = 0
+        var n = n
+        while n != 0 {
+            let temp = n % 10
+            sum += temp * temp
+            n /= 10
+        }
+        return sum
+    }
+    
+    func isHappy(_ n: Int) -> Bool {
+        
+        var slow = n
+        var fast = n
+        repeat {
+            slow = digitSquareSum(slow)
+            fast = digitSquareSum(fast)
+            fast = digitSquareSum(fast)
+        } while slow != fast
+        
+        return slow == 1
+    }
     
     // LC:187. Repeated DNA Sequences
-    //
+    
     
     // LC:170. Two Sum III - Data structure design
     // @locked
@@ -387,6 +613,7 @@ class Hashtables {
         var result = [Int]()
         guard root != nil else { return result; }
         
+        /*
         var set = Set<TreeNode>()
         var deque = [TreeNode]()
         
@@ -396,7 +623,8 @@ class Hashtables {
             
             let current=deque.removeLast()
             
-            if(set.contains(current)) {
+            if(set.contains(current))
+            {
                 result.append(current.val);
             }
             else{
@@ -411,8 +639,9 @@ class Hashtables {
                     result.append(current.val);
                 }
             }
+
         }
-        
+            */
         return result;
         
     }

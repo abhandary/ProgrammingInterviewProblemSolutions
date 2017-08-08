@@ -51,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Strings.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Strings.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Strings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="27">
-              <caret line="205" column="26" lean-forward="true" selection-start-line="205" selection-start-column="26" selection-end-line="205" selection-end-column="26" />
+            <state relative-caret-position="242">
+              <caret line="224" column="24" lean-forward="false" selection-start-line="224" selection-start-column="24" selection-end-line="224" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -71,11 +71,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Hashtables.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Hashtables.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/Hashtables.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="935">
-              <caret line="942" column="9" lean-forward="false" selection-start-line="942" selection-start-column="9" selection-end-line="942" selection-end-column="9" />
+            <state relative-caret-position="380">
+              <caret line="650" column="0" lean-forward="true" selection-start-line="650" selection-start-column="0" selection-end-line="650" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -123,7 +123,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>12. Integer to Roman</find>
       <find>13. Roman to Integer</find>
       <find>9. Palindrome Number</find>
       <find>Plus One</find>
@@ -153,6 +152,7 @@
       <find>167</find>
       <find>unique p</find>
       <find>copyrandom</find>
+      <find>cows</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -194,10 +194,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="211" />
-    <option name="y" value="65" />
+    <option name="x" value="191" />
+    <option name="y" value="185" />
     <option name="width" value="1117" />
-    <option name="height" value="793" />
+    <option name="height" value="709" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -507,7 +507,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="211" y="65" width="1117" height="793" extended-state="1" />
+    <frame x="191" y="185" width="1117" height="709" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -855,18 +855,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Hashtables.java">
+    <entry file="file://$PROJECT_DIR$/src/com/company/Strings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="942" column="9" lean-forward="false" selection-start-line="942" selection-start-column="9" selection-end-line="942" selection-end-column="9" />
+        <state relative-caret-position="242">
+          <caret line="224" column="24" lean-forward="false" selection-start-line="224" selection-start-column="24" selection-end-line="224" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Strings.java">
+    <entry file="file://$PROJECT_DIR$/src/com/company/Hashtables.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="205" column="26" lean-forward="true" selection-start-line="205" selection-start-column="26" selection-end-line="205" selection-end-column="26" />
+        <state relative-caret-position="380">
+          <caret line="650" column="0" lean-forward="true" selection-start-line="650" selection-start-column="0" selection-end-line="650" selection-end-column="0" />
           <folding />
         </state>
       </provider>

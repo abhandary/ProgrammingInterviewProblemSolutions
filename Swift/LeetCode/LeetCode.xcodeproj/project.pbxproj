@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E200157D1F398884004BBAF2 /* TwoPointers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E200157C1F398884004BBAF2 /* TwoPointers.swift */; };
 		E23C92241E7DCC5600A536F3 /* Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23C92231E7DCC5600A536F3 /* Arrays.swift */; };
 		E23C92261E7E105B00A536F3 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23C92251E7E105B00A536F3 /* Math.swift */; };
 		E28F88771E823BC8003F4C30 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F88761E823BC8003F4C30 /* Strings.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E200157C1F398884004BBAF2 /* TwoPointers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoPointers.swift; sourceTree = "<group>"; };
 		E23C92231E7DCC5600A536F3 /* Arrays.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arrays.swift; sourceTree = "<group>"; };
 		E23C92251E7E105B00A536F3 /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		E28F88761E823BC8003F4C30 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				E28F88781E836CC3003F4C30 /* Hashtables.swift */,
 				E28F887A1E839A43003F4C30 /* DFS.swift */,
 				E28F887C1E84B6E2003F4C30 /* Parser.swift */,
+				E200157C1F398884004BBAF2 /* TwoPointers.swift */,
 			);
 			path = LeetCode;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			files = (
 				FAF4A0371D83594000E9A52A /* main.swift in Sources */,
 				E23C92241E7DCC5600A536F3 /* Arrays.swift in Sources */,
+				E200157D1F398884004BBAF2 /* TwoPointers.swift in Sources */,
 				E28F88771E823BC8003F4C30 /* Strings.swift in Sources */,
 				E28F887B1E839A43003F4C30 /* DFS.swift in Sources */,
 				E28F88791E836CC3003F4C30 /* Hashtables.swift in Sources */,

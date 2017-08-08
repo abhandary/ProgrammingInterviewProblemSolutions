@@ -72,7 +72,24 @@ class Strings {
     // LC:72. Edit Distance
     
     // LC:71. Simplify Path
-    
+    // Time: O(N), Space: O(N) where N is the number of path components
+    func simplifyPath(_ path: String) -> String {
+        var stack = [String]();
+        
+        let components = path.characters.split(separator: "/").map(String.init)
+        
+        for dir in components {
+            if (dir == ".." && stack.count > 0) { stack.removeLast(); }
+            else if (dir != ".." && dir != "." && dir != "") { stack.append(dir); }
+        }
+        
+        var result = ""
+        for ix in (0..<stack.count).reversed() {
+            result = "/" + stack[ix] + result;
+        }
+        
+        return result.characters.count == 0 ? "/" : result;
+    }
     // LC:68. Text Justification
     
     // LC:67. Add Binary
@@ -234,7 +251,47 @@ class Strings {
     }
     
     // LC:14. Longest Common Prefix
+    func longestCommonPrefix(_ strs: [String]) -> String {
+        guard strs.count > 0 else { return "" }
+        var charsArrays = [[Character]]()
+        for str in strs {
+            let schars = Array(str.characters)
+            charsArrays.append(schars)
+        }
+        var prefix = ""
+        var currentCharIx = 0;
+        var currentChar : Character = Character("a")
+        while (true) {
+            for ix in 0..<strs.count {
+                if currentCharIx >= charsArrays[ix].count { return prefix; }
+                if ix == 0 {
+                    currentChar = charsArrays[ix][currentCharIx]
+                } else {
+                    if currentChar != charsArrays[ix][currentCharIx] { return prefix; }
+                }
+            }
+            prefix += "\(currentChar)"
+            currentCharIx += 1
+        }
+        return prefix;
+    }
     
+    func longestCommonPrefix2(_ strs: [String]) -> String {
+        guard strs.count > 0 else { return ""; }
+        let first = Array(strs[0].characters);
+        for (index, char) in first.enumerated() {
+            var ix = 1;
+            while ix < strs.count {
+                let current = Array(strs[ix].characters);
+                if index >= current.count  || char != current[index] {
+                    return String(first[0..<index]);
+                }
+                ix += 1;
+            }
+        }
+        return strs[0];
+    }
+
     
     // LC:13. Roman to Integer
     // Time: O(N), Space: O(1)
@@ -282,10 +339,114 @@ class Strings {
     // LC:10. Regular Expression Matching
     
     // LC:8. String to Integer (atoi)
+    func myAtoi(_ str: String) -> Int
+    {
+        var result = 0;
+        var isNeg = false;
+        let chars = Array(str.characters);
+        for char in chars {
+            if char == " " { continue }
+            if char == "+" { continue }
+            if char == "-" { isNeg = true; continue; }
+            
+            if  let digit = Int(String(char)) {
+                result *= 10;
+                result += digit;
+            } else {
+                break;
+            }
+        }
+        return isNeg ? -result : result;
+    }
+
     
     // LC:7. ZigZag Conversion
     
-    // LC:4. Longest Palindromic Substring
+    // LC:5. Longest Palindromic Substring
+    func longestPalindromeHelper(_ s: String, left: Int, right : Int) -> (Int, Int, Int) {
+        
+        var left = left, right = right;
+        let chars = Array(s.characters);
+        var maxLen = 1;
+        
+        while left >= 0 && right < chars.count && chars[left] == chars[right] {
+            maxLen = max(maxLen, right - left + 1);
+            left -= 1;
+            right += 1;
+        }
+        return (maxLen, left + 1, right - 1);
+    }
+    
+    func longestPalindrome(_ s: String) -> String {
+        let chars = Array(s.characters);
+        var maxLen = 1, maxLeft = 0, maxRight = 0;
+        
+        for (index, _) in chars.enumerated() {
+            var (newLen, newLeft, newRight) = longestPalindromeHelper(s, left: index, right : index);
+            if newLen > maxLen {
+                maxLen = newLen;
+                maxLeft = newLeft; maxRight = newRight;
+            }
+            (newLen, newLeft, newRight) = longestPalindromeHelper(s, left: index, right : index + 1);
+            if newLen > maxLen {
+                maxLen = newLen;
+                maxLeft = newLeft; maxRight = newRight;
+            }
+        }
+        return String(chars[maxLeft...maxRight]);
+    }
+    
+    func longestPalindrome2(_ s: String) -> String
+    {
+        guard (s.characters.count > 1) else { return s; }
+        
+        var min_start = 0, max_len = 1, max_end = 0;
+        var i = 0;
+        let chars = Array(s.characters);
+        while i < chars.count {
+            if (chars.count - i <= max_len / 2) { break; }
+            
+            var j = i, k = i;
+            while (k < chars.count - 1 && chars[k+1] == chars[k]) {
+                k += 1; // Skip duplicate characters.
+            }
+            
+            i = k+1;
+            while (k < chars.count - 1 && j > 0 && chars[k + 1] == chars[j - 1]) {
+                k += 1; // Expand.
+                j -= 1;
+            }
+            let new_len = k - j + 1;
+            if (new_len > max_len) {
+                min_start = j; max_len = new_len; max_end = k;
+            }
+        }
+        return String(chars[min_start...max_end]);
+    }
+    
+    func longestPalindrome3(_ s: String) -> String {
+        let schars = Array(s.characters)
+        guard schars.count > 1 else { return s; }
+        
+        var low = 0, high = 0;
+        for ix in 0..<schars.count {
+            let (oddLow, oddHigh) = extend(schars, ix, ix)
+            let (evenLow, evenHigh) = extend(schars, ix, ix + 1)
+            if evenHigh > evenLow && evenHigh - evenLow > high - low {
+                low = evenLow; high = evenHigh;
+            }
+            if oddHigh > oddLow && oddHigh - oddLow > high - low {
+                low = oddLow; high = oddHigh;
+            }
+        }
+        return String(schars[low...high])
+    }
+    
+    func extend(_ schars : [Character], _ s : Int, _ e : Int) -> (Int, Int) {
+        var s = s, e = e
+        while s >= 0 && e < schars.count && schars[s] == schars[e] { s -= 1; e += 1; }
+        return (s + 1, e - 1)
+    }
     
     
     // LC:3. Longest Substring Without Repeating Characters
