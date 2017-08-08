@@ -104,13 +104,54 @@ class Arrays {
         
     }
     
-    // @todo:442. Find All Duplicates in an Array.
+    // @LC:442. Find All Duplicates in an Array.
+    func findDuplicates(_ nums: [Int]) -> [Int] {
+        var result = [Int]()
+        var nums = nums
+        
+        for (ix, num) in nums.enumerated() {
+            if num >= 0 && nums[num - 1] > 0 { nums[num - 1] = -nums[num - 1]; }
+            else {
+                result.append(abs(num))
+            }
+        }
+        return result
+    }
     
     // @todo:414. Third Maximum Number
+    func thirdMax(_ nums: [Int]) -> Int {
+        guard nums.count > 0 else { return 0;}
+        
+        if nums.count == 1 { return nums[0]; }
+        if nums.count == 2 { return max(nums[0], nums[1]); }
+        
+        var minValue = Int.max;
+        for value in nums {
+            minValue = min(minValue, value);
+        }
+        var firstMax = minValue, secondMax = minValue, thirdMax = minValue;
+        
+        for ix in 1..<nums.count {
+            if nums[ix] > firstMax {
+                thirdMax = secondMax;
+                secondMax = firstMax;
+                firstMax  = nums[ix];
+            }	else if nums[ix] > secondMax {
+                thirdMax = secondMax;
+                secondMax = nums[ix];
+            } else if nums[ix] > thirdMax {
+                thirdMax = nums[ix];
+            }
+        }
+        return  thirdMax == secondMax ? firstMax : thirdMax;
+    }
     
     // @todo:380. Insert Delete GetRandom O(1)
     
     // @todo:289. Game of Life.
+    
+    // LC:287. Find the Duplicate Number
+    // @see BinarySearch, TwoPointers
     
     // LC:283. Move Zeroes
     func moveZeroes(_ nums: inout [Int]) {

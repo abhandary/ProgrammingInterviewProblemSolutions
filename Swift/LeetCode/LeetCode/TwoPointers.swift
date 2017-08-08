@@ -46,16 +46,61 @@ class TwoPointers {
     }
 
     // LC:27. Remove Element
-    // @see: see Arrays
+    // @see: Arrays
+    
+    // LC:75. Sort Colors
+    // @see Arrays
+    
+    // LC:88. Merge Sorted Array
+    // @see Arrays
     
     // LC:125. Valid Palindrome
-    // @see: see Strings
+    // @see: Strings
+    
+    // 141. Linked List Cycle
+    func hasCycle(_ head : ListNode?) -> Bool {
+        guard head != nil else { return false; }
+        
+        var slow = head, fast = head;
+        if fast != nil { fast = fast?.next; }
+        
+        while slow !== fast {
+            slow = slow?.next
+            fast = fast?.next
+            if fast != nil { fast = fast?.next; }
+        }
+        if slow == nil || fast == nil { return false; }
+        
+        return true;
+    }
     
     // LC:167. Two Sum II - Input array is sorted
-    // @see Arrays
+    // @see: Arrays
     
     // LC:283. Move Zeroes
-    // @see Arrays
+    // @see: Arrays
+    
+    // 287. Find the Duplicate Number
+    func findDuplicate(_ nums: [Int]) -> Int {
+        guard nums.count > 0 else { return -1; }
+        
+        var slow = nums[0];
+        var fast = nums[nums[0]]
+        
+        while slow != fast {
+            slow = nums[slow];
+            fast = nums[nums[fast]]
+        }
+        
+        fast = 0
+        while slow != fast {
+            slow = nums[slow]
+            fast = nums[fast]
+        }
+        return slow
+    }
+    
+    
     
     // LC: 344. Reverse String
     func reverseString(_ s: String) -> String {
@@ -96,5 +141,11 @@ class TwoPointers {
         }
         return String(chars);
     }
+    
+    // LC:349. Intersection of Two Arrays
+    // @see: Hashtables
+    
+    // LC:350. Intersection of Two Arrays II
+    // @see: Hashtables
 
 }
