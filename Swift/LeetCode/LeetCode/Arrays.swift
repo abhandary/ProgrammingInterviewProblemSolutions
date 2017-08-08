@@ -25,10 +25,38 @@ func == (lhs: SetInteger, rhs: SetInteger) -> Bool {
 }
 
 
+class Interval {
+    public var start: Int
+    public var end: Int
+    public init(_ start: Int, _ end: Int) {
+        self.start = start
+        self.end = end
+    }
+}
+
 class Arrays {
+
+    // @todo:581. Shortest Unsorted Continuous Subarray
     
+    // @todo:566. Reshape the Matrix
     
-    // LC: 485. Max Consecutive Ones
+    // @todo:562. Longest Line of Consecutive One in Matrix
+    
+    // @todo:561. Array Partition I
+    
+    // @todo:560. Subarray Sum Equals K
+    
+    // @todo:548. Split Array with Equal Sum
+    
+    // @todo:533. Lonely Pixel II
+
+    // @todo:532. K-diff Pairs in an Array
+    
+    // @todo:531. Lonely Pixel I
+    
+    // @todo:495. Teemo Attacking.
+    
+    // LC:485. Max Consecutive Ones
     func findMaxConsecutiveOnes(_ nums: [Int]) -> Int {
         guard nums.count > 0 else { return 0; }
         
@@ -56,7 +84,7 @@ class Arrays {
         return maxOnes;
     }
     
-    // LC: 448. Find All Numbers Disappeared in an Array
+    // LC:448. Find All Numbers Disappeared in an Array
     func findDisappearedNumbers(_ nums: [Int]) -> [Int] {
         guard nums.count > 0 else { return [] }
         
@@ -76,10 +104,15 @@ class Arrays {
         
     }
     
-    // LC: 414. Third Maximum Number
+    // @todo:442. Find All Duplicates in an Array.
     
+    // @todo:414. Third Maximum Number
     
-    // LC: 283. Move Zeroes
+    // @todo:380. Insert Delete GetRandom O(1)
+    
+    // @todo:289. Game of Life.
+    
+    // LC:283. Move Zeroes
     func moveZeroes(_ nums: inout [Int]) {
         guard nums.count > 0 else { return; }
         
@@ -108,7 +141,7 @@ class Arrays {
         
     }
     
-    // LC: 268. Missing Number
+    // LC:268. Missing Number
     func missingNumberAS(_ nums: [Int]) -> Int {
         guard nums.count > 0 else { return 0; }
         
@@ -135,8 +168,11 @@ class Arrays {
         }
         return res ^ ix;
     }
+
     
-    // LC: 228. Summary Ranges
+    // @todo:238. Product of Array Except Self
+    
+    // LC:228. Summary Ranges
     func summaryRanges(_ nums: [Int]) -> [String] {
         guard nums.count > 0 else { return []; }
         
@@ -160,7 +196,7 @@ class Arrays {
     
     
     
-    // LC: 219. Contains Duplicate II
+    // LC:219. Contains Duplicate II
     func containsNearbyDuplicate(_ nums: [Int], _ k: Int) -> Bool {
         guard nums.count > 0 else { return false; }
         
@@ -176,7 +212,7 @@ class Arrays {
         
     }
     
-    // LC: 217. Contains Duplicate
+    // LC:217. Contains Duplicate
     func containsDuplicate(_ nums: [Int]) -> Bool {
         
         guard nums.count > 0 else { return false; }
@@ -190,7 +226,11 @@ class Arrays {
         return false;
     }
     
-    // LC: 189. Rotate Array
+    // @todo:216. Combination Sum III
+    
+    // @todo:209. Minimum Size Subarray Sum
+    
+    // LC:189. Rotate Array
     func reverse(_ nums: inout[Int], _ left : Int, _ right : Int) {
         var left = left, right = right
         while left < right {
@@ -209,7 +249,7 @@ class Arrays {
         reverse(&nums, 0, nums.count - 1);
     }
     
-    // LC: 169. Majority Element
+    // LC:169. Majority Element
     func majorityElement(_ nums: [Int]) -> Int {
         guard nums.count > 0 else { return -1; }
         
@@ -229,7 +269,7 @@ class Arrays {
         return majorityElement;
     }
 
-    // LC: 167. Two Sum II - Input array is sorted
+    // LC:167. Two Sum II - Input array is sorted
     func twoSum(_ numbers : [Int], _ target : Int) -> [Int] {
         guard numbers.count > 1 else { return [-1, -1]; }
         
@@ -244,8 +284,24 @@ class Arrays {
         }
         return [-1, -1]
     }
+    
+    // @todo:162. Find Peak Element
+    
+    // @todo:154. Find Minimum in Rotated Sorted Array II
+    
+    // @todo:153. Find Minimum in Rotated Sorted Array
+    
+    // @todo:152. Maximum Product Subarray
+    
+    // @todo:128. Longest Consecutive Sequence
+    
+    // @todo:126. Word Ladder II
+    
+    // @todo:123. Best Time to Buy and Sell Stock III
+    
+    // @todo:122. Best Time to Buy and Sell Stock II
 
-    // LC: 121. Best Time to Buy and Sell Stock
+    // LC:121. Best Time to Buy and Sell Stock
     func maxProfit(_ prices : [Int]) -> Int {
         guard prices.count > 0 else { return 0; }
         
@@ -258,7 +314,26 @@ class Arrays {
         return maxSoFar;
     }
     
-    // LC: 118. Pascal's Triangle
+    
+    // @todo:120. Triange
+    
+    // LC:119. Pascal's Triangle II 
+    func getRow(_ rowIndex: Int) -> [Int] {
+        var lastRow = [1]
+        if rowIndex == 0 { return lastRow }
+        var currentRow : [Int]!
+        for rx in 1...rowIndex {
+            currentRow = [Int](repeating : 1, count : rx + 1)
+            if  (currentRow.count - 1) <= 1 { lastRow = currentRow; continue; }
+            for jx in 1..<(currentRow.count - 1) {
+                currentRow[jx] = lastRow[jx - 1] + lastRow[jx]
+            }
+            lastRow = currentRow
+        }
+        return currentRow;
+    }
+    
+    // LC:118. Pascal's Triangle
     func generate(_ numRows: Int) -> [[Int]] {
         
         
@@ -279,7 +354,38 @@ class Arrays {
         
     }
     
-    // LC: 88. Merge Sorted Array
+    // @todo:106. Construct Binary Tree from Inorder and Postorder Traversal
+    
+    // @LC:105. Construct Binary Tree from Preorder and Inorder Traversal
+    // Time: O(n), Space: O(h)
+    var treeMap = [Int : Int]()
+    
+    func buildTreeHelper(_ preorder : [Int], _ inorder : [Int], _ pstart : Int, _ pend : Int, _ istart : Int, _ iend : Int) -> TreeNode? {
+        guard pstart <= pend && istart <= iend else { return nil; }
+        let root = TreeNode(preorder[pstart])
+        
+        if let ix = treeMap[root.val] {
+            let pLeftLen = ix - istart
+            let pRightLen = iend - ix
+            root.left = buildTreeHelper(preorder, inorder, pstart + 1, pstart + pLeftLen, istart, ix - 1)
+            root.right = buildTreeHelper(preorder, inorder, pstart + pLeftLen + 1, pend, ix + 1, iend)
+        }
+        return root
+    }
+    
+    func buildTree(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+        guard preorder.count > 0 && inorder.count > 0 else { return nil; }
+        
+        for (ix, val) in inorder.enumerated() {
+            treeMap[val] = ix
+        }
+        
+        return buildTreeHelper(preorder, inorder, 0, preorder.count - 1, 0, inorder.count - 1)
+    }
+    
+    // @todo:90. Subsets 2
+    
+    // LC:88. Merge Sorted Array
     func merge(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
         var ix = m - 1;
         var jx = n - 1;
@@ -305,7 +411,13 @@ class Arrays {
         
     }
     
-    // 80. Remove Duplicates from Sorted Array II
+    // @todo:85. Maximal Rectangle
+    
+    // @todo:84. Largest Rectangle in Histogram
+    
+    // @todo:81. Search in Rotated Sorted Array II
+    
+    // LC:80. Remove Duplicates from Sorted Array II
     func removeDuplicates2(_ nums: inout [Int]) -> Int {
         guard nums.count > 0 else { return 0; }
         if nums.count == 1 { return 1; }
@@ -322,7 +434,61 @@ class Arrays {
         
     }
     
-    // LC: 75. Sort Colors
+    // LC:79. Word Search
+    // @todo: optimize to use a hashmap 
+    // Space: O(m + n) Time O(m * n * L)
+    func existHelper(_ board : inout [[Character]], _ word : [Character], _ wx : Int, _ ix : Int, _ jx : Int) -> Bool {
+        
+        
+        if wx == word.count { return true; }
+        guard ix >= 0 && jx >= 0 && ix < board.count && jx < board[0].count else { return false; }
+        
+        
+        if word[wx] != board[ix][jx] { return false; }
+        let temp = board[ix][jx]
+        board[ix][jx] = "$"
+        let shifts = [[0, -1], [0, 1], [1, 0], [-1, 0]]
+        for shift in shifts {
+            if existHelper(&board, word, wx + 1, ix + shift[0], jx + shift[1]) == true {
+                return true;
+            }
+        }
+        board[ix][jx] = temp
+        return false;
+    }
+    
+    func exist(_ board: [[Character]], _ word: String) -> Bool {
+        guard board.count > 0 else { return false; }
+        
+        var board = board
+        let wchars = Array(word.characters)
+        for ix in 0..<board.count {
+            for jx in 0..<board[0].count {
+                if existHelper(&board, wchars, 0, ix, jx)  == true { return true; }
+            }
+        }
+        return false;
+    }
+    
+    // @LC:78. Subsets
+    func subsets(_ nums: [Int]) -> [[Int]] {
+        let n = nums.count;
+        var result = [[Int]]();
+        
+        for ix in 0..<(1 << n) {
+            var partial = [Int]();
+            var num = ix;
+            while num > 0 {
+                let bitSet = Double(num & ~(num - 1));
+                partial.append(nums[Int(log(bitSet) / log(2))]);
+                num &= (num - 1);
+            }
+            result.append(partial);
+        }
+        return result;
+    }
+    
+    // LC:75. Sort Colors
     func sortColors(_ nums: inout [Int]) {
         var numRed = 0;    // 0
         var numWhite = 0;  // 1
@@ -349,7 +515,43 @@ class Arrays {
         }
     }
     
-    // LC: 73. Set Matrix Zeroes
+    // @LC:74. Search a 2D Matrix
+    /*
+    [
+     [1,   3,  5,  7],
+     [10, 11, 16, 20],
+     [23, 30, 34, 50]
+    ]
+     
+     */
+    
+    // m = 4
+    // n = 3
+    //
+    // 1. l = 0, h = 11, mid = 5, ix = 1, jx = 1
+    // 2. l = 0, h = 4, mid = 2, ix = 2, jx = 0
+    // 3. l = 0, h = 1, mid = 1, ix = 0, jx = 1
+    
+    func searchMatrix(_ matrix: [[Int]], _ target: Int) -> Bool {
+        guard matrix.count > 0 else { return false; }
+        
+        let n = matrix.count
+        let m = matrix[0].count
+        var l = 0, h = m * n - 1;
+        
+        while l <= h {
+            let mid = h - ((h - l) / 2)
+            if matrix[mid / m][mid % m] == target { return true; }
+            if matrix[mid / m][mid % m] < target {
+                l = mid + 1
+            } else {
+                h = mid - 1;
+            }
+        }
+        return false;
+    }
+    
+    // LC:73. Set Matrix Zeroes
     func setZeroes(_ matrix: inout [[Int]]) {
         guard matrix.count > 0 else { return; }
         let m = matrix.count, n = matrix[0].count;
@@ -374,7 +576,7 @@ class Arrays {
     }
     
     
-    // LC: 66 Plus One
+    // LC:66. Plus One
     func plusOne(_ digits: [Int]) -> [Int] {
         var result = digits;
         guard digits.count > 0 else { return result; }
@@ -394,7 +596,177 @@ class Arrays {
         return result;
     }
 
-    // LC: 55. Jump Game
+    // @todo:64. Minimum Path Sum
+    
+    
+    // @LC:63. Unique Paths 2
+    func uniquePathsWithObstaclesHelper(_ obstacleGrid: [[Int]], _ ix : Int, _ jx : Int) -> Int {
+        guard ix >= 0 && jx >= 0 else { return 0; }
+        
+        if obstacleGrid[ix][jx] == 1 { return 0; }
+        
+        if ix == 0 && jx == 0 { return 1; }
+        
+        let lookupStr = "\(ix),\(jx)"
+        if let result = hmap[lookupStr] {
+            return result;
+        }
+        
+        let result = uniquePathsWithObstaclesHelper(obstacleGrid, ix - 1, jx) +
+            uniquePathsWithObstaclesHelper(obstacleGrid, ix, jx - 1);
+        hmap[lookupStr] = result;
+        return result;
+    }
+    
+    func uniquePathsWithObstacles(_ obstacleGrid: [[Int]]) -> Int {
+        
+        guard obstacleGrid.count > 0 else { return 0; }
+        return uniquePathsWithObstaclesHelper(obstacleGrid, obstacleGrid.count - 1, obstacleGrid[0].count - 1);
+    }
+    
+    
+    
+    // @LC:62. Unique Paths
+    var hmap = [String : Int]()
+    
+    func uniquePaths(_ m: Int, _ n: Int) -> Int {
+        if (m == 1 ||  n == 1) { return 1; }
+        
+        let lookupStr = "\(m),\(n)"
+        if let result = hmap[lookupStr] {
+            return result;
+        }
+        let paths = uniquePaths(m - 1, n) + uniquePaths(m, n - 1);
+        hmap[lookupStr] = paths;
+        return paths;
+    }
+    
+    
+    // @LC:59. Spiral Matrix 2
+    // Discussion: https://discuss.leetcode.com/topic/4362/my-super-simple-solution-can-be-used-for-both-spiral-matrix-i-and-ii
+    // Time: O(m x n)
+    func generateMatrix(_ n: Int) -> [[Int]] {
+        
+        // Declaration
+        let row = [Int](repeating: 0, count: n)
+        var matrix = [[Int]](repeating: row, count: n);
+        
+        // Edge Case
+        guard n > 0 else { return matrix; }
+        
+        // Normal Case
+        var rowStart = 0;
+        var rowEnd = n-1;
+        var colStart = 0;
+        var colEnd = n-1;
+        var num = 1;
+        
+        while (rowStart <= rowEnd && colStart <= colEnd) {
+            for ix in colStart...colEnd {
+                matrix[rowStart][ix] = num; num += 1;
+            }
+            rowStart += 1
+            if rowStart > rowEnd { break; }
+            for ix in rowStart...rowEnd {
+                matrix[ix][colEnd] = num; num += 1;
+            }
+            colEnd -= 1
+            if colStart > colEnd { break; }
+            for ix in (colStart...colEnd).reversed() {
+                matrix[rowEnd][ix] = num;  num += 1;
+            }
+            rowEnd -= 1
+            if rowStart > rowEnd { break; }
+            for ix in (rowStart...rowEnd).reversed() {
+                matrix[ix][colStart] = num; num += 1
+            }
+            colStart += 1
+        }
+        
+        return matrix;
+        
+    }
+    
+    
+    // @LC:57. Insert Interval
+    // Discussion: https://discuss.leetcode.com/topic/7808/short-and-straight-forward-java-solution/1
+    // Time: O(n), Space: O(1)
+    func insert(_ intervals: [Interval], _ newInterval: Interval) -> [Interval] {
+        guard intervals.count > 0 else { return [newInterval]; }
+        
+        var result = [Interval]()
+        let mergedInterval = newInterval;
+        var ix = 0;
+        while ix < intervals.count {
+            if intervals[ix].end < mergedInterval.start {
+                result.append(intervals[ix]);
+            } else if intervals[ix].start <= mergedInterval.end  {
+                mergedInterval.start = min(intervals[ix].start, mergedInterval.start);
+                mergedInterval.end   = max(intervals[ix].end, mergedInterval.end);
+            } else {
+                break;
+            }
+            ix += 1;
+        }
+        result.append(mergedInterval)
+        while ix < intervals.count { result.append(intervals[ix]); ix += 1; }
+        
+        return result;
+        
+    }
+    
+    func insert2(_ intervals: [Interval], _ newInterval: Interval) -> [Interval] {
+        guard intervals.count > 0 else { return [newInterval]; }
+        
+        let mergedInterval = newInterval
+        var result = [Interval]()
+        var ix = 0;
+        
+        while ix < intervals.count && intervals[ix].end < mergedInterval.start{
+            result.append(intervals[ix]); ix += 1
+        }
+        
+        while ix < intervals.count && intervals[ix].start <= mergedInterval.end{
+            mergedInterval.start = min(mergedInterval.start, intervals[ix].start);
+            mergedInterval.end = max(mergedInterval.end, intervals[ix].end)
+            ix += 1
+        }
+        
+        result.append(mergedInterval)
+        
+        while ix < intervals.count {
+            result.append(intervals[ix]); ix += 1;
+        }
+        
+        return result;
+    }
+    
+    
+    // @LC:56. Merge Intervals
+    // Time: O(n), Space: O(1)
+    // Discussion: https://discuss.leetcode.com/topic/4319/a-simple-java-solution
+    func merge(_ intervals: [Interval]) -> [Interval] {
+        guard intervals.count > 0 else { return intervals; }
+        
+        let sortedIntervals = intervals.sorted { $0.start < $1.start }
+        
+        var start = sortedIntervals[0].start
+        var end   = sortedIntervals[0].end
+        var result = [Interval]();
+        for interval in sortedIntervals {
+            if interval.start <= end {
+                end = max(end, interval.end)
+            } else {
+                result.append(Interval(start, end));
+                start = interval.start; end = interval.end
+            }
+        }
+        result.append(Interval(start, end))
+        return result;
+    }
+    
+    
+    // LC:55. Jump Game
     func canJump(_ nums: [Int]) -> Bool {
         guard nums.count > 0 else { return false; }
         var maxSoFar = nums[0];
@@ -408,7 +780,7 @@ class Arrays {
         return maxSoFar >= nums.count - 1;
     }
     
-    // LC: 54. Spiral Matrix
+    // LC:54. Spiral Matrix
     func spiralOrder(_ matrix: [[Int]]) -> [Int] {
         var result  = [Int]();
         guard matrix.count > 0 else { return result; }
@@ -445,9 +817,204 @@ class Arrays {
         return result;
     }
     
-    // LC: 40 Combination Sum 2
     
-    // 39. Combination Sum
+    // @LC:53. Maximum subarray
+    // Time: O(n), space: O(1)
+    // Discussion: https://discuss.leetcode.com/topic/5000/accepted-o-n-solution-in-java/2
+    // https://discuss.leetcode.com/topic/6413/dp-solution-some-thoughts
+    func maxSubArray(_ nums: [Int]) -> Int {
+        
+        if nums.count == 0 { return Int.min; }
+        
+        var maxTillHere = nums[0];
+        var maxValue = nums[0];
+        
+        for ix in 1..<nums.count {
+            maxTillHere = max(nums[ix], maxTillHere + nums[ix]);
+            maxValue = max(maxValue, maxTillHere);
+        }
+        
+        return maxValue;
+    }
+    
+    func maxSubArrayDP(_ nums: [Int]) -> Int {
+        
+        var dp = [Int](repeating: 0, count: nums.count)
+        dp[0] = nums[0];
+        
+        var maxValue = dp[0];
+        for ix in 1..<nums.count {
+            dp[ix] = nums[ix] + (dp[ix - 1] > 0 ? dp[ix - 1] : 0);
+            maxValue = max(maxValue, dp[ix]);
+        }
+        return maxValue;
+    }
+    
+    
+    // @LC:48. Rotate Image
+    // Time: O(M x N), Space: O(1)
+    // Discussion:
+    // https://discuss.leetcode.com/topic/6796/a-common-method-to-rotate-the-image
+    // https://discuss.leetcode.com/topic/9744/ac-java-in-place-solution-with-explanation-easy-to-understand/2
+    // @todo: NP, work out with some examples, work out the time complexity and space complexity
+    func rotate(_ matrix: inout [[Int]]) {
+        guard matrix.count > 0 else { return; }
+        
+        for ix in 0..<matrix.count {
+            for jx in ix..<matrix[0].count {
+                if ix != jx {
+                    swap(&matrix[ix][jx], &matrix[jx][ix])
+                }
+            }
+        }
+        
+        for ix in 0..<matrix.count {
+            for jx in 0..<matrix.count/2 {
+                swap(&matrix[ix][jx], &matrix[ix][matrix.count-1-jx]);
+            }
+        }
+    }
+    
+    // @LC:45. Jump Game 2
+    // Time: O(N), Space: O(1)
+    // Discussion: https://discuss.leetcode.com/topic/11408/single-loop-simple-java-solution
+    // https://discuss.leetcode.com/topic/3191/o-n-bfs-solution
+    // @todo: NP, work out with some examples, work out the time complexity and space complexity
+    func jump(_ nums: [Int]) -> Int {
+        var step_count = 0, last_jump_max = 0, current_jump_max = 0;
+        for ix in 0..<nums.count-1 {
+            current_jump_max = max(current_jump_max, ix + nums[ix])
+            if ix == last_jump_max {
+                step_count += 1;
+                last_jump_max = current_jump_max;
+            }
+        }
+        
+        return step_count;
+    }
+    
+    // @LC:42. Trapping Rain Water
+    // Time: ??, Space: ??
+    // Discussion: https://discuss.leetcode.com/topic/3016/share-my-short-solution
+    // https://discuss.leetcode.com/topic/18731/7-lines-c-c/2
+    // https://discuss.leetcode.com/topic/5125/sharing-my-simple-c-code-o-n-time-o-1-space/2
+    // @todo: NP, work out with some examples, work out the time complexity and space complexity
+    func trap(_ height: [Int]) -> Int {
+        var l = 0, r = height.count-1, level = 0, water = 0;
+        while l < r {
+            var hix = 0
+            if height[l] < height[r] { hix = l; l += 1; }
+            else { hix = r; r -= 1; }
+            let lower = height[hix];
+            level = max(level, lower);
+            water += level - lower;
+        }
+        return water;
+    }
+    
+    // @LC:41. First Missing Positive
+    // Time: O(N)??, Space: O(1) if input is mutable, otherwise O(N)
+    // Discussion: https://discuss.leetcode.com/topic/8293/my-short-c-solution-o-1-space-and-o-n-time/2
+    // @todo: NP, work out with some examples, work out the time complexity
+    func firstMissingPositive(_ nums: [Int]) -> Int {
+        var nums = nums;
+        for ix in 0..<nums.count {
+            while nums[ix] > 0 && nums[ix] <= nums.count &&
+                nums[ix] != nums[nums[ix] - 1] {
+                    // e.g. swap 5 into nums[4]
+                    swap(&nums[ix], &nums[nums[ix] - 1])
+            }
+        }
+        
+        // return the first index where nums[ix] != ix + 1
+        for ix in 0..<nums.count {
+            if nums[ix] != ix + 1 {
+                return ix + 1
+            }
+        }
+        
+        return nums.count + 1;
+    }
+    
+    // Alt Soln
+    // Time: O(N), Space: O(1) if input is mutable, otherwise O(N)
+    // Discussion: https://discuss.leetcode.com/topic/2633/share-my-o-n-time-o-1-space-solution
+    func firstMissingPositive2(_ A: [Int]) -> Int {
+        var A = A;
+        let n = A.count;
+        
+        guard n > 0 else { return 1; }
+        
+        let k = partition(&A) + 1;
+        var temp = 0;
+        var first_missing_Index = k;
+        
+        for ix in 0..<k {
+            temp=abs(A[ix]);
+            if temp <= k {
+                A[temp - 1] = A[temp - 1] < 0 ? A[temp - 1] : -A[temp - 1];
+            }
+            
+        }
+        for ix in 0..<k {
+            if A[ix] > 0 {
+                first_missing_Index = ix;
+                break;
+            }
+        }
+        return first_missing_Index + 1;
+    }
+    
+    func partition(_ A : inout [Int]) -> Int {
+        let n = A.count;
+        var q = -1;
+        
+        for ix in 0..<n {
+            if A[ix] > 0 {
+                q += 1;
+                if (q != ix) {
+                    swap(&A[q],&A[ix]);
+                }
+            }
+        }
+        return q;
+    }
+    
+    // LC:40. Combination Sum 2
+    // @todo: NP
+    // Time: ??, Space: ??
+    // Discussion: https://discuss.leetcode.com/topic/19845/java-solution-using-dfs-easy-understand/1
+    func combinationSum2Helper(_ candidates: [Int], _ target: Int, _ result : inout [[Int]], _  partial : [Int], _ begin : Int) {
+        
+        guard target >= 0 else { return; }
+        if target == 0 {
+            result.append(partial);
+            return;
+        }
+        
+        
+        var partial = partial;
+        for ix in begin..<candidates.count {
+            if ix > begin && candidates[ix] == candidates[ix - 1] { continue; }
+            let newTarget = target - candidates[ix]
+            if (newTarget >= 0) {
+                partial.append(candidates[ix]);
+                combinationSum2Helper(candidates, newTarget, &result, partial, ix + 1);
+                partial.removeLast();
+            }
+        }
+        
+    }
+    
+    func combinationSum2(_ candidates: [Int], _ target: Int) -> [[Int]] {
+        let  sortedCandidates = candidates.sorted();
+        var result = [[Int]]()
+        var partial = [Int]()
+        combinationSum2Helper(sortedCandidates, target, &result, partial, 0)
+        return result;
+    }
+    
+    // LC:39. Combination Sum
     var result : [[Int]]!
     
     func combinationSumHelper(_ candidates: [Int], _ ix: Int, _ partial: inout [Int], _ target: Int) {
@@ -476,7 +1043,7 @@ class Arrays {
         return result;
     }
     
-    // LC: 35. Search Insert Position
+    // LC:35. Search Insert Position
     func searchInsert(_ nums: [Int], _ target: Int) -> Int {
         guard nums.count > 0 else { return -1; }
         var low = 0;
@@ -494,7 +1061,7 @@ class Arrays {
         return low;
     }
     
-    // LC: 34 Search for a Range
+    // LC:34. Search for a Range
     func searchRange(_ nums: [Int], _ target: Int) -> [Int] {
         var startIx = -1;
         var endIx = -1;
@@ -530,9 +1097,7 @@ class Arrays {
         return [startIx, endIx];
     }
 
-    // LC: @todo 31 Next Permutation
-    
-    // LC: 33 Search in Rotated Sorted Array
+    // LC:33. Search in Rotated Sorted Array
     func search(_ nums : [Int], _ target : Int) -> Int {
         guard nums.count > 0 else { return -1; }
         
@@ -560,9 +1125,10 @@ class Arrays {
         return -1;
     }
     
+    // @todo:31. Next Permutation
     
-    
-    // 27. Remove Element
+
+    // LC:27. Remove Element
     // https://leetcode.com/problems/remove-element/#/description
     func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
         guard nums.count > 0 else { return 0; }
@@ -586,7 +1152,7 @@ class Arrays {
         return wx + 1;
     }
     
-    // 26. Remove Duplicates from Sorted Array
+    // LC:26. Remove Duplicates from Sorted Array
     // https://leetcode.com/problems/remove-duplicates-from-sorted-array/#/description
     func removeDuplicates(_ nums: inout [Int]) -> Int {
 
@@ -604,9 +1170,9 @@ class Arrays {
     
     
 
-    // LC: @todo 4 Sum
+    // @todo:18 4. Sum
     
-    // LC: 16. Three Sum Closest
+    // LC:16. 3Sum Closest
     func threeSumClosest(_ nums: [Int], _ target: Int) -> Int {
         let snums = nums.sorted();
         var minDiffSoFar = Int.max;
@@ -635,7 +1201,7 @@ class Arrays {
         
     }
     
-    // 15. 3Sum
+    // LC:15. 3Sum
     // https://leetcode.com/problems/3sum/#/description
     func threeSum(_ nums: [Int]) -> [[Int]] {
         var inter = nums.sorted();
@@ -665,7 +1231,7 @@ class Arrays {
     }
     
     
-    // 11. Container With Most Water
+    // LC:11. Container With Most Water
     // https://leetcode.com/problems/container-with-most-water/#/description
     func maxArea(_ height: [Int]) -> Int {
         var ix = 0;
@@ -684,9 +1250,9 @@ class Arrays {
     
     
     
-    // 1. Two Sum
+    // LC:1. Two Sum
     // https://leetcode.com/problems/two-sum/#/description
-    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+    func twoSum2(_ nums: [Int], _ target: Int) -> [Int] {
         var result = [Int]();
         var hmap = [Int : Int]();
         for (index, num) in  nums.enumerated() {

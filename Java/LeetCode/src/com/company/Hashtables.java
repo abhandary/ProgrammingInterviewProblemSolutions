@@ -531,7 +531,7 @@ public class Hashtables {
     }
 
     // LC: 336. Palindrome Pairs
-    // Given a list of unique words, find all pairs of distinct indices (i, j) in the given list, so that the
+    // Given a list of unique   words, find all pairs of distinct indices (i, j) in the given list, so that the
     // concatenation of the two words, i.e. words[i] + words[j] is a palindrome.
     // https://discuss.leetcode.com/topic/39585/o-n-k-2-java-solution-with-trie-structure-n-total-number-of-words-k-average-length-of-each-word/2
     class TrieNode {

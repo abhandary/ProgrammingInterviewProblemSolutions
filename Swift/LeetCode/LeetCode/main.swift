@@ -1687,7 +1687,7 @@ class Solution {
         return stack.count == 0;
     }
     
-    // MARK: - 19. Remove Nth Node From End of List
+    // LC:19. Remove Nth Node From End of List
     func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
         var dummyHead = ListNode(0);
         dummyHead.next = head;
@@ -1767,21 +1767,6 @@ class Solution {
     }
     
     // MARK: - 14. Longest Common Prefix (EASY)
-    func longestCommonPrefix(_ strs: [String]) -> String {
-        guard strs.count > 0 else { return ""; }
-        let first = Array(strs[0].characters);
-        for (index, char) in first.enumerated() {
-            var ix = 1;
-            while ix < strs.count {
-                let current = Array(strs[ix].characters);
-                if index >= current.count  || char != current[index] {
-                    return String(first[0..<index]);
-                }
-                ix += 1;
-            }
-        }
-        return strs[0];
-    }
     
     // MARK: - 13. Roman to Integer
     func romanToInt(_ s: String) -> Int
@@ -1891,25 +1876,6 @@ class Solution {
     }
     
     // MARK: - 8. String to Integer (atoi)
-    func myAtoi(_ str: String) -> Int
-    {
-        var result = 0;
-        var isNeg = false;
-        let chars = Array(str.characters);
-        for char in chars {
-            if char == " " { continue }
-            if char == "+" { continue }
-            if char == "-" { isNeg = true; continue; }
-            
-            if  let digit = Int(String(char)) {
-                result *= 10;
-                result += digit;
-            } else {
-                break;
-            }
-        }
-        return isNeg ? -result : result;
-    }
     
     // MARK: - 7. Reverse Integer
     func reverse(_ x: Int) -> Int {
@@ -2083,14 +2049,19 @@ class Solution {
 //let result = parser.decode("bce12xac10x1e5xgf11x");
 //print(result);
 
+/*
 let dfs = DFS();
+
 let count = dfs.numIslands([["1", "1", "1", "1", "0"],
                 ["1", "1", "0", "1", "0"],
                 ["1", "1", "0", "0", "0"],
                 ["0", "0", "0", "0", "0"]]
 );
 print(count);
+*/
 
-
+let str = Strings()
+let simplified = str.simplifyPath("/abc/...")
+print(simplified)
 
 
