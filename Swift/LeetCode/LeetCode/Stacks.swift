@@ -71,6 +71,12 @@ class Stacks {
     };
     */
     
+    // LC:225. Implement Stack using Queues
+    // @todo: wing it
+    
+    // LC:232. Implement Queue using Stacks
+    // @todo: wing it    
+    
     // LC:341. Flatten Nested List Iterator
     /*
     class NestedIterator {
