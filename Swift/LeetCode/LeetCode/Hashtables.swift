@@ -47,8 +47,78 @@ class Hashtables {
     // LC:508. Most Frequent Subtree Sum
     
     // LC:500. Keyboard Row
+    func findWords(_ words: [String]) -> [String] {
+        
+        let rows = ["qwertyquiop", "asdfghjkl", "zxcvbnm"]
+        
+        var result = [String]()
+        for word in words {
+            let wchars = Array(word.lowercased().characters)
+            var currRow = -1
+            
+            var wx = 0
+            while wx < wchars.count {
+                var matchedRow = -1
+                for (rx, row) in rows.enumerated() {
+                    if row.contains("\(wchars[wx])") { matchedRow = rx; break; }
+                }
+                if wx == 0 {
+                    currRow = matchedRow
+                } else {
+                    if currRow != matchedRow { break; }
+                }
+                wx += 1
+            }
+            if wx == wchars.count { result.append(word) }
+        }
+        return result
+    }
+    
+    // general idea, doesn't work however
+    func findWords2(_ words: [String]) -> [String] {
+
+        let pat = "[qwertyuiop]*|[asdfghjkl]*|[zxcvbnm]*"
+        let regex = try! NSRegularExpression(pattern: pat, options: [])
+
+        return words.filter { let matched = regex.matches(in: $0.lowercased(), options: [], range: NSRange(location: 0, length: $0.characters.count)).count
+            
+        
+        }
+        
+    }
+    
+    // Java 1-line
+    /*
+    public String[] findWords(String[] words) {
+        return Stream.of(words).filter(s -> s.toLowerCase().matches("[qwertyuiop]*|[asdfghjkl]*|[zxcvbnm]*")).toArray(String[]::new);
+    }
+    */
     
     // LC:463. Island Perimeter
+    func numWaterSides(_ grid: [[Int]], _ ix : Int, _ jx : Int) -> Int {
+        let shifts = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+        var sum = 0
+        for shift in shifts {
+            let six = ix + shift[0]
+            let sjx = jx + shift[1]
+            if six < 0 || six >= grid.count || sjx < 0 || sjx >= grid[0].count || grid[six][sjx] == 0 {
+                sum += 1;
+            }
+        }
+        return sum
+    }
+    
+    func islandPerimeter(_ grid: [[Int]]) -> Int {
+        var sum = 0
+        for ix in 0..<grid.count {
+            for jx in 0..<grid[0].count {
+                if grid[ix][jx] == 1 {
+                    sum += numWaterSides(grid, ix, jx)
+                }
+            }
+        }
+        return sum
+    }
     
     // LC:454. 4Sum II
     

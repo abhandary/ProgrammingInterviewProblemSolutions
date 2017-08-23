@@ -20,6 +20,31 @@ class BinarySearch {
     // LC:35. Search Insert Position
     // @see: Arrays
     
+    // LC:69. Sqrt(x)
+    // doesn't work, but same idea
+    func mySqrt(_ x: Int) -> Int {
+        var low = 0
+        var high = x
+        while low < high {
+            let mid = high - (low - high)/2
+            if mid * mid == x { return mid }
+            if mid * mid < x {
+                low = mid + 1
+            } else {
+                high = mid - 1
+            }
+        }
+        return low
+    }
+    
+    // works
+    func mySqrt2(_ x: Int) -> Int {
+        var val = x
+        while val * val > x {
+            val = (val + x/val) / 2
+        }
+        return val
+    }
     
     // @LC:74. Search a 2D Matrix
     // @see: Arrays

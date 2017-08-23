@@ -2060,8 +2060,13 @@ let count = dfs.numIslands([["1", "1", "1", "1", "0"],
 print(count);
 */
 
-let str = Strings()
-let simplified = str.simplifyPath("/abc/...")
-print(simplified)
+// let str = Strings()
+//let simplified = str.simplifyPath("/abc/...")
+// print(simplified)
+
+let ht = Hashtables()
+print(ht.findWords2(["Hello","Alaska","Dad","Peace"]))
+
+
 
 

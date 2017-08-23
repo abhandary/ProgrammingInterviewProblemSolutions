@@ -36,13 +36,126 @@ class Interval {
 
 class Arrays {
 
-    // @todo:581. Shortest Unsorted Continuous Subarray
     
-    // @todo:566. Reshape the Matrix
+    
+    // LC:643. Maximum Average Subarray I
+    func findMaxAverage(_ nums: [Int], _ k: Int) -> Double {
+        
+        var sum = 0
+        
+        for ix in 0..<k {
+            sum += nums[ix]
+        }
+        var maxVal = sum
+        for ix in k..<nums.count {
+            sum += nums[ix] - nums[ix - k]
+            maxVal = max(maxVal, sum)
+        }
+        return Double(maxVal) / Double(k)
+    }
+    
+    // LC:628. Maximum Product of Three Numbers
+    func maximumProduct(_ nums: [Int]) -> Int {
+        
+        guard nums.count >= 3 else { return 0; }
+        
+        var min1 = Int.max
+        var min2 = Int.max
+        var max1 = Int.min
+        var max2 = Int.min
+        var max3 = Int.min
+        for ix in 0..<nums.count {
+            if nums[ix] > max1 {
+                max3 = max2
+                max2 = max1
+                max1 = nums[ix]
+            } else if nums[ix] > max2 {
+                max3 = max2
+                max2 = nums[ix]
+            } else if nums[ix] > max3 {
+                max3 = nums[ix]
+            }
+            if nums[ix] < min1 {
+                min2 = min1
+                min1 = nums[ix]
+            } else if nums[ix] < min2 {
+                min2 = nums[ix]
+            }
+        }
+        
+        return max(max1 * max2 * max3, max1 * min1 * min2)
+    }
+    
+    // LC:605. Can Place Flowers
+    func canPlaceFlowers(_ flowerbed: [Int], _ n: Int) -> Bool {
+        guard n > 0 else { return true }
+        var placed = 0
+        var flowerbed = flowerbed
+        for ix in 0..<flowerbed.count {
+            if flowerbed[ix] == 0 {
+                let prev = (ix == 0 ? 0 : flowerbed[ix - 1])
+                let next = ((ix == flowerbed.count - 1) ? 0 : flowerbed[ix + 1] )
+                if next == 0 && prev == 0 {
+                    flowerbed[ix] = 1
+                    placed += 1
+                    if placed == n { break; }
+                }
+            }
+        }
+        return placed == n
+    }
+    
+
+    // LC:581. Shortest Unsorted Continuous Subarray
+    func findUnsortedSubarray2(_ nums: [Int]) -> Int {
+        guard nums.count > 0 else { return 0 }
+        let n = nums.count
+        var beg = -1, end = -2, maxVal = nums[0], minVal = nums[n - 1]
+        for ix in 0..<n {
+            maxVal = max(maxVal, nums[ix])
+            minVal = min(minVal, nums[n - 1 - ix])
+            if nums[ix] < maxVal { end = ix; }
+            if nums[n - 1 - ix] > minVal { beg = n - 1 - ix; }
+        }
+        return end - beg + 1
+    }
+    
+    func findUnsortedSubarray(_ nums: [Int]) -> Int {
+        let sorted = nums.sorted()
+        var start = 0
+        while start < nums.count && sorted[start] == nums[start] { start += 1 }
+        var end = nums.count - 1
+        while end > start && sorted[end] == nums[end] { end -= 1 }
+        return end - start + 1
+    }
+    
+    // LC:566. Reshape the Matrix
+    func matrixReshape(_ nums: [[Int]], _ r: Int, _ c: Int) -> [[Int]] {
+        
+        let n = nums.count, m = nums[0].count
+        if n*m != r*c { return nums; }
+        
+        var result = [[Int]](repeating:[Int](repeating: 0, count: c), count: r )
+        for ix in 0..<r*c {
+            result[ix/c][ix%c] = nums[ix/m][ix%m]
+        }
+        return result
+    }
+
     
     // @todo:562. Longest Line of Consecutive One in Matrix
     
-    // @todo:561. Array Partition I
+    // LC:561. Array Partition I
+    func arrayPairSum(_ nums: [Int]) -> Int {
+        let sorted = nums.sorted()
+        var sum = 0
+        var ix = sorted.count - 2
+        while ix >= 0 {
+            sum += sorted[ix]
+            ix -= 2
+        }
+        return sum
+    }
     
     // @todo:560. Subarray Sum Equals K
     
@@ -403,7 +516,7 @@ class Arrays {
     
     func buildTreeHelper(_ preorder : [Int], _ inorder : [Int], _ pstart : Int, _ pend : Int, _ istart : Int, _ iend : Int) -> TreeNode? {
         guard pstart <= pend && istart <= iend else { return nil; }
-        let root = TreeNode(preorder[pstart])
+        let root = TreeNode(x: preorder[pstart])
         
         if let ix = treeMap[root.val] {
             let pLeftLen = ix - istart
@@ -1307,5 +1420,29 @@ class Arrays {
         return result;
     }
     
+    // MARK: - G4G / pramp
+    func sortKMessedArrayHelper(_ arr : inout [Int], _ ix : Int, _ jx : Int) {
+        var ix = ix, jx = jx
+        if ix < 0 { ix = 0; }
+        if jx > arr.count - 1 { jx = arr.count - 1; }
+        if ix > jx { return; }
+        
+        let sortedSub = arr[ix...jx].sorted()
+        var sx = 0
+        for kx in ix...jx {
+            arr[kx] = sortedSub[sx]
+            sx += 1
+        }
+    }
+    
+    func sortKMessedArray(arr: [Int], k: Int) -> [Int] {
+        var result = arr
+        guard arr.count > 1 else { return result; }
+        
+        for ix in 0..<arr.count {
+            sortKMessedArrayHelper(&result, ix - k - 1, ix + k + 1)
+        }
+        return result
+    }
     
 }

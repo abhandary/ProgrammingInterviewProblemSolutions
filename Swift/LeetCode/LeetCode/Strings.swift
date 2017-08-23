@@ -9,7 +9,82 @@
 import Foundation
 
 class Strings {
+    
+    // LC:459. Repeated Substring Pattern
+    func repeatedSubstringPattern(_ s: String) -> Bool {
+        
+        let schars = Array(s.characters)
+        guard schars.count > 1 else { return false }
+        
+        for ix in 1...schars.count/2 {
+            if schars.count % ix == 0 {
+                let m = schars.count / ix
+                let sub = String(schars[0..<ix])
+                var ssub = ""
+                for jx in 0..<m {
+                    ssub += sub
+                }
+                if ssub == s { return true }
+            }
+        }
+        return false
+    }
+    
+    // LC:434. Number of Segments in a String
+    func countSegments(_ s: String) -> Int {
+        let trimmed = s.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmed.characters.count > 0 else { return 0; }
+        return trimmed.components(separatedBy: CharacterSet.whitespaces).count
+    }
+    
+    // LC:383. Ransom Note
+    func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
+        var htable = [Character : Int]()
+        let rchars = Array(ransomNote.characters)
+        
+        for rc in rchars {
+            htable[rc] = htable[rc] == nil ? 1 : htable[rc]! + 1
+        }
+        
+        let mchars = Array(magazine.characters)
+        for mc in mchars {
+            if let count = htable[mc] {
+                htable[mc] = count == 1 ? nil : count - 1
+            }
+            if htable.count == 0 { return true }
+        }
+        return htable.count == 0
+    }
 
+    // LC:345. Reverse Vowels of a String
+    func reverseVowels(_ s: String) -> String {
+        let vchars = Array("aeiou".characters)
+        let Vchars = Array("AEIOU".characters)
+        var schars = Array(s.characters)
+        var ix = 0, jx = schars.count - 1
+        while ix < jx {
+            while ix < jx && !vchars.contains(schars[ix]) && !Vchars.contains(schars[ix])  { ix += 1 }
+            while ix < jx && !vchars.contains(schars[jx]) && !Vchars.contains(schars[jx]) { jx -= 1 }
+            if ix < jx {
+                swap(&schars[ix], &schars[jx])
+            }
+            ix += 1; jx -= 1
+        }
+        return String(schars)
+    }
+    
+    // LC:344. Reverse String
+    func reverseString(_ s: String) -> String {
+        
+        var rchars = Array(s.characters)
+        var ix = 0, jx = rchars.count - 1
+        while ix < jx {
+            swap(&rchars[ix], &rchars[jx])
+            ix += 1; jx -= 1
+        }
+        return String(rchars)
+    }
+    
     // LC:151. Reverse Words in a String
     func reverseWords(_ s : String) -> String {
         
@@ -93,6 +168,27 @@ class Strings {
     // LC:68. Text Justification
     
     // LC:67. Add Binary
+    func addBinary(_ a: String, _ b: String) -> String {
+        let achars = Array(a.characters)
+        let bchars = Array(b.characters)
+        
+        var ax = achars.count - 1
+        var bx = bchars.count - 1
+        
+        var carry = 0
+        var result = ""
+        while ax >= 0 || bx >= 0 {
+            var sum : Int = (ax >= 0 ? Int("\(achars[ax])")! : 0)
+            sum += bx >= 0 ? Int("\(bchars[bx])")! : 0
+            sum += carry;
+            
+            result.append(String(sum % 2))
+            carry = sum / 2
+            ax -= 1; bx -= 1
+        }
+        if carry > 0 { result.append("1") }
+        return String(result.characters.reversed())
+    }
     
     // LC:65. Valid Number
     

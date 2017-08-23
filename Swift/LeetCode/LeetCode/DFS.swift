@@ -59,7 +59,7 @@ class DFS {
     
     
     
-    // LC: 257. Binary Tree Paths
+    // LC:257. Binary Tree Paths
     func binaryTreePathsHelper(_ root: TreeNode?, _ result : inout [String], _ partial : String){
         if let root = root {
             var partial = partial;
@@ -83,7 +83,7 @@ class DFS {
         return result;
     }
     
-    // LC: 200. Number of Islands
+    // LC:200. Number of Islands
     func cover(_ grid : inout [[Character]], _ ix : Int, _ jx : Int) {
         
         if ix < 0 || ix >= grid.count || jx < 0 || jx >= grid[0].count { return; }
@@ -113,7 +113,7 @@ class DFS {
         return count;
     }
     
-    // LC: 199. Binary Tree Right Side View
+    // LC:199. Binary Tree Right Side View
     func rightSideView(_ root: TreeNode?) -> [Int] {
         guard root != nil else { return []; }
         
@@ -140,7 +140,7 @@ class DFS {
         
     }
     
-    // LC: 129. Sum Root to Leaf Numbers
+    // LC:129. Sum Root to Leaf Numbers
     func sumNumbersHelper(_ root : TreeNode?, _ partial : Int, _ result : inout Int) {
         if let root = root {
             var partial = partial;
@@ -161,7 +161,96 @@ class DFS {
         return result;
     }
     
-    // 110. Balanced Binary Tree
+    
+    
+    // LC:114. Flatten Binary Tree to Linked List
+    // @todo: passed 163/225 test cases
+    func flattenHelper(_ root : TreeNode?) -> TreeNode? {
+        if let root = root {
+            if root.left == nil && root.right == nil { return root }
+            if let left = root.left {
+                let tail = flattenHelper(left)
+                let right = root.right
+                root.left = nil
+                root.right = left
+                tail?.right = right
+                return flattenHelper(right)
+            }
+            return flattenHelper(root.right)
+        }
+        return nil
+    }
+    
+    func flatten(_ root: TreeNode?) {
+        _ = flattenHelper(root)
+    }
+    
+    // LC:113. Path Sum II
+    func pathSumHelper(_ root : TreeNode?, _ sum : Int, _ partial : [Int], _ result : inout [[Int]]) {
+        
+        var partial = partial
+        var sum = sum
+        if let root = root {
+            sum -= root.val;
+            partial.append(root.val)
+            
+            if root.left == nil && root.right == nil {
+                if sum == 0 {
+                    result.append(partial)
+                }
+                return
+            }
+            
+            pathSumHelper(root.left, sum, partial, &result)
+            pathSumHelper(root.right, sum, partial, &result)
+        }
+        return;
+    }
+    
+    func pathSum(_ root: TreeNode?, _ sum: Int) -> [[Int]] {
+        var result = [[Int]]()
+        pathSumHelper(root, sum, [], &result)
+        return result
+    }
+    
+    
+    // LC:112. Path Sum
+    func hasPathSum(_ root: TreeNode?, _ sum: Int) -> Bool {
+        guard root != nil else { return false; }
+        var sum = sum
+        if let root = root {
+            sum -= root.val
+            if root.left == nil && root.right == nil && sum == 0 {
+                return true
+            }
+            return hasPathSum(root.left, sum) || hasPathSum(root.right, sum);
+        }
+        return false;
+    }
+    
+    
+    // LC:111. Minimum Depth of Binary Tree
+    func minDepth(_ root: TreeNode?) -> Int {
+        
+        if let root = root {
+            if root.left == nil && root.right == nil {
+                return 1;
+            }
+            
+            if root.left != nil && root.right != nil {
+                return 1 + min(minDepth(root.left), minDepth(root.right))
+            }
+            if root.left != nil {
+                return 1 + minDepth(root.left);
+            }
+            return 1 + minDepth(root.right);
+        }
+        
+        return 0
+    }
+    
+    
+    // LC:110. Balanced Binary Tree
     func isBalancedHelper(_ root : TreeNode?) -> (Bool, Int) {
         
         if let root = root {
@@ -185,8 +274,30 @@ class DFS {
         return result.0;      
     }
 
+    // LC:109. Convert Sorted List to Binary Search Tree
+    func toBST(_ head : ListNode?, _ tail : ListNode?) -> TreeNode? {
+        if head === tail { return nil }
+        var slow = head
+        var fast = head
+        while fast !== tail && fast?.next !== tail {
+            slow = slow?.next
+            fast = fast?.next?.next
+        }
+        let root = TreeNode(x: slow!.val)
+        root.left = toBST(head, slow)
+        root.right = toBST(slow!.next, tail)
+        return root
+    }
     
-    // 108. Convert Sorted Array to Binary Search Tree
+    func sortedListToBST(_ head: ListNode?) -> TreeNode? {
+        if let head = head {
+            return toBST(head, nil)
+        }
+        return nil
+    }
+    
+    
+    // LC:108. Convert Sorted Array to Binary Search Tree
     func sortedArrayToBSTHelper(_ nums: [Int], _ left : Int, _ right : Int) -> TreeNode? {
         if left > right { return nil; }
         let mid = left + (right - left) / 2;
@@ -202,7 +313,8 @@ class DFS {
         return   sortedArrayToBSTHelper(nums, 0, nums.count - 1);
     }
     
-    
+    // LC:105. Construct Binary Tree from Preorder and Inorder Traversal
+    // @see: Arrays
     
     // LC: 104. Maximum Depth of Binary Tree
     func maxDepth(_ root: TreeNode?) -> Int {
