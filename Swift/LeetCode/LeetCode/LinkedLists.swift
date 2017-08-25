@@ -61,6 +61,82 @@ class LinkedLists {
         return dummyHead.next
     }
     
+    // LC:23. Merge k Sorted Lists
+    /*
+    public ListNode mergeKLists(List<ListNode> lists) {
+        if (lists==null||lists.size()==0) return null;
+    
+        PriorityQueue<ListNode> queue= new PriorityQueue<ListNode>(lists.size(),new Comparator<ListNode>(){
+            @Override
+            public int compare(ListNode o1,ListNode o2){
+                if (o1.val<o2.val)
+                    return -1;
+                else if (o1.val==o2.val)
+                    return 0;
+                else
+                    return 1;
+            }
+        });
+    
+        ListNode dummy = new ListNode(0);
+        ListNode tail=dummy;
+    
+        for (ListNode node:lists)
+            if (node!=null)
+                queue.add(node);
+    
+        while (!queue.isEmpty()){
+            tail.next=queue.poll();
+            tail=tail.next;
+    
+            if (tail.next!=null)
+            queue.add(tail.next);
+        }
+        return dummy.next;
+    }
+    */
+    
+    
+    // LC:24. Swap Nodes in Pairs
+    
+    /*
+    public ListNode swapPairs(ListNode head) {
+        if ((head == null)||(head.next == null))
+            return head;
+        ListNode n = head.next;
+        head.next = swapPairs(head.next.next);
+        n.next = head;
+        return n;
+    }
+ 
+     ListNode* swapPairs(ListNode* head) {
+        ListNode **pp = &head, *a, *b;
+        while ((a = *pp) && (b = a->next)) {
+            a->next = b->next;
+            b->next = a;
+            *pp = b;
+            pp = &(a->next);
+        }
+        return head;
+     }
+     
+     public ListNode swapPairs(ListNode head) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode current = dummy;
+        while (current.next != null && current.next.next != null) {
+            ListNode first = current.next;
+            ListNode second = current.next.next;
+            first.next = second.next;
+            current.next = second;
+            current.next.next = first;
+            current = current.next.next;
+        }
+        return dummy.next;
+     }
+     
+    */
+    
     // LC:83. Remove Duplicates from Sorted List
     func deleteDuplicates(_ head: ListNode?) -> ListNode? {
         guard head != nil && head?.next != nil else { return head; }

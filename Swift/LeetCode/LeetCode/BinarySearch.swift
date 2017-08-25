@@ -52,6 +52,23 @@ class BinarySearch {
     // LC:167. Two Sum II - Input array is sorted
     // @see Arrays
     
+    // LC:268. Missing Number
+    func missingNumber(_ nums: [Int]) -> Int {
+        guard nums.count > 0 else { return 0; }
+        let nums = nums.sorted()
+        var left = 0
+        var right = nums.count
+        while left < right {
+            let mid = (left + right) / 2
+            if nums[mid] > mid {
+                right = mid
+            } else {
+                left = mid + 1
+            }
+        }
+        return left
+    }
+    
     // 287. Find the Duplicate Number
     func findDuplicate(_ nums: [Int]) -> Int {
         guard nums.count > 0 else { return -1; }
