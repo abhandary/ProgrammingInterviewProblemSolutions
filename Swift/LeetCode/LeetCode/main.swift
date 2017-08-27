@@ -2042,8 +2042,11 @@ print(count);
 //let simplified = str.simplifyPath("/abc/...")
 // print(simplified)
 
-let ht = Hashtables()
-print(ht.findWords2(["Hello","Alaska","Dad","Peace"]))
+//let ht = Hashtables()
+// print(ht.findWords2(["Hello","Alaska","Dad","Peace"]))
+
+let arrays = Arrays()
+print(arrays.maxProduct([6,-5,-1,5,1,6,-5,-1,2,4,-2,-6,0,2,1,-6,1,6,-6,-3,4,1,1,0,6,2,0,1,-4,0,-1,1,5,-1,2,4,1,1,5,0,2,-6,2,0,-2,5,4,1,5,2]));
 
 
 

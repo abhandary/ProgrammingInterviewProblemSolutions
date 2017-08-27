@@ -20,6 +20,9 @@ class BinarySearch {
     // LC:35. Search Insert Position
     // @see: Arrays
     
+    // LC:50. Pow(x, n)
+    // @see: Math
+    
     // LC:69. Sqrt(x)
     // doesn't work, but same idea
     func mySqrt(_ x: Int) -> Int {
@@ -49,8 +52,29 @@ class BinarySearch {
     // @LC:74. Search a 2D Matrix
     // @see: Arrays
     
+    // LC:81. Search in Rotated Sorted Array II
+    // @see: Arrays
+    
     // LC:167. Two Sum II - Input array is sorted
     // @see Arrays
+    
+    // LC:222. Count Complete Tree Nodes
+    // @see Tree
+    
+    // LC:230. Kth Smallest Element in a BST
+    // @see: Tree
+    
+    // LC:240. Search a 2D Matrix II
+    func searchMatrix(_ matrix: [[Int]], _ target: Int) -> Bool {
+        guard matrix.count > 0 else { return false; }
+        var row = 0, col = matrix[0].count - 1
+        while row <= matrix.count - 1 && col >= 0 {
+            if matrix[row][col] == target { return true; }
+            else if matrix[row][col] < target { row += 1; }
+            else { col -= 1; }
+        }
+        return false;
+    }
     
     // LC:268. Missing Number
     func missingNumber(_ nums: [Int]) -> Int {

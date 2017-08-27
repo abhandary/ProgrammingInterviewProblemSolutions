@@ -13,19 +13,19 @@ class Tree {
     // LC:99. Recover Binary Search Tree
     var first : TreeNode?
     var second : TreeNode?
-    var prev  : TreeNode?
+    var prevNode  : TreeNode?
     
     func traverse(_ root : TreeNode?) {
         if let root = root {
             traverse(root.left)
             
-            if first == nil && prev != nil && prev!.val >= root.val {
-                first = prev
+            if first == nil && prevNode != nil && prevNode!.val >= root.val {
+                first = prevNode
             }
             if first != nil && first!.val >= root.val {
                 second = root
             }
-            prev = root;
+            prevNode = root;
             
             traverse(root.right)
         }

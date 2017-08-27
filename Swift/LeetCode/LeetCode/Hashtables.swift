@@ -95,17 +95,16 @@ class Hashtables {
     }
     
     // general idea, doesn't work however
+
     func findWords2(_ words: [String]) -> [String] {
 
         let pat = "[qwertyuiop]*|[asdfghjkl]*|[zxcvbnm]*"
         let regex = try! NSRegularExpression(pattern: pat, options: [])
 
-        return words.filter { let matched = regex.matches(in: $0.lowercased(), options: [], range: NSRange(location: 0, length: $0.characters.count)).count
-            
-        
-        }
+        return words.filter { regex.matches(in: $0.lowercased(), options: [], range: NSRange(location: 0, length: $0.characters.count)).count > 0 }
         
     }
+
     
     // Java 1-line
     /*

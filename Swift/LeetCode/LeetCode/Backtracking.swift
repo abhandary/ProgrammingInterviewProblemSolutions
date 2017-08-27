@@ -15,23 +15,50 @@ class Backtracking {
     var hmap = [String : Bool]()
     
     // LC:90. Subsets II
-    // @todo: solves 10/19
+    // passes 10/19
+    func subsetsWithDupHelper(_ nums : [Int], _ partial : [Int], _ begin : Int, _ result : inout [[Int]]) {
+        var partial = partial
+        result.append(partial)
+        
+        for ix in begin..<nums.count {
+            if ix > 0 && nums[ix] == nums[ix - 1] { continue; }
+            partial.append(nums[ix])
+            subsetsWithDupHelper(nums, partial, ix + 1, &result)
+            partial.removeLast()
+        }
+    }
+    
     func subsetsWithDup(_ nums: [Int]) -> [[Int]] {
+        
+        let sorted = nums.sorted()
+        var result = [[Int]]()
+        subsetsWithDupHelper(sorted, [], 0, &result)
+        return result
+    }
+    
+    // passes all tests
+    func subsetsWithDup2(_ nums: [Int]) -> [[Int]] {
         let sorted = nums.sorted()
         var result = [[Int]]()
         result.append([])
-        for ix in 0..<sorted.count {
-            if ix > 0 && sorted[ix] == sorted[ix - 1] { continue; }
+        var ix = 0
+        while ix < sorted.count {
+            var count = 0
+            while count + ix < sorted.count && sorted[count + ix] == sorted[ix] { count += 1; }
             
-            let size = result.count
-            for jx in 0..<size {
-                var temp = result[jx]
-                temp.append(sorted[ix])
-                result.append(temp)
+            var previousN = result.count
+            for kx in 0..<previousN {
+                var instance = result[kx]
+                for jx in 0..<count {
+                    instance.append(sorted[ix])
+                    result.append(instance)
+                }
             }
+            ix += count
         }
         return result
     }
+    
     
     // LC:79. Word Search
     func existHelper(_ board : inout [[Character]], _ word : [Character], _ wx : Int, _ ix : Int, _ jx : Int) -> Bool {

@@ -11,7 +11,7 @@ import Foundation
 class Strings {
     
     // LC:557. Reverse Words in a String III
-    func reverse(_ schars : inout [Character], _ start : Int, _ end : Int) {
+    func reverse2(_ schars : inout [Character], _ start : Int, _ end : Int) {
         var start = start, end = end;
         while start < end {
             let temp = schars[start]
@@ -21,7 +21,7 @@ class Strings {
         }
     }
     
-    func reverseWords(_ s: String) -> String {
+    func reverseWords2(_ s: String) -> String {
         var start = 0, end = 0
         var schars = Array(s.characters)
         
@@ -453,7 +453,7 @@ class Strings {
         return false;
     }
     
-    func isValid(_ s: String) -> Bool {
+    func isValid2(_ s: String) -> Bool {
         var stack = [Character]()
         let schars = Array(s.characters)
         

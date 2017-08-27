@@ -325,7 +325,25 @@ class Arrays {
     }
 
     
-    // @todo:238. Product of Array Except Self
+    // LC:238. Product of Array Except Self
+    func productExceptSelf(_ nums: [Int]) -> [Int] {
+        var result = [Int](repeating: 1, count: nums.count)
+        guard nums.count > 0 else { return result; }
+        
+        var ix = 1
+        while ix < nums.count {
+            result[ix] = result[ix - 1] * nums[ix - 1]
+            ix += 1
+        }
+        var right = 1
+        var jx = nums.count - 1
+        while jx >= 0 {
+            result[jx] *= right
+            right *= nums[jx]
+            jx -= 1
+        }
+        return result
+    }
     
     // LC:228. Summary Ranges
     func summaryRanges(_ nums: [Int]) -> [String] {
@@ -444,9 +462,39 @@ class Arrays {
     
     // @todo:154. Find Minimum in Rotated Sorted Array II
     
-    // @todo:153. Find Minimum in Rotated Sorted Array
+    // LC:153. Find Minimum in Rotated Sorted Array
+    func findMin(_ nums: [Int]) -> Int {
+        var left = 0, right = nums.count - 1
+        
+        var candidate = 0
+        while left < right {
+            
+            if nums[left] < nums[right] { return nums[left] }
+            
+            let mid = (left + right) / 2
+            if nums[mid] >= nums[left]  {
+                left = mid + 1 // the invariant is satisfied here that nums[left] can't possibly be the smallest element.
+            } else {
+                right = mid
+            }
+        }
+        return nums[left]
+    }
     
-    // @todo:152. Maximum Product Subarray
+    // LC:152. Maximum Product Subarray
+    func maxProduct(_ nums: [Int]) -> Int {
+        guard nums.count > 0 else { return 0; }
+        var result = nums[0], localMin = nums[0], localMax = nums[0]
+        
+        for ix in 1..<nums.count {
+            let num = nums[ix]
+            let tempMax = localMax
+            localMax = max(max(num * localMin, num * localMax), num)
+            localMin = min(min(num * localMin, num * tempMax), num)
+            result = max(result, localMax)
+        }
+        return result
+    }
     
     // @todo:128. Longest Consecutive Sequence
     
@@ -454,8 +502,21 @@ class Arrays {
     
     // @todo:123. Best Time to Buy and Sell Stock III
     
-    // @todo:122. Best Time to Buy and Sell Stock II
+    // LC:122. Best Time to Buy and Sell Stock II
+    func maxProfit2(_ prices: [Int]) -> Int {
+        var profit = 0
+        var ix = 0
+        while ix < prices.count {
+            let min = prices[ix]
+            while ix < prices.count - 1 && prices[ix] <= prices[ix + 1] { ix += 1 }
+            profit += ix < prices.count ? prices[ix] - min : 0
+            ix += 1
+        }
+        return profit
+    }
 
+    
+    
     // LC:121. Best Time to Buy and Sell Stock
     func maxProfit(_ prices : [Int]) -> Int {
         guard prices.count > 0 else { return 0; }
@@ -470,7 +531,26 @@ class Arrays {
     }
     
     
-    // @todo:120. Triange
+    // LC:120. Triange
+    // @todo: compile time exceeded
+    func minimumTotal(_ triangle: [[Int]]) -> Int {
+        var triangle = triangle
+        guard triangle.count > 0 else { return 0; }
+        var minVal = triangle[0][0]
+        for rx in 1..<triangle.count {
+            var row = triangle[rx]
+            
+            row[0] += triangle[rx - 1][0]
+            row[row.count - 1] += triangle[rx - 1][triangle[rx - 1].count - 1]
+            minVal = min(row[0], row[row.count - 1])
+            for ix in 1..<row.count - 1 {
+                row[ix] += min(triangle[rx - 1][ix - 1], triangle[rx - 1][ix])
+                minVal = min(minVal, row[ix])
+            }
+            triangle[rx] = row
+        }
+        return minVal
+    }
     
     // LC:119. Pascal's Triangle II 
     func getRow(_ rowIndex: Int) -> [Int] {
@@ -592,7 +672,35 @@ class Arrays {
     
     // @todo:84. Largest Rectangle in Histogram
     
-    // @todo:81. Search in Rotated Sorted Array II
+    // LC:81. Search in Rotated Sorted Array II
+    func search(_ nums: [Int], _ target: Int) -> Bool {
+        var left = 0, right = nums.count - 1
+        while left <= right {
+            
+            let mid = (left + right) / 2
+            
+            if nums[mid] == target { return true; }
+            
+            if nums[left] == nums[mid] && nums[right] == nums[mid] { left += 1; right -= 1; }
+            else if nums[left] <= nums[mid] {
+                if target < nums[mid] && target >= nums[left] {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1
+                }
+            } else {
+                // nums[mid] <= nums[right]
+                if target > nums[mid] && target <= nums[right] {
+                    left = mid + 1
+                } else {
+                    right = mid - 1
+                }
+            }
+            
+        }
+        return false
+    }
+
     
     // LC:80. Remove Duplicates from Sorted Array II
     func removeDuplicates2(_ nums: inout [Int]) -> Int {
@@ -773,7 +881,8 @@ class Arrays {
         return result;
     }
 
-    // @todo:64. Minimum Path Sum
+    // LC:64. Minimum Path Sum
+    // @see Dynamic Programming
     
     
     // @LC:63. Unique Paths 2
@@ -1302,7 +1411,8 @@ class Arrays {
         return -1;
     }
     
-    // @todo:31. Next Permutation
+    // LC:31. Next Permutation
+    
     
 
     // LC:27. Remove Element
@@ -1347,7 +1457,8 @@ class Arrays {
     
     
 
-    // @todo:18 4. Sum
+    // LC:18. 4Sum
+    // @see: Hashtables
     
     // LC:16. 3Sum Closest
     func threeSumClosest(_ nums: [Int], _ target: Int) -> Int {
