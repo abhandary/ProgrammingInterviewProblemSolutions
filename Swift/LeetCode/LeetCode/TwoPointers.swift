@@ -143,9 +143,9 @@ class TwoPointers {
     }
     
     // LC:349. Intersection of Two Arrays
-    // @see: Hashtables
+    // @todo: sort both arrays and use two pointers
     
     // LC:350. Intersection of Two Arrays II
-    // @see: Hashtables
+    // @todo: needs a two pointer solution
 
 }

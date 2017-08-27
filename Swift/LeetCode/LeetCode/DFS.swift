@@ -21,6 +21,35 @@ import Foundation
 
 class DFS {
     
+    // LC:494. Target Sum
+    // @todo: passed 117/139 test cases
+    var numWays = 0
+    var hmap = [String : Int]()
+    
+    func findTargetSumWaysHelper(_ nums: [Int], _ pos : Int, _ sum : Int, _ S: Int) -> Int  {
+        
+        if pos == nums.count {
+            return sum == S ? 1 : 0
+        }
+        let keyStr = "\(pos)->\(sum)"
+        if let val = hmap[keyStr] {
+            return val;
+        }
+        
+        let a = findTargetSumWaysHelper(nums, pos + 1, sum - nums[pos], S)
+        let b = findTargetSumWaysHelper(nums, pos + 1, sum + nums[pos], S)
+        hmap[keyStr] = a + b
+        return a + b
+    }
+    
+    func findTargetSumWays(_ nums: [Int], _ S: Int) -> Int {
+        return findTargetSumWaysHelper(nums, 0, 0, S)
+        
+    }
+    
+    // LC:394. Decode String
+    // @see: Stacks
+    
     var cache : [[Int]]!;
     func longestIncreasingPathHelper(_ matrix: inout [[Int]], _ ix : Int, _ jx : Int)  -> Int {
         
@@ -140,6 +169,29 @@ class DFS {
         
     }
     
+    // LC:133. Clone Graph
+    // @todo: standard DFS
+    /*
+    private HashMap<Integer, UndirectedGraphNode> map = new HashMap<>();
+        public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+            return clone(node);
+        }
+    
+        private UndirectedGraphNode clone(UndirectedGraphNode node) {
+            if (node == null) return null;
+    
+            if (map.containsKey(node.label)) {
+                return map.get(node.label);
+            }
+            UndirectedGraphNode clone = new UndirectedGraphNode(node.label);
+            map.put(clone.label, clone);
+            for (UndirectedGraphNode neighbor : node.neighbors) {
+                clone.neighbors.add(clone(neighbor));
+            }
+        return clone;
+    }
+    */
+    
     // LC:129. Sum Root to Leaf Numbers
     func sumNumbersHelper(_ root : TreeNode?, _ partial : Int, _ result : inout Int) {
         if let root = root {
@@ -161,29 +213,85 @@ class DFS {
         return result;
     }
     
+    // LC:117. Populating Next Right Pointers in Each Node II
+    // @todo: passes only 10/61
+    /*
+    public void connect(TreeLinkNode root) {
+        if(root == null)
+            return;
     
+        if(root.left != null){
+            prev = root.left;
+        }
+    
+        if (prev != null) { prev.next = root.right; }
+    
+        if (root.right != null) {
+            prev = root.right;
+        }
+        if (root.next != null && prev != null) {
+            prev.next = root.next.left;
+        }
+    
+        connect(root.left);
+        connect(root.right);
+    }
+    */
+    
+    // LC:116. Populating Next Right Pointers in Each Node
+    /*
+    public void connect(TreeLinkNode root) {
+        if(root == null)
+            return;
+    
+        if(root.left != null){
+            root.left.next = root.right;
+            if(root.next != null)
+                root.right.next = root.next.left;
+        }
+    
+        connect(root.left);
+        connect(root.right);
+    }
+    */
     
     // LC:114. Flatten Binary Tree to Linked List
-    // @todo: passed 163/225 test cases
-    func flattenHelper(_ root : TreeNode?) -> TreeNode? {
-        if let root = root {
-            if root.left == nil && root.right == nil { return root }
-            if let left = root.left {
-                let tail = flattenHelper(left)
-                let right = root.right
-                root.left = nil
-                root.right = left
-                tail?.right = right
-                return flattenHelper(right)
-            }
-            return flattenHelper(root.right)
-        }
-        return nil
-    }
+    var prev : TreeNode?
     
     func flatten(_ root: TreeNode?) {
-        _ = flattenHelper(root)
+        if let root = root {
+            flatten(root.right)
+            flatten(root.left)
+            root.right = prev
+            root.left = nil
+            prev = root
+        }
     }
+    
+    
+    /*
+    void flatten(TreeNode *root) {
+        TreeNode*now = root;
+        while (now)
+        {
+            if(now->left)
+            {
+                //Find current node's prenode that links to current node's right subtree
+				TreeNode* pre = now->left;
+				while(pre->right)
+				{
+                    pre = pre->right;
+				}
+				pre->right = now->right;
+                //Use current node's left subtree to replace its right subtree(original right
+                //subtree is already linked by current node's prenode
+				now->right = now->left;
+				now->left = NULL;
+            }
+            now = now->right;
+        }
+    }
+    */
     
     // LC:113. Path Sum II
     func pathSumHelper(_ root : TreeNode?, _ sum : Int, _ partial : [Int], _ result : inout [[Int]]) {
@@ -312,6 +420,9 @@ class DFS {
         
         return   sortedArrayToBSTHelper(nums, 0, nums.count - 1);
     }
+    
+    // LC:106. Construct Binary Tree from Inorder and Postorder Traversal
+    // @see: Arrays
     
     // LC:105. Construct Binary Tree from Preorder and Inorder Traversal
     // @see: Arrays

@@ -10,6 +10,103 @@ import Foundation
 
 class Strings {
     
+    // LC:557. Reverse Words in a String III
+    func reverse(_ schars : inout [Character], _ start : Int, _ end : Int) {
+        var start = start, end = end;
+        while start < end {
+            let temp = schars[start]
+            schars[start] = schars[end]
+            schars[end] = temp
+            start += 1; end -= 1;
+        }
+    }
+    
+    func reverseWords(_ s: String) -> String {
+        var start = 0, end = 0
+        var schars = Array(s.characters)
+        
+        
+        while start < schars.count {
+            while start < schars.count && schars[start] == " " { start += 1; }
+            end = start
+            while end < schars.count && schars[end] != " " { end += 1; }
+            end = end - 1
+            reverse(&schars, start, end)
+            start = end + 1
+        }
+        return String(schars)
+    }
+    
+    // LC:551. Student Attendance Record I
+    func checkRecord(_ s: String) -> Bool {
+        var tardyCount = 0
+        var lateCount  = 0
+        let schars = Array(s.characters)
+        for ix in 0..<schars.count {
+            if schars[ix] == "A" {
+                tardyCount += 1
+                lateCount = 0
+            } else if schars[ix] == "L" {
+                lateCount += 1
+            } else {
+                lateCount = 0
+            }
+            if tardyCount >= 2 { return false; }
+            if lateCount >= 3 { return false; }
+        }
+        return true
+    }
+    
+    // LC:541. Reverse String II
+    func reverse(_ schars : inout [Character], _ start : Int, _ end : Int) {
+        
+        var start = start, end = end;
+        while start < end {
+            let temp = schars[start]
+            schars[start] = schars[end]
+            schars[end] = temp
+            start += 1; end -= 1;
+        }
+    }
+    
+    func reverseStr(_ s: String, _ k: Int) -> String {
+        var schars = Array(s.characters)
+        var start = 0
+        while start < schars.count {
+            let end = min(schars.count - 1, start + k - 1)
+            reverse(&schars, start, end)
+            start += 2 * k
+        }
+        return String(schars)
+    }
+    
+    // LC:521. Longest Uncommon Subsequence I
+    func findLUSlength(_ a: String, _ b: String) -> Int {
+        return a == b ? -1 : max(a.characters.count, b.characters.count)
+    }
+
+    
+    // LC:520. Detect Capital
+    func detectCapitalUse(_ word: String) -> Bool {
+        let lowerCase = CharacterSet.lowercaseLetters
+        let upperCase = CharacterSet.uppercaseLetters
+        var uppercaseSeen = false
+        var lowercaseSeen = false
+        var needAllUpper = false
+
+        for currentChar in word.unicodeScalars {
+            if upperCase.contains(currentChar) {
+                if lowercaseSeen == true { return false  }
+                if uppercaseSeen == true { needAllUpper = true }
+                uppercaseSeen = true
+            } else {
+                if needAllUpper == true { return false }
+                lowercaseSeen = true
+            }
+        }
+        return true
+    }
+    
     // LC:459. Repeated Substring Pattern
     func repeatedSubstringPattern(_ s: String) -> Bool {
         
@@ -85,6 +182,23 @@ class Strings {
         return String(rchars)
     }
     
+    // LC:165. Compare Version Numbers
+    func compareVersion(_ version1: String, _ version2: String) -> Int {
+        let l1 = version1.characters.split { $0 == "." }.map(String.init)
+        let l2 = version2.characters.split { $0 == "." }.map(String.init)
+        let len = max(l1.count, l2.count)
+        
+        for lx in 0..<len {
+            let v1 = lx < l1.count ? String(l1[lx]) : "0"
+            let v2 = lx < l2.count ? String(l2[lx]) : "0"
+            
+            if let v1Int = Int(v1), let v2Int = Int(v2) {
+                if (v1Int - v2Int) != 0 { return v1Int - v2Int < 0 ? -1 : 1; }
+            }
+        }
+        return 0
+    }
+    
     // LC:151. Reverse Words in a String
     func reverseWords(_ s : String) -> String {
         
@@ -137,6 +251,42 @@ class Strings {
     // LC:97. Interleaving String
     
     // LC:93. Restore IP Addresses
+    // @todo: didn't pass any tests
+    func restoreIpAddresses(_ s: String) -> [String] {
+        let schars = Array(s.characters)
+        let len = schars.count
+        var result = [String]()
+        var ix = 1
+        while ix < 4 && ix < len - 2 {
+            let s1 = String(schars[0..<ix])
+            if (!isValid(s1)) { ix += 1; continue;  }
+            var jx = ix + 1
+            while jx < ix+4 && jx < len - 1 {
+                let s2 = String(schars[ix..<jx])
+                if !isValid(s2) { jx += 1; continue; }
+                var kx = jx + 1
+                while kx < jx+4 && kx < len {
+                    let s3 = String(schars[jx..<kx])
+                    let s4 = String(schars[kx..<len])
+                    if !isValid(s3) || !isValid(s4) { kx += 1; continue; }
+                    
+                    result.append(s1 + "." + s2 + "." + s3 + "." + s4)
+                    kx += 1
+                }
+                jx += 1
+            }
+            ix += 1
+        }
+        return result
+    }
+    
+    func isValid(_ s : String) -> Bool {
+        let schars = Array(s.characters)
+        if schars.count > 3 || schars.count == 0 || (schars[0] == "0" && schars.count > 0) || Int(s)! > 255 {
+            return false;
+        }
+        return true
+    }
 
     // LC:91. Decode Ways
     

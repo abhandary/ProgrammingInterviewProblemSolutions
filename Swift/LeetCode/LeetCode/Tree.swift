@@ -10,6 +10,112 @@ import Foundation
 
 class Tree {
     
+    // LC:99. Recover Binary Search Tree
+    var first : TreeNode?
+    var second : TreeNode?
+    var prev  : TreeNode?
+    
+    func traverse(_ root : TreeNode?) {
+        if let root = root {
+            traverse(root.left)
+            
+            if first == nil && prev != nil && prev!.val >= root.val {
+                first = prev
+            }
+            if first != nil && first!.val >= root.val {
+                second = root
+            }
+            prev = root;
+            
+            traverse(root.right)
+        }
+    }
+    
+    func recoverTree(_ root: TreeNode?) {
+        traverse(root);
+        if var first = first, var second = second {
+            let temp = first.val;
+            first.val = second.val;
+            second.val = temp
+        }
+    }
+    
+    // LC:95. Unique Binary Search Trees II
+    func genTrees(_ start : Int, _ end : Int) -> [TreeNode?] {
+        var result = [TreeNode?]()
+        if start > end {
+            return result;
+        }
+        if start == end {
+            let temp = TreeNode(start);
+            result.append(temp)
+            return result;
+        }
+        
+        for ix in start...end {
+            let left = genTrees(start, ix - 1)
+            let right = genTrees(ix + 1, end)
+            
+            if left.count != 0 && right.count != 0 {
+                
+                for lnode in left {
+                    for rnode in right {
+                        let root = TreeNode(ix)
+                        root.left = lnode
+                        root.right = rnode
+                        result.append(root)
+                    }
+                }
+            } else if left.count == 0 && right.count != 0 {
+                for rnode in right {
+                    let root = TreeNode(ix)
+                    root.right = rnode
+                    result.append(root)
+                }
+            } else if right.count == 0 && left.count != 0 {
+                for lnode in left {
+                    let root = TreeNode(ix)
+                    root.left = lnode
+                    result.append(root)
+                }
+            }
+            else {
+                let root = TreeNode(ix)
+                result.append(root)
+            }
+        }
+        return result
+    }
+    
+    func generateTrees(_ n: Int) -> [TreeNode?] {
+        return genTrees(1, n);
+    }
+    
+    // LC:96. Unique Binary Search Trees
+    // Hard
+    // G(n): the number of unique BST for a sequence of length n.
+    // F(i, n), 1 <= i <= n: the number of unique BST, where the number i is the root of BST, and the sequence ranges from 1 to n.
+    // G(n) = F(1, n) + F(2, n) + ... + F(n, n). 
+    // G(0)=1, G(1)=1. 
+    // F(i, n) = G(i-1) * G(n-i)	1 <= i <= n 
+    // combining the two:
+    // G(n) = G(0) * G(n-1) + G(1) * G(n-2) + … + G(n-1) * G(0)
+    // https://discuss.leetcode.com/topic/8398/dp-solution-in-6-lines-with-explanation-f-i-n-g-i-1-g-n-i
+    func numTrees(_ n: Int) -> Int {
+        var G = [Int](repeating: 0, count: n + 1);
+        G[0] = 1; G[1] = 1;
+        if n >= 2 {
+            
+            
+            for ix in 2...n {
+                for jx in 1...ix {
+                    G[ix] += G[jx - 1] * G[ix - jx]
+                }
+            }
+        }
+        return G[n]
+    }
+    
     // LC: 98. Validate Binary Search Tree
     // @see: DFS
     
@@ -35,9 +141,51 @@ class Tree {
         return result
     }
     
+    // LC:103. Binary Tree Zigzag Level Order Traversal
+    func zigzagLevelOrder(_ root: TreeNode?) -> [[Int]] {
+        var result = [[Int]]()
+        if let root = root {
+            var queue = [TreeNode]()
+            var level = [Int]()
+            var isOdd = true
+            queue.append(root)
+            var numInLevel = 1
+            
+            while queue.count > 0 {
+                let first = queue.removeFirst()
+                numInLevel -= 1
+                level.append(first.val)
+                if let left = first.left {
+                    queue.append(left)
+                }
+                if let right = first.right {
+                    queue.append(right)
+                }
+                if numInLevel == 0 {
+                    numInLevel = queue.count
+                    if isOdd == false {
+                        isOdd = true
+                        result.append(level.reversed())
+                    } else {
+                        isOdd = false
+                        result.append(level)
+                    }
+                    level = [Int]()
+                }
+            }
+        }
+        return result
+    }
+    
     // LC: 104. Maximum Depth of Binary Tree
     // @see: DFS
 
+    // LC:105. Construct Binary Tree from Preorder and Inorder Traversal
+    // @see: Arrays
+    
+    // LC:106. Construct Binary Tree from Inorder and Postorder Traversal
+    // @see: Arrays
+    
     // LC:107. Binary Tree Level Order Traversal II
     // @see easy
     
@@ -109,11 +257,88 @@ class Tree {
     }
     */
     
+    // LC:124. Binary Tree Maximum Path Sum
+    // @todo: didn't pass all test cases
+    var maxSoFar = Int.min
+    
+    func maxPathSumHelper(_ root: TreeNode?) -> Int {
+        if let root = root {
+            let left = maxPathSum(root.left)
+            let right = maxPathSum(root.right)
+            maxSoFar = max(left + right + root.val, maxSoFar)
+            return max(left, right) + root.val
+        }
+        return 0;
+    }
+    
+    func maxPathSum(_ root: TreeNode?) -> Int {
+        maxPathSumHelper(root);
+        return maxSoFar
+    }
+    
     // LC:129. Sum Root to Leaf Numbers
     // @see DFS
     
+    // LC:144. Binary Tree Preorder Traversal
+    // @see Stacks
+    
+    // LC:173. Binary Search Tree Iterator
+    /*
+     class BSTIterator {
+            stack<TreeNode*> st;
+        public:
+     
+            void save(TreeNode* root) {
+                while (root) {
+                    st.push(root);
+                    root = root->left;
+                }
+            }
+     
+            BSTIterator(TreeNode *root) {
+                save(root);
+            }
+     
+            /** @return whether we have a next smallest number */
+            bool hasNext() {
+                return st.size() > 0;
+            }
+     
+            /** @return the next smallest number */
+            int next() {
+                TreeNode* top = st.top();
+                st.pop();
+                save(top->right);
+                return top->val;
+            }
+     };
+     */
+
+    
     // LC:199. Binary Tree Right Side View
     // @see BFS
+    
+    
+    // LC:222. Count Complete Tree Nodes
+    /*
+    int countNodes(TreeNode* root) {
+    
+        if (!root) return 0;
+    
+        int hl=0, hr=0;
+    
+        TreeNode *l=root, *r=root;
+    
+        while (l) {hl++;l=l->left;}
+    
+        while (r) {hr++;r=r->right;}
+    
+        if (hl==hr) return (1 << hl) - 1;
+    
+        return 1+countNodes(root->left)+countNodes(root->right);
+    
+    }
+    */
     
     // LC:226. Invert Binary Tree
     func invertTree(_ root: TreeNode?) -> TreeNode? {
@@ -127,6 +352,16 @@ class Tree {
         }
         return nil
     }
+    
+    // LC:230. Kth Smallest Element in a BST
+    /*
+    int kthSmallest(TreeNode* root, int& k) {
+        if (root) {
+            int x = kthSmallest(root->left, k);
+            return !k ? x : !--k ? root->val : kthSmallest(root->right, k);
+        }
+    }
+    */
     
     // LC:235. Lowest Common Ancestor of a Binary Search Tree
     /*
@@ -262,6 +497,13 @@ class Tree {
             traverse(root.right, &result)
         }
     }
+    
+    // LC:513. Find Bottom Left Tree Value
+    // @see: BFS
+    
+    // LC:515. Find Largest Value in Each Tree Row
+    // @see: BFS
+    
     
     // LC:538. Convert BST to Greater Tree
     var sum = 0

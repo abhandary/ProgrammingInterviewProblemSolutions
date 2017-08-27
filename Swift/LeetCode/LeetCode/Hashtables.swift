@@ -18,6 +18,26 @@ class RandomListNode {
 import Foundation
 
 class Hashtables {
+    
+    // LC:645. Set Mismatch
+    func findErrorNums(_ nums: [Int]) -> [Int] {
+        
+        var result = [Int]()
+        var nums = nums
+        for num in nums {
+            if nums[abs(num - 1)] < 0 {
+                result.append(abs(num))
+            } else {
+                nums[abs(num - 1)] *= -1
+            }
+        }
+        for ix in 0..<nums.count {
+            if nums[ix] > 0 {
+                result.append(ix + 1)
+            }
+        }
+        return result
+    }
 
     // LC:632. Smallest Range
     

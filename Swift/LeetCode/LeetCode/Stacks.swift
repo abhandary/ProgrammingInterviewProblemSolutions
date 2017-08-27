@@ -13,6 +13,9 @@ class Stacks {
     // LC:20. Valid Parentheses
     // @see: Strings
     
+    // LC:71. Simplify Path
+    // @see: Strings
+    
     // LC: 144. Binary Tree Preorder Traversal
     func preorderTraversal(_ root: TreeNode?) -> [Int] {
         var stack = [TreeNode]()
@@ -32,6 +35,51 @@ class Stacks {
             }
         }
         return result
+    }
+    
+    // LC:145. Binary Tree Postorder Traversal
+    func postorderTraversal(_ root: TreeNode?) -> [Int] {
+        var stack = [TreeNode]()
+        var result = [Int]()
+        guard root != nil else { return result; }
+        
+        stack.append(root!)
+        while stack.count > 0 {
+            if let last = stack.popLast() {
+                result.append(last.val)
+                if let left = last.left {
+                    stack.append(left)
+                }
+                if let right = last.right {
+                    stack.append(right)
+                }
+                
+            }
+        }
+        return result.reversed()
+    }
+    
+    // LC:150. Evaluate Reverse Polish Notation
+    func evalRPN(_ tokens: [String]) -> Int {
+        var stack = [Int]()
+        for token in tokens {
+            if token == "+" || token == "-" || token == "/" || token == "*" {
+                let second = stack.removeLast()
+                let first = stack.removeLast()
+                switch token {
+                case "+": stack.append(first + second)
+                case "-": stack.append(first - second)
+                case "*": stack.append(first * second)
+                case "/": stack.append(first / second)
+                default: break;
+                }
+            } else {
+                if let val = Int(token) {
+                    stack.append(val)
+                }
+            }
+        }
+        return stack.removeLast()
     }
     
     // LC:155. Min Stack
@@ -77,13 +125,53 @@ class Stacks {
     // LC:232. Implement Queue using Stacks
     // @todo: wing it    
     
+    // LC:331. Verify Preorder Serialization of a Binary Tree
+    func isValidSerialization(_ preorder: String) -> Bool {
+        let nodes = preorder.characters.split{$0 == ","}.map(String.init)
+        var diff = 1
+        for node in nodes {
+            diff -= 1
+            if diff < 0 { return false; }
+            if node != "#" { diff += 2; }
+        }
+        return diff == 0
+    }
+
+    /*
+    public boolean isValidSerialization(String preorder) {
+        // using a stack, scan left to right
+        // case 1: we see a number, just push it to the stack
+        // case 2: we see #, check if the top of stack is also #
+        // if so, pop #, pop the number in a while loop, until top of stack is not #
+        // if not, push it to stack
+        // in the end, check if stack size is 1, and stack top is #
+        if (preorder == null) {
+            return false;
+        }
+        Stack<String> st = new Stack<>();
+        String[] strs = preorder.split(",");
+        for (int pos = 0; pos < strs.length; pos++) {
+            String curr = strs[pos];
+            while (curr.equals("#") && !st.isEmpty() && st.peek().equals(curr)) {
+                st.pop();
+                if (st.isEmpty()) {
+                    return false;
+                }
+                st.pop();
+            }
+            st.push(curr);
+        }
+        return st.size() == 1 && st.peek().equals("#");
+    }
+    */
+    
     // LC:341. Flatten Nested List Iterator
     /*
     class NestedIterator {
         public:
-        
+     
         stack<NestedInteger> nstack;
-        
+     
         NestedIterator(vector<NestedInteger> &nestedList) {
             for (int ix = nestedList.size() - 1; ix >= 0 ; ix--) {
                 nstack.push(nestedList[ix]);
@@ -113,6 +201,36 @@ class Stacks {
         }
     };
     */
+    
+    // LC:394. Decode String
+    func decodeStringHelper(_ schars : [Character], _ pos : inout Int) -> String {
+        
+        var result = ""
+        let digits = 0...9
+        while pos < schars.count && schars[pos] != "]" {
+            var num = 0
+            if let val = Int(String(schars[pos])) {
+                // nums
+                while let val = Int(String(schars[pos])), digits.contains(val) {
+                    num = num * 10 + val; pos += 1;
+                }
+                
+                pos += 1 // [
+                let decoded = decodeStringHelper(schars, &pos)
+                pos += 1 // ]
+                for ix in 0..<num { result += decoded; }
+            } else {
+                result += String(schars[pos])
+                pos += 1
+            }
+        }
+        return result;
+    }
+    
+    func decodeString(_ s: String) -> String {
+        var pos = 0
+        return decodeStringHelper(Array(s.characters), &pos)
+    }
     
     // LC: 496. Next Greater Element I
     // https://discuss.leetcode.com/topic/77916/java-10-lines-linear-time-complexity-o-n-with-explanation/2

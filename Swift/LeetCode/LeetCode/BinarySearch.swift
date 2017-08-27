@@ -89,4 +89,123 @@ class BinarySearch {
         }
         return l
     }
+    
+    // LC:349. Intersection of Two Arrays
+    //
+    /*
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Set<Integer> set = new HashSet<>();
+        Arrays.sort(nums2);
+        for (Integer num : nums1) {
+            if (binarySearch(nums2, num)) {
+                set.add(num);
+            }
+        }
+        int i = 0;
+        int[] result = new int[set.size()];
+        for (Integer num : set) {
+            result[i++] = num;
+        }
+        return result;
+    }
+    
+    public boolean binarySearch(int[] nums, int target) {
+        int low = 0;
+        int high = nums.length - 1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (nums[mid] == target) {
+            return true;
+        }
+        if (nums[mid] > target) {
+            high = mid - 1;
+        } else {
+            low = mid + 1;
+        }
+        }
+        return false;
+    }
+    */
+    
+    // LC:367. Valid Perfect Square
+    // @see: Math
+    
+    // LC:374. Guess Number Higher or Lower
+    func guess(_ num : Int) -> Int {
+        return 0;
+    }
+    
+    func guessNumber(_ num : Int) -> Int {
+        
+        var low = 0;
+        var high = 0;
+        var mid = num >> 1;
+        var nextGuess = 0;
+        
+        while guess(mid) != 0 {
+            nextGuess = guess(mid)
+            if nextGuess < 0 {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+            mid = low + (high - low) / 2;
+        }
+        return mid;
+    }
+
+    // LC:441. Arranging Coins
+    func arrangeCoins(_ n: Int) -> Int {
+        
+        var left = 0, right = n;
+        var candidate = 0;
+        while left <= right {
+            let mid = Double((left + right) / 2);
+            // IMP to work with Doubles here to satisfy the equation correctly
+            if (mid * mid)  * 0.5 + mid * 0.5 <= Double(n) {
+                candidate = Int(mid)
+                left = Int(mid) + 1
+            } else {
+                right = Int(mid) - 1
+            }
+        }
+        return candidate
+    }
+    
+    // LC:475. Heaters
+    func findRadius(_ houses: [Int], _ heaters: [Int]) -> Int {
+        let shouses = houses.sorted()
+        let sheaters = heaters.sorted()
+        var maxVal = Int.min
+        var currentVal = Int.min
+        for ix in 0..<shouses.count {
+            var jx = 0
+            while jx < sheaters.count - 1 && abs(sheaters[jx] - shouses[ix]) >= abs(sheaters[jx + 1] - shouses[ix])  {
+                jx += 1
+            }
+            maxVal = max(maxVal, abs(sheaters[jx] - shouses[ix]))
+        }
+        return maxVal
+    }
+    
+    /*
+    public int findRadius(int[] houses, int[] heaters) {
+        Arrays.sort(heaters);
+        int result = Integer.MIN_VALUE;
+    
+        for (int house : houses) {
+            int index = Arrays.binarySearch(heaters, house);
+            if (index < 0) {
+                index = -(index + 1);
+            }
+            int dist1 = index - 1 >= 0 ? house - heaters[index - 1] : Integer.MAX_VALUE;
+            int dist2 = index < heaters.length ? heaters[index] - house : Integer.MAX_VALUE;
+    
+            result = Math.max(result, Math.min(dist1, dist2));
+        }
+    
+        return result;
+    }
+    */
+    
 }

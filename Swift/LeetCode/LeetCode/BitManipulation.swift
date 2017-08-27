@@ -56,6 +56,23 @@ class Bits {
         return count
     }
     
+    // LC:397. Integer Replacement
+    
+    var hmap = [Int : Int]()
+    
+    func integerReplacement(_ n: Int) -> Int {
+        if n == 1 { return 0; }
+        
+        if let x = hmap[n] { return x; }
+        
+        var val = 0
+        if n % 2 == 0 { val = integerReplacement(n / 2) + 1; }
+        else { val = min(integerReplacement(n + 1), integerReplacement(n - 1))  + 1; }
+        
+        hmap[n] = val;
+        return val;
+    }
+    
     // LC:389. Find the Difference
     func findTheDifference(_ s: String, _ t: String) -> Character {
         
@@ -100,6 +117,16 @@ class Bits {
     // LC:342. Power of Four
     func isPowerOfFour(_ num: Int) -> Bool {
         return num > 0 && (num & (num - 1) == 0) && (num & 0x55555555 != 0)
+    }
+    
+    // LC:338. Counting Bits
+    func countBits(_ num: Int) -> [Int] {
+        var result = [Int](repeating: 0, count: num + 1)
+        if num < 1 { return result; }
+        for ix in 1...num {
+            result[ix] = result[ix >> 1] + (ix & 1)
+        }
+        return result;
     }
     
     // LC:268. Missing Number

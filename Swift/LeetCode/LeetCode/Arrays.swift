@@ -509,13 +509,35 @@ class Arrays {
         
     }
     
-    // @todo:106. Construct Binary Tree from Inorder and Postorder Traversal
+    // @LC:106. Construct Binary Tree from Inorder and Postorder Traversal
+    func buildTreeHelper(_ postorder : [Int], _ inorder : [Int], _ pstart : Int, _ pend : Int, _ istart : Int, _ iend : Int) -> TreeNode? {
+        guard pstart <= pend && istart <= iend else { return nil; }
+        
+        let root = TreeNode(postorder[pend])
+        
+        if let ix = treeMap[root.val] {
+            let pLeftLen = ix - istart
+            let pRightLen = iend - ix
+            root.left = buildTreeHelper(postorder, inorder, pstart, pstart + pLeftLen - 1, istart, ix - 1)
+            root.right = buildTreeHelper(postorder, inorder, pstart + pLeftLen, pend - 1, ix + 1, iend)
+        }
+        return root
+    }
+    
+    
+    func buildTree(_ inorder: [Int], _ postorder: [Int]) -> TreeNode? {
+        guard postorder.count > 0 else { return nil; }
+        for (ix, val) in inorder.enumerated() {
+            treeMap[val] = ix
+        }
+        return buildTreeHelper(postorder, inorder, 0, postorder.count - 1, 0, inorder.count - 1)
+    }
     
     // @LC:105. Construct Binary Tree from Preorder and Inorder Traversal
     // Time: O(n), Space: O(h)
     var treeMap = [Int : Int]()
     
-    func buildTreeHelper(_ preorder : [Int], _ inorder : [Int], _ pstart : Int, _ pend : Int, _ istart : Int, _ iend : Int) -> TreeNode? {
+    func buildTreeHelper2(_ preorder : [Int], _ inorder : [Int], _ pstart : Int, _ pend : Int, _ istart : Int, _ iend : Int) -> TreeNode? {
         guard pstart <= pend && istart <= iend else { return nil; }
         let root = TreeNode(x: preorder[pstart])
         
@@ -528,7 +550,7 @@ class Arrays {
         return root
     }
     
-    func buildTree(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+    func buildTree2(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
         guard preorder.count > 0 && inorder.count > 0 else { return nil; }
         
         for (ix, val) in inorder.enumerated() {

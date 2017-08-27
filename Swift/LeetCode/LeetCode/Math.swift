@@ -13,6 +13,15 @@ class Math {
     // LC:628. Maximum Product of Three Numbers
     // @see Arrays
     
+    // LC:441. Arranging Coins
+    // @see Binary Search
+    // https://discuss.leetcode.com/topic/65593/java-clean-code-with-explanations-and-running-time-2-solutions
+    /*
+    public int arrangeCoins(int n) {
+        return (int) ((Math.sqrt(1 + 8.0 * n) - 1) / 2);
+    }
+    */
+    
     // LC:415. Add Strings
     func addStrings(_ num1: String, _ num2: String) -> String {
         let n1 = Array(num1.characters)
@@ -46,7 +55,7 @@ class Math {
         var left = 0
         var right = num
         while left <= right {
-            let mid = (left + right) / 2
+            let mid = right - ((right - left) / 2)
             if mid * mid == num { return true }
             if mid * mid < num { left = mid + 1 }
             else { right = mid - 1; }
@@ -195,6 +204,15 @@ class Math {
         }
         return result;
     }
+    
+    // LC:50. Pow(x, n)
+    /*
+    public double myPow(double x, int n) {
+        if(n == 0) return 1.;
+        double res = myPow(x, n / 2);
+        return n % 2 == 0 ? res * res : n < 0 ? res * res * (1 / x) : res * res * x;
+    }
+    */
     
     // LC:29. Divide Two Integers
     // @todo: passed 740 / 988

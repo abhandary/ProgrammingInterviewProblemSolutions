@@ -72,6 +72,7 @@ class TreeNode {
     var left : TreeNode?;
     var right : TreeNode?;
     init(x : Int) { val = x }
+    init(_ x : Int) { val = x }
 };
 
 class Solution {
@@ -656,29 +657,6 @@ class Solution {
     }
     
     
-    // MARK:- 374. Guess Number Higher or Lower
-    func guess(_ num : Int) -> Int {
-        return 0;
-    }
-    
-    func guessNumber(_ num : Int) -> Int {
-        
-        var low = 0;
-        var high = 0;
-        var mid = num >> 1;
-        var nextGuess = 0;
-        
-        while guess(mid) != 0 {
-            nextGuess = guess(mid)
-            if nextGuess < 0 {
-                high = mid - 1;
-            } else {
-                low = mid + 1;
-            }
-            mid = low + (high - low) / 2;
-        }
-        return mid;
-    }
     
 
     // MARK:- 373. Find K Pairs with Smallest Sums
