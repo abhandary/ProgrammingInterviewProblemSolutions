@@ -142,6 +142,27 @@ class Arrays {
         return result
     }
 
+    // LC:565. Array Nesting
+    // The idea is to, start from every number, find circles in those index-pointer-chains, every time 
+    // you find a set (a circle) mark every number as visited (-1) so that next time you won't step on it again.
+    func arrayNesting(_ nums: [Int]) -> Int {
+        
+        var maxsize = 0
+        var nums = nums
+        for ix in 0..<nums.count {
+            var size = 0
+            var kx = ix
+            while kx >= 0 && nums[kx] >= 0 {
+                let ak = nums[kx]
+                nums[kx] = -1
+                kx = ak
+                size += 1
+            }
+            maxsize = max(maxsize, size)
+        }
+        return maxsize
+    }
+    
     
     // @todo:562. Longest Line of Consecutive One in Matrix
     
@@ -157,13 +178,49 @@ class Arrays {
         return sum
     }
     
-    // @todo:560. Subarray Sum Equals K
+    // LC:560. Subarray Sum Equals K
+    // Solution 1. Brute force. We just need two loops (i, j) and test if SUM[i, j] = k. Time complexity O(n^2), Space complexity O(1). I bet this solution will TLE.
+    // Solution 2. From solution 1, we know the key to solve this problem is SUM[i, j]. So if we know SUM[0, i - 1] and SUM[0, j], then we can easily get SUM[i, j]. To achieve this, we just need to go through the array, calculate the current sum and save number of all seen PreSum to a HashMap. Time complexity O(n), Space complexity O(n).
+    func subarraySum(_ nums: [Int], _ k: Int) -> Int {
+        var sum = 0
+        var hmap = [Int : Int]()
+        hmap[0] = 1
+        var result = 0
+        for num in nums {
+            sum += num
+            if let val = hmap[sum - k] {
+                result += val
+            }
+            hmap[sum] = hmap[sum] == nil ? 1 : hmap[sum]! + 1
+        }
+        return result
+    }
     
     // @todo:548. Split Array with Equal Sum
     
     // @todo:533. Lonely Pixel II
 
-    // @todo:532. K-diff Pairs in an Array
+    // LC:532. K-diff Pairs in an Array
+    func findPairs(_ nums: [Int], _ k: Int) -> Int {
+        var htable = [Int : Int]()
+        for (ix, num) in nums.enumerated() {
+            htable[num] = htable[num] == nil ? 1 : htable[num]! + 1
+        }
+        
+        var count = 0
+        for key in htable.keys {
+            if k == 0 {
+                if htable[key]! >= 2 {
+                    count += 1
+                }
+            } else {
+                if let _ = htable[key + k] {
+                    count += 1
+                }
+            }
+        }
+        return count
+    }
     
     // @todo:531. Lonely Pixel I
     
@@ -261,7 +318,31 @@ class Arrays {
     
     // @todo:380. Insert Delete GetRandom O(1)
     
-    // @todo:289. Game of Life.
+    // LC:289. Game of Life.
+    func gameOfLife(_ board: inout [[Int]]) {
+        
+        guard board.count > 0 else { return; }
+        
+        let m = board.count, n = board[0].count
+        for ix in 0..<m {
+            for jx in 0..<n {
+                var count = 0
+                for I in max(ix - 1, 0)...min(ix + 1, m - 1) {
+                    for J in max(jx - 1, 0)...min(jx + 1, n - 1) {
+                        count += board[I][J] & 1 != 0 ? 1 : 0
+                    }
+                }
+                if count == 3 || count - board[ix][jx] == 3 {
+                    board[ix][jx] |= 2
+                }
+            }
+        }
+        for ix in 0..<m {
+            for jx in 0..<n {
+                board[ix][jx] >>= 1
+            }
+        }
+    }
     
     // LC:287. Find the Duplicate Number
     // @see BinarySearch, TwoPointers
@@ -399,9 +480,57 @@ class Arrays {
         return false;
     }
     
-    // @todo:216. Combination Sum III
+    // LC:216. Combination Sum III
+    // @todo: passes 8/18
+    func combinationSum3Helper(_ k : Int, _ n : Int, _ sum : Int, _ start : Int,
+                               _ partial : [Int], _ result : inout [[Int]]) {
+        
+        if partial.count > k {
+            return
+        }
+        if partial.count == k {
+            if sum == n {
+                result.append(partial)
+            }
+            return
+        }
+        var partial = partial
+        for val in start...9 {
+            
+            partial.append(val)
+            combinationSum3Helper(k, n, sum + val, start + 1, partial, &result)
+            partial.removeLast()
+        }
+    }
     
-    // @todo:209. Minimum Size Subarray Sum
+    func combinationSum3(_ k: Int, _ n: Int) -> [[Int]] {
+        
+        
+        var result = [[Int]]()
+        combinationSum3Helper(k, n, 0, 1, [], &result)
+        return result;
+    }
+    
+    // LC:209. Minimum Size Subarray Sum
+    func minSubArrayLen(_ s: Int, _ nums: [Int]) -> Int {
+        guard nums.count > 0 else { return 0; }
+        
+        var sum = 0
+        var jx = 0
+        var minVal = Int.max
+        var ix = 0
+        
+        while jx < nums.count {
+            sum += nums[jx]
+            jx += 1
+            while sum >= s {
+                minVal = min(minVal, jx - ix)
+                sum -= nums[ix];
+                ix += 1
+            }
+        }
+        return minVal == Int.max ? 0 : minVal
+    }
     
     // LC:189. Rotate Array
     func reverse(_ nums: inout[Int], _ left : Int, _ right : Int) {
@@ -458,7 +587,29 @@ class Arrays {
         return [-1, -1]
     }
     
-    // @todo:162. Find Peak Element
+    // LC:162. Find Peak Element
+    func findPeakElement(_ nums: [Int]) -> Int {
+        var peakIndex = 0
+        for ix in 0..<nums.count {
+            if ix == 0 {
+                // head
+                if ix < nums.count - 1 && nums[ix] > nums[ix + 1] {
+                    peakIndex = ix;
+                }
+            } else if ix == nums.count - 1{
+                // tail
+                if ix - 1 >= 0 && nums[ix] > nums[ix - 1] {
+                    peakIndex = ix
+                }
+            } else {
+                // everything else
+                if nums[ix] > nums[ix - 1] && nums[ix] > nums[ix + 1] {
+                    peakIndex = ix
+                }
+            }
+        }
+        return peakIndex
+    }
     
     // @todo:154. Find Minimum in Rotated Sorted Array II
     

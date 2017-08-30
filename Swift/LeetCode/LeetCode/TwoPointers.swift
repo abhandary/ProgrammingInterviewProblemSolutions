@@ -23,12 +23,9 @@ class TwoPointers {
     // LC:18. 4Sum
     // @see Hashtables
     
-    // LC:26. Remove Duplicates from Sorted Array
-    // @see Arrays
-    
     // LC:19. Remove Nth Node From End of List
     func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
-        var dummyHead = ListNode(0);
+        let dummyHead = ListNode(0);
         dummyHead.next = head;
         var itr : ListNode? = dummyHead;
         var ix = 0;
@@ -45,11 +42,83 @@ class TwoPointers {
         return dummyHead.next;
     }
 
+    // LC:26. Remove Duplicates from Sorted Array
+    // @see Arrays
+
+    
     // LC:27. Remove Element
     // @see: Arrays
     
+    // LC:28. Implement strStr()
+    func strStr(_ haystack: String, _ needle: String) -> Int {
+        guard haystack.characters.count >= needle.characters.count else { return -1 }
+        
+        let hchars = Array(haystack.characters)
+        let nchars = Array(needle.characters)
+        if nchars.count == 0 { return 0; }
+        for ix in 0..<hchars.count {
+            var jx = 0
+            while jx < nchars.count && ix + jx < hchars.count {
+                if hchars[ix + jx] != nchars[jx] { break; }
+                jx += 1
+            }
+            if jx == nchars.count { return ix;  }
+        }
+        return -1;
+    }
+    
+    // Rabin-Karp matcher, something along these lines
+    func lookup(_ x : Character) -> Int {
+        return 0
+    }
+    
+    func strStr2(_ haystack: String, _ needle: String) -> Int {
+        guard haystack.characters.count >= needle.characters.count else { return -1 }
+        
+        let hchars = Array(haystack.characters)
+        let nchars = Array(needle.characters)
+        if nchars.count == 0 { return 0; }
+        
+        var nhash = 0
+        var hhash = 0
+        var ix = 0
+        
+        let kLimit = 16357
+        
+        var baseMult = 1
+        while ix < nchars.count {
+            baseMult *=  (ix == 0 ? 1 : 101)
+            nhash = (nhash * 101 + lookup(nchars[ix])) % kLimit
+            hhash = (hhash * 101 + lookup(hchars[ix])) % kLimit
+            ix += 1
+        }
+        if nhash == hhash && String(nchars) == String(hchars[0..<nchars.count]) { return 0 }
+        while ix < hchars.count - nchars.count {
+            hhash -= (baseMult * lookup(hchars[ix - hchars.count])) * 101 + lookup(nchars[ix])
+            if nhash == hhash && String(nchars) == String(hchars[ix..<nchars.count+ix]) { return ix }
+            ix += 1
+        }
+        return -1
+    }
+    
     // LC:75. Sort Colors
     // @see Arrays
+    
+    // LC:80. Remove Duplicates from Sorted Array II
+    func removeDuplicates(_ nums: inout [Int]) -> Int {
+        guard nums.count > 0 else { return 0; }
+        if nums.count == 1 { return 1; }
+        
+        var wx = 0;
+        for index in 0..<nums.count {
+            if index + 2 < nums.count && nums[index] == nums[index + 2] { continue; }
+            nums[wx] = nums[index]
+            wx += 1;
+        }
+        
+        return wx;
+    }
+    
     
     // LC:88. Merge Sorted Array
     // @see Arrays

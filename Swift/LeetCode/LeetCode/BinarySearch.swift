@@ -93,6 +93,24 @@ class BinarySearch {
         return left
     }
     
+    // LC:278. First Bad Version
+    /*
+    int firstBadVersion(int n) {
+        long long left = 1, right = n;
+        int minBadVersion = 0;
+        while (left <= right) {
+            long long mid = (left + right) / 2;
+            if (true == isBadVersion(mid)) {
+                minBadVersion = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return minBadVersion;
+    }
+    */
+    
     // 287. Find the Duplicate Number
     func findDuplicate(_ nums: [Int]) -> Int {
         guard nums.count > 0 else { return -1; }

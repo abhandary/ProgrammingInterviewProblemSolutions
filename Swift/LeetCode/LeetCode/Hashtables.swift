@@ -59,12 +59,74 @@ class Hashtables {
     }
     
     // LC:554. Brick Wall
+    // @todo: passes 13/85
+    func leastBricks(_ wall: [[Int]]) -> Int {
+        var hmap = [Int : Int]()
+        
+        var maxCount = 0
+        for list in wall {
+            var len = 0
+            for brick in list {
+                len += brick
+                hmap[len] = hmap[len] == nil ? 1 : hmap[len]! + 1
+                maxCount = max(hmap[len]!, maxCount)
+            }
+        }
+        return wall.count - maxCount
+    }
 
     // LC:535. Encode and Decode TinyURL
     
     // LC:525. Contiguous Array
+    // https://discuss.leetcode.com/topic/80056/python-o-n-solution-with-visual-explanation
+    func findMaxLength(_ nums: [Int]) -> Int {
+        var nums = nums
+        for ix in 0..<nums.count {
+            nums[ix] = nums[ix] == 0 ? -1 : nums[ix]
+        }
+        var maxVal = 0
+        var hmap = [Int: Int]()
+        hmap[0] = -1
+        var sum = 0
+        for ix in 0..<nums.count {
+            sum += nums[ix]
+            if let stored = hmap[sum] {
+                maxVal = max(maxVal, ix - stored)
+            } else {
+                hmap[sum] = ix
+            }
+        }
+        return maxVal
+    }
     
     // LC:508. Most Frequent Subtree Sum
+    var hmap = [Int : Int]()
+    var maxCount = Int.min
+    
+    func findFrequentTreeSum(_ root: TreeNode?) -> [Int] {
+        postOrder(root)
+        var result = [Int]()
+        
+        for key in hmap.keys {
+            if hmap[key]! == maxCount {
+                result.append(key)
+            }
+        }
+        return result
+    }
+    
+    func postOrder(_ root : TreeNode?) -> Int {
+        if let root = root {
+            let left = postOrder(root.left)
+            let right = postOrder(root.right)
+            
+            let sum = left + right + root.val
+            hmap[sum] = hmap[sum] == nil ? 1 : hmap[sum]! + 1
+            maxCount = max(maxCount, hmap[sum]!)
+            return sum
+        }
+        return 0
+    }
     
     // LC:500. Keyboard Row
     func findWords(_ words: [String]) -> [String] {
@@ -140,6 +202,24 @@ class Hashtables {
     }
     
     // LC:454. 4Sum II
+    func fourSumCount(_ A: [Int], _ B: [Int], _ C: [Int], _ D: [Int]) -> Int {
+        var hmap = [Int : Int]()
+        for cx in 0..<C.count {
+            for dx in 0..<D.count {
+                let sum = C[cx] + D[dx]
+                hmap[sum] = hmap[sum] == nil ? 1 : hmap[sum]! + 1
+            }
+        }
+        var result = 0
+        for ax in 0..<A.count {
+            for bx in 0..<B.count {
+                if let stored = hmap[-(A[ax] + B[bx])] {
+                    result += stored
+                }
+            }
+        }
+        return result
+    }
     
     // LC:451. Sort Characters By Frequency
     // Time: O(N + UlogU), Space: O(U)
@@ -165,6 +245,30 @@ class Hashtables {
     
     
     // LC:447. Number of Boomerangs
+    func numberOfBoomerangs(_ points: [[Int]]) -> Int {
+        guard points.count > 0 else { return 0; }
+        var hmap = [Int : Int]()
+        var result = 0
+        for ix in 0..<points.count {
+            for jx in 0..<points.count {
+                if ix == jx { continue; }
+                let dis = distance(points[ix], points[jx])
+                hmap[dis] = hmap[dis] == nil ? 1 : hmap[dis]! + 1
+            }
+            for val in hmap.values {
+                result += val * (val - 1)
+            }
+            hmap = [Int : Int]()
+        }
+        
+        return result;
+    }
+    
+    func distance(_ a : [Int], _ b : [Int]) -> Int {
+        let x = a[0] - b[0]
+        let y = a[1] - b[1]
+        return x*x + y*y
+    }
     
     // LC:438. Find All Anagrams in a String
     // @todo: executed 34/36 cases
@@ -444,6 +548,29 @@ class Hashtables {
     // LC:288. Unique Word Abbreviation
     
     // LC:274. H-Index
+    // https://discuss.leetcode.com/topic/40765/java-bucket-sort-o-n-solution-with-detail-explanation
+    func hIndex(_ citations: [Int]) -> Int {
+        var buckets = [Int](repeating: 0, count : citations.count + 1);
+        
+        for citation in citations {
+            if citation >= buckets.count {
+                buckets[buckets.count - 1] += 1
+            } else {
+                buckets[citation] += 1
+            }
+        }
+        
+        var ix = buckets.count - 1
+        var t = 0
+        while ix >= 0 {
+            t += buckets[ix]
+            if t >= ix {
+                return ix
+            }
+            ix -= 1
+        }
+        return 0
+    }
     
     // LC:266. Palindrome Permutation
     // @locked
@@ -595,6 +722,22 @@ class Hashtables {
     }
     
     // LC:187. Repeated DNA Sequences
+    func findRepeatedDnaSequences(_ s: String) -> [String] {
+        let schars = Array(s.characters)
+        var seen = Set<String>()
+        var repeated = Set<String>()
+        
+        if schars.count < 10 { return [String](); }
+        for ix in 0..<schars.count-9 {
+            let str = String(schars[ix..<ix+10])
+            if seen.contains(str) {
+                repeated.insert(str)
+            } else {
+                seen.insert(str)
+            }
+        }
+        return [String](repeated)
+    }
     
     
     // LC:170. Two Sum III - Data structure design

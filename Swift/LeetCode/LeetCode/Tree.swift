@@ -380,6 +380,16 @@ class Tree {
     }
     */
     
+    // LC:236. Lowest Common Ancestor of a Binary Tree
+    /*
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if (root == NULL || root == p || root == q) { return root; }
+        TreeNode* left = lowestCommonAncestor(root->left, p, q);
+        TreeNode* right = lowestCommonAncestor(root->right, p, q);
+        return !left ? right : !right ? left : root;
+    }
+    */
+    
     // LC:257. Binary Tree Paths
     func binaryTreePathsHelper(_ root: TreeNode?, _ result : inout [String], _ partial : String){
         if let root = root {
@@ -402,6 +412,25 @@ class Tree {
         var result = [String]();
         binaryTreePathsHelper(root, &result, "");
         return result;
+    }
+    
+    
+    // LC:337. House Robber III
+    func robHelper(_ root : TreeNode?) -> [Int]  {
+        var result = [Int](repeating: 0, count: 2)
+        if let root = root {
+            let left = robHelper(root.left)
+            let right = robHelper(root.right)
+            
+            result[0] = left[1] + right[1] + root.val
+            result[1] = max(left[0], left[1]) + max(right[0], right[1])
+        }
+        return result
+    }
+    
+    func rob(_ root: TreeNode?) -> Int {
+        let res = robHelper(root)
+        return max(res[0], res[1])
     }
     
     //LC:404. Sum of Left Leaves
