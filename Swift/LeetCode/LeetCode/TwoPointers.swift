@@ -101,6 +101,9 @@ class TwoPointers {
         return -1
     }
     
+    // LC:61. Rotate List
+    // @see Linked Lists
+    
     // LC:75. Sort Colors
     // @see Arrays
     
@@ -119,6 +122,8 @@ class TwoPointers {
         return wx;
     }
     
+    // LC:86. Partition List
+    // @see Linked Lists
     
     // LC:88. Merge Sorted Array
     // @see Arrays
@@ -143,8 +148,17 @@ class TwoPointers {
         return true;
     }
     
+    // 142. Linked List Cycle II
+    // @see Linked Lists
+    
     // LC:167. Two Sum II - Input array is sorted
     // @see: Arrays
+    
+    // LC:209. Minimum Size Subarray Sum
+    // @see: Arrays
+
+    // LC:234. Palindrome Linked List
+    // @see Linked Lists
     
     // LC:283. Move Zeroes
     // @see: Arrays
@@ -216,5 +230,37 @@ class TwoPointers {
     
     // LC:350. Intersection of Two Arrays II
     // @todo: needs a two pointer solution
+    
+    // LC:524. Longest Word in Dictionary through Deleting
+    /*
+    public String findLongestWord(String s, List<String> d) {
+        Collections.sort(d, (a,b) -> a.length() != b.length() ? -Integer.compare(a.length(), b.length()) :  a.compareTo(b));
+        for (String dictWord : d) {
+            int i = 0;
+            for (char c : s.toCharArray())
+                if (i < dictWord.length() && c == dictWord.charAt(i)) i++;
+            if (i == dictWord.length()) return dictWord;
+        }
+        return "";
+    }
+    */
+    
 
+    /*
+    public String findLongestWord(String s, List<String> d) {
+        String longest = "";
+        for (String dictWord : d) {
+            int i = 0;
+            for (char c : s.toCharArray())
+                if (i < dictWord.length() && c == dictWord.charAt(i)) i++;
+    
+            if (i == dictWord.length() && dictWord.length() >= longest.length())
+                if (dictWord.length() > longest.length() || dictWord.compareTo(longest) < 0)
+                    longest = dictWord;
+        }
+        return longest;
+    }
+    */
+    
+    
 }

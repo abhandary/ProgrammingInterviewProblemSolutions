@@ -527,6 +527,9 @@ class Tree {
         }
     }
     
+    // LC:508. Most Frequent Subtree Sum
+    // @see Hashtables
+    
     // LC:513. Find Bottom Left Tree Value
     // @see: BFS
     
@@ -605,6 +608,21 @@ class Tree {
         return false
     }
     
+    // LC:606. Construct String from Binary Tree
+    func tree2str(_ t: TreeNode?) -> String {
+        if let t = t {
+            let result = "\(t.val)"
+            
+            let left = tree2str(t.left)
+            let right = tree2str(t.right)
+            if left == "" && right == "" { return result; }
+            if left == ""  { return result + "()(\(right))" }
+            if right == "" { return result + "(\(left))" }
+            return "\(result)(\(left))(\(right))"
+        }
+        return ""
+    }
+    
     // LC:617. Merge Two Binary Trees
     func mergeTrees(_ t1: TreeNode?, _ t2: TreeNode?) -> TreeNode? {
         if t1 == nil && t2 == nil { return nil; }
@@ -616,9 +634,63 @@ class Tree {
         return newNode
     }
     
+    // LC:623. Add One Row to Tree
+    func addOneRow(_ root: TreeNode?, _ v: Int, _ d: Int) -> TreeNode? {
+        guard d >= 1 else { return nil }
+        if d == 1 {
+            let newNode = TreeNode(v)
+            newNode.left = root
+            return newNode
+        }
+        guard let root = root else { return nil; }
+        
+        var queue = [TreeNode]()
+        queue.append(root)
+        var dx = 1
+        while dx < d - 1 {
+            let size = queue.count
+            for ix in 0..<size {
+                let curr = queue.removeFirst()
+                if let left = curr.left { queue.append(left); }
+                if let right = curr.right { queue.append(right); }
+            }
+            dx += 1
+        }
+        
+        while queue.count > 0 {
+            let curr = queue.removeFirst()
+            let left = curr.left
+            let right = curr.right
+            curr.left = TreeNode(v)
+            curr.right = TreeNode(v)
+            curr.left!.left = left
+            curr.right!.right = right
+        }
+        
+        return root
+    }
+    
     // LC:637. Average of Levels in Binary Tree
     // @todo: just use BFS
     
+    
+    // LC:652. Find Duplicate Subtrees
+    func findDuplicateSubtrees(_ root: TreeNode?) -> [TreeNode?] {
+        var result = [TreeNode?]()
+        var hmap = [String: Int]()
+        postorder(root, &result, &hmap)
+        return result
+    }
+    
+    func postorder(_ root : TreeNode?, _ result : inout [TreeNode?], _ hmap : inout [String : Int]) -> String {
+        if let root = root {
+            let str = "\(root.val)," + postorder(root.left, &result, &hmap) + "," + postorder(root.right, &result, &hmap)
+            if hmap[str] == 1 { result.append(root) }
+            hmap[str] = hmap[str] == nil ? 1 : hmap[str]! + 1
+            return str
+        }
+        return "#"
+    }
     
     // LC:653. Two Sum IV - Input is a BST
     var set = Set<Int>()
@@ -632,4 +704,56 @@ class Tree {
         }
         return false;
     }
+    
+    // LC:654. Maximum Binary Tree
+    /*
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        if (nums == null) return null;
+            return build(nums, 0, nums.length - 1);
+    }
+    
+    private TreeNode build(int[] nums, int start, int end) {
+        if (start > end) return null;
+    
+        int idxMax = start;
+        for (int i = start + 1; i <= end; i++) {
+            if (nums[i] > nums[idxMax]) {
+                idxMax = i;
+            }
+        }
+    
+        TreeNode root = new TreeNode(nums[idxMax]);
+    
+        root.left = build(nums, start, idxMax - 1);
+        root.right = build(nums, idxMax + 1, end);
+    
+        return root;
+    }
+    */
+    
+    // LC:655. Print Binary Tree
+    /*
+    public List<List<String>> printTree(TreeNode root) {
+        List<List<String>> res = new LinkedList<>();
+        int height = root == null ? 1 : getHeight(root);
+        int rows = height, columns = (int) (Math.pow(2, height) - 1);
+        List<String> row = new ArrayList<>();
+        for(int i = 0; i < columns; i++)  row.add("");
+        for(int i = 0; i < rows; i++)  res.add(new ArrayList<>(row));
+        populateRes(root, res, 0, rows, 0, columns - 1);
+        return res;
+    }
+    
+    public void populateRes(TreeNode root, List<List<String>> res, int row, int totalRows, int i, int j) {
+        if (row == totalRows || root == null) return;
+        res.get(row).set((i+j)/2, Integer.toString(root.val));
+        populateRes(root.left, res, row+1, totalRows, i, (i+j)/2 - 1);
+        populateRes(root.right, res, row+1, totalRows, (i+j)/2+1, j);
+    }
+    
+    public int getHeight(TreeNode root) {
+        if (root == null) return 0;
+        return 1 + Math.max(getHeight(root.left), getHeight(root.right));
+    }
+    */
 }

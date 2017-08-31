@@ -86,6 +86,46 @@ class Arrays {
         return max(max1 * max2 * max3, max1 * min1 * min2)
     }
     
+    
+    // LC:621. Task Scheduler
+    /*
+    public int leastInterval(char[] tasks, int n) {
+    
+        int[] c = new int[26];
+        for(char t : tasks){
+            c[t - 'A']++;
+        }
+        Arrays.sort(c);
+        int i = 25;
+        while(i >= 0 && c[i] == c[25]) i--;
+    
+        return Math.max(tasks.length, (c[25] - 1) * (n + 1) + 25 - i);
+    }
+    */
+    
+    // LC:611. Valid Triangle Number
+    func triangleNumber(_ nums: [Int]) -> Int {
+        let sorted = nums.sorted()
+        
+        let n = sorted.count
+        var ix = n - 1
+        var count = 0
+        while ix >= 2 {
+            var left = 0, right = ix - 1
+            while left < right {
+                if sorted[left] + sorted[right] > sorted[ix] {
+                    count += (right - left)
+                    // while left < right && sorted[left] == sorted[left + 1] { left += 1; count += 1; }
+                    right -= 1;
+                } else {
+                    left += 1
+                }
+            }
+            ix -= 1
+        }
+        return count
+    }
+    
     // LC:605. Can Place Flowers
     func canPlaceFlowers(_ flowerbed: [Int], _ n: Int) -> Bool {
         guard n > 0 else { return true }
@@ -225,6 +265,22 @@ class Arrays {
     // @todo:531. Lonely Pixel I
     
     // @todo:495. Teemo Attacking.
+    func findPoisonedDuration(_ timeSeries: [Int], _ duration: Int) -> Int {
+        guard timeSeries.count > 0 && duration > 0 else { return 0; }
+        
+        var start = timeSeries[0], result = 0, end = timeSeries[0] + duration
+        
+        for ix in 1..<timeSeries.count {
+            if timeSeries[ix] > end {
+                result += end - start
+                start = timeSeries[ix]
+            }
+            end = timeSeries[ix] + duration
+        }
+        result += end - start
+        
+        return result
+    }
     
     // LC:485. Max Consecutive Ones
     func findMaxConsecutiveOnes(_ nums: [Int]) -> Int {
@@ -1563,7 +1619,39 @@ class Arrays {
     }
     
     // LC:31. Next Permutation
+    func reverse2(_ nums : inout [Int], _ left : Int, _ right : Int) {
+        var ix = left, jx = right;
+        guard left >= 0 && right < nums.count else { return; }
+        while ix < jx {
+            let temp = nums[ix]
+            nums[ix] = nums[jx]
+            nums[jx] = temp
+            ix += 1; jx -= 1
+        }
+    }
     
+    func nextPermutation(_ nums: inout [Int]) {
+        guard nums.count > 1 else { return; }
+        
+        var ix = nums.count - 2
+        
+        while ix >= 0 {
+            if nums[ix] < nums[ix + 1] { break; }
+            ix -= 1
+        }
+        
+        if ix < 0 {  reverse(&nums, 0, nums.count - 1);  return; }
+        
+        var jx = nums.count - 1
+        while jx >= ix {
+            if nums[jx] > nums[ix] { break; }
+            jx -= 1
+        }
+        
+        swap(&nums[ix], &nums[jx])
+        
+        reverse(&nums, ix + 1, nums.count - 1)
+    }
     
 
     // LC:27. Remove Element

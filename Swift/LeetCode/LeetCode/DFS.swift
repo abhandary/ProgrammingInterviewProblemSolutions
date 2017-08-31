@@ -86,7 +86,15 @@ class DFS {
         return maxVal;
     }
     
+    // LC:337. House Robber III
+    // https://leetcode.com/problems/house-robber-iii/description/
+    // https://discuss.leetcode.com/topic/39834/step-by-step-tackling-of-the-problem
+    // https://discuss.leetcode.com/topic/39659/easy-understanding-solution-with-dfs
     
+    // LC:332. Reconstruct Itinerary
+    // https://leetcode.com/problems/reconstruct-itinerary/description/
+    // SP https://discuss.leetcode.com/topic/36370/short-ruby-python-java-c
+    // https://discuss.leetcode.com/topic/36383/share-my-solution
     
     // LC:257. Binary Tree Paths
     func binaryTreePathsHelper(_ root: TreeNode?, _ result : inout [String], _ partial : String){
@@ -111,6 +119,76 @@ class DFS {
         binaryTreePathsHelper(root, &result, "");
         return result;
     }
+    
+    // LC:210. Course Schedule II
+    // https://discuss.leetcode.com/topic/13873/two-ac-solution-in-java-using-bfs-and-dfs-with-explanation
+    // https://discuss.leetcode.com/topic/17276/20-lines-c-bfs-dfs-solutions/2
+ 
+    
+    // LC:207. Course Schedule
+    // https://discuss.leetcode.com/topic/17273/18-22-lines-c-bfs-dfs-solutions
+    // https://discuss.leetcode.com/topic/13854/easy-bfs-topological-sort-java
+    /*
+     
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        int[][] matrix = new int[numCourses][numCourses]; // i -> j
+        int[] indegree = new int[numCourses];
+    
+        for (int i=0; i<prerequisites.length; i++) {
+            int ready = prerequisites[i][0];
+            int pre = prerequisites[i][1];
+            if (matrix[pre][ready] == 0)
+                indegree[ready]++; //duplicate case
+            matrix[pre][ready] = 1;
+        }
+    
+        int count = 0;
+        Queue<Integer> queue = new LinkedList();
+        for (int i=0; i<indegree.length; i++) {
+            if (indegree[i] == 0) queue.offer(i);
+        }
+        while (!queue.isEmpty()) {
+            int course = queue.poll();
+            count++;
+            for (int i=0; i<numCourses; i++) {
+                if (matrix[course][i] != 0) {
+                    if (--indegree[i] == 0)
+                        queue.offer(i);
+                }
+            }
+        }
+        return count == numCourses;
+    }
+ 
+     class Solution {
+        public:
+            bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
+                vector<unordered_set<int>> graph = make_graph(numCourses, prerequisites);
+                vector<bool> onpath(numCourses, false), visited(numCourses, false);
+                for (int i = 0; i < numCourses; i++)
+                    if (!visited[i] && dfs_cycle(graph, i, onpath, visited))
+                        return false;
+                return true;
+            }
+        private:
+            vector<unordered_set<int>> make_graph(int numCourses, vector<pair<int, int>>& prerequisites) {
+                vector<unordered_set<int>> graph(numCourses);
+                for (auto pre : prerequisites)
+                    graph[pre.second].insert(pre.first);
+                return graph;
+            }
+     
+            bool dfs_cycle(vector<unordered_set<int>>& graph, int node, vector<bool>& onpath, vector<bool>& visited) {
+                if (visited[node]) return false;
+                onpath[node] = visited[node] = true;
+                for (int neigh : graph[node])
+                    if (onpath[neigh] || dfs_cycle(graph, neigh, onpath, visited))
+                        return true;
+                return onpath[node] = false;
+            }
+     };
+     
+    */
     
     // LC:200. Number of Islands
     func cover(_ grid : inout [[Character]], _ ix : Int, _ jx : Int) {

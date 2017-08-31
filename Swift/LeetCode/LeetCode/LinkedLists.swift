@@ -163,6 +163,37 @@ class LinkedLists {
     }
     */
     
+    func rotateRight(_ head: ListNode?, _ k: Int) -> ListNode? {
+        guard head != nil else { return nil; }
+        
+        var len = 0
+        var itr = head
+        while itr != nil {
+            itr = itr!.next
+            len += 1
+        }
+        
+        let k = k % len
+        
+        let dummyHead = ListNode(0)
+        dummyHead.next = head
+        
+        var forward = head
+        for ix in 0..<k {
+            forward = forward?.next
+        }
+        var tail = head
+        while forward?.next != nil {
+            forward = forward?.next
+            tail = tail?.next
+        }
+        forward?.next = head
+        dummyHead.next = tail?.next
+        tail?.next = nil
+        return dummyHead.next
+    }
+    
+    
     // LC:82. Remove Duplicates from Sorted List II
     /*
     public ListNode deleteDuplicates(ListNode head) {
