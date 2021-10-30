@@ -1,6 +1,5 @@
 class Solution {
     
-
     // LC1480. Running Sum of 1d Array
     fun runningSum(nums: IntArray): IntArray {
         val result = IntArray(nums.size, { 0 })
